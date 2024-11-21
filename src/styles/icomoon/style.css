@@ -1,0 +1,430 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?iv703h');
+  src:  url('fonts/icomoon.eot?iv703h#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?iv703h') format('truetype'),
+    url('fonts/icomoon.woff?iv703h') format('woff'),
+    url('fonts/icomoon.svg?iv703h#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-call-support:before {
+  content: "\e900";
+}
+.icon-category:before {
+  content: "\e901";
+}
+.icon-check-circle:before {
+  content: "\e902";
+}
+.icon-comb:before {
+  content: "\e903";
+}
+.icon-cotton:before {
+  content: "\e904";
+}
+.icon-credit-card:before {
+  content: "\e905";
+}
+.icon-delivery-truck:before {
+  content: "\e906";
+}
+.icon-double-leaves:before {
+  content: "\e907";
+}
+.icon-earth:before {
+  content: "\e908";
+}
+.icon-facebook:before {
+  content: "\e909";
+}
+.icon-filter:before {
+  content: "\e90a";
+}
+.icon-food:before {
+  content: "\e90b";
+}
+.icon-foot:before {
+  content: "\e90c";
+}
+.icon-guarantee:before {
+  content: "\e90d";
+}
+.icon-heart:before {
+  content: "\e90e";
+}
+.icon-instagram:before {
+  content: "\e90f";
+}
+.icon-leaves:before {
+  content: "\e910";
+}
+.icon-leaves-100:before {
+  content: "\e911";
+}
+.icon-leaves-compatible:before {
+  content: "\e912";
+}
+.icon-phone-call:before {
+  content: "\e913";
+}
+.icon-pinterest:before {
+  content: "\e914";
+}
+.icon-rabbit-heart:before {
+  content: "\e915";
+}
+.icon-return:before {
+  content: "\e916";
+}
+.icon-search:before {
+  content: "\e917";
+}
+.icon-twitter:before {
+  content: "\e918";
+}
+.icon-update:before {
+  content: "\e919";
+}
+.icon-user:before {
+  content: "\e91a";
+}
+.icon-user-shield:before {
+  content: "\e91b";
+}
+.icon-youtube:before {
+  content: "\e91c";
+}
+.icon-bag:before {
+  content: "\e91d";
+}
+
+
+@keyframes shine {
+  0% {
+      transform: translateX(-100%);
+  }
+  100% {
+      transform: translateX(100%);
+  }
+}
+
+.shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: skewX(-20deg);
+  animation: shine 2s infinite;
+}
+
+.menu-header-text{
+  color: var(--white);
+}
+.menu-header-text:hover{
+  color: var(--custom-primary);
+}
+
+
+
+.fs-20{
+  font-size: 20px;
+}
+
+
+.menu-main .sub-menu, .menu-main .mega-menu {
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  transition: all ease 0.3s;
+  transform: scaleY(0);
+  transform-origin: top center;
+  box-shadow: 0px 5px 25px 0px rgba(138, 159, 168, 0.25);
+  font-size: 14px;
+  color: var(--black);
+}
+
+.header-menu.fixed {
+  background-color:var(--bluedark-t) !important;
+  box-shadow: 0px 10px 25px 0px rgba(43, 52, 74, 0.12);
+  top: 0;
+  animation: animateHeader ease 0.5s;
+}
+
+.shiny-effect-container {
+    position: relative;
+    width: 60px; /* Adjust size */
+    height: 60px; /* Adjust size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Apply gradient to SVG by default */
+.image {
+    width: 100%;
+    height: 100%;
+    fill: url(#gradient); /* Apply initial gradient (top to bottom) */
+    transition: fill 1s ease; /* Smooth transition of fill */
+}
+
+/* On hover, change the gradient smoothly (bottom to top) */
+.shiny-effect-container:hover .svg-path {
+  fill: #FF5733; /* Bottom to top gradient on hover */
+}
+
+.shiny-effect-container {
+  position: relative;
+  width: 60px; /* Adjust size */
+  height: 60px; /* Adjust size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+
+@media (min-width: 1280px) {
+  .container {
+      max-width: 85% !important;
+      padding-right: 80px !important;
+      padding-left: 80px !important;
+  }
+}
+
+
+/* Styles for desktop devices (minimum width 786px) */
+@media (min-width: 786px) {
+  .shiny-effect-container {
+    position: relative;
+    width: 60px;  /* Larger size for desktop */
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-size: 16px;  /* Optional: adjust font size for desktop */
+  }
+
+  .shiny-effect-container p {
+    font-size: 12px; 
+  }
+}
+
+/* Styles for mobile devices (minimum width 300px) */
+@media (max-width: 785px) {
+  .shiny-effect-container {
+    position: relative;
+    width: 50px;  /* Smaller size for mobile */
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-size: 12px;  /* Optional: smaller font size for mobile */
+  }
+
+  .shiny-effect-container p {
+    font-size: 12px !important; 
+  }
+}
+
+.fs-12{
+  font-size: 12px;
+}
+
+
+@keyframes slideGradient {
+  0% {
+      background-position: -45% -200%;
+  }
+  50% {
+      background-position: 200% 45%;
+  }
+  100% {
+      background-position: -200% -45%;
+  }
+}
+
+.animate-gradient {
+  background-size: 400% 400%;  /* Larger background area for smooth transition */
+  background-image: linear-gradient(225deg, #ffffff, #d9d9d9);  /* Add angle to gradient */
+  animation: 15s ease-in-out infinite;
+}
+
+
+/* Add this CSS to your global styles or in a CSS module */
+.shimmer-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.3) 25%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0.3) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+  border-radius: 32px; /* Match the border-radius of your images */
+  display: block;
+}
+
+.loading {
+  display: block;
+}
+
+@keyframes shimmer {
+  100% {
+      background-position: 200% 0;
+  }
+}
+
+
+.shimmer-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.shimmer-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.2) 20%,
+      rgba(255, 255, 255, 0.5) 60%,
+      rgba(255, 255, 255, 0)
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  z-index: 1;
+}
+
+@keyframes shimmer {
+  0% {
+      background-position: -200% 0;
+  }
+  100% {
+      background-position: 200% 0;
+  }
+}
+
+.image-loaded .shimmer-overlay {
+  display: none; /* Hide shimmer overlay once image is loaded */
+}
+
+
+
+
+.auto-shining {
+  position: relative;
+  overflow: hidden;
+}
+
+.auto-shining::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%; /* Start shimmer from outside the left */
+  width: 200%; /* Span beyond the width to cover the element */
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgb(255, 255, 255), transparent);
+  opacity: 0.6;
+  transform: skewX(-20deg);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.section-swiper-navigation.style-outline .swiper .swiper-button-prev {
+  left: -20px;
+  top: calc(50% - 10px) !important;
+}
+
+.section-swiper-navigation.style-outline .swiper .swiper-button-next {
+  right: -20px;
+  top: calc(50% - 10px) !important;
+}
+
+.typewriter h1 {
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
+}
+
+.m-width-call{
+  width: 138px;
+}
+
+
+hr{
+  color: #dbdbdb !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

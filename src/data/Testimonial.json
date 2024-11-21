@@ -1,0 +1,182 @@
+[
+    {
+        "id": "1",
+        "category": "fashion",
+        "title": "Variety of Styles!",
+        "name": "Fukuda E.",
+        "avatar": "/images/avatar/1.png",
+        "date": "November 10, 2023",
+        "address": "Tokyo, Japan",
+        "description": "it was an excellent trip to Vietnam very well coordinated by Bikram and team. Great Logistics even accommodating and making my trip memorable Great hotels Ground trips Vehicle pick up and drop politeness and punctual.  answering calls",
+        "images": [
+            "/images/product/1000x1000.png",
+            "/images/product/1000x1000.png"
+        ],
+        "star": 5
+    },
+    {
+        "id": "2",
+        "category": "fashion",
+        "title": "Quality of Clothing!",
+        "name": "Georgina S.",
+        "avatar": "/images/avatar/2.png",
+        "date": "November 11, 2023",
+        "address": "Madrid, Spain",
+        "description": "Thank you very much for your valuable feedback. Your positive feedback inspire our whole team. We are eagerly waiting for your next trip to be planned with us.",
+        "images": [
+            "/images/product/1000x1000.png",
+            "/images/product/1000x1000.png"
+        ],
+        "star": 5
+    },
+    {
+        "id": "3",
+        "category": "fashion",
+        "title": "Customer Service!",
+        "name": "Elizabeth A.",
+        "avatar": "/images/avatar/3.png",
+        "date": "November 13, 2023",
+        "address": "Manchester, UK",
+        "description": "One of the best travel agency for international travel. Me and my wife booked a honeymoon trip to Bali and it was seamless, thanks to Riya mam, who handled all things for this trip. The room, the neighborhood where we stayed, the guide",
+        "images": [
+            "/images/product/1000x1000.png",
+            "/images/product/1000x1000.png"
+        ],
+        "star": 4
+    },
+    {
+        "id": "4",
+        "category": "fashion",
+        "title": "Quality of Clothing!",
+        "name": "Christin H.",
+        "avatar": "/images/avatar/4.png",
+        "date": "November 15, 2023",
+        "address": "California, USA",
+        "description": "One of the best travel agency for international travel. Me and my wife booked a honeymoon trip to Bali and it was seamless, thanks to Riya mam, who handled all things for this trip. The room, the neighborhood where we stayed, the guide",
+        "images": [
+            "/images/product/1000x1000.png",
+            "/images/product/1000x1000.png"
+        ],
+        "star": 5
+    },
+    {
+        "id": "5",
+        "category": "fashion",
+        "title": "Customer Service!",
+        "name": "Emily G.",
+        "avatar": "/images/avatar/5.png",
+        "date": "November 18, 2023",
+        "address": "Paris, France",
+        "description": "One of the best travel agency for international travel. Me and my wife booked a honeymoon trip to Bali and it was seamless, thanks to Riya mam, who handled all things for this trip. The room, the neighborhood where we stayed, the guide",
+        "images": [
+            "/images/product/1000x1000.png",
+            "/images/product/1000x1000.png"
+        ],
+        "star": 4
+    },
+    {
+        "id": "6",
+        "category": "fashion",
+        "title": "Variety of Styles!",
+        "name": "Carolina C.",
+        "avatar": "/images/avatar/6.png",
+        "date": "November 19, 2023",
+        "address": "London, UK",
+        "description": "One of the best travel agency for international travel. Me and my wife booked a honeymoon trip to Bali and it was seamless, thanks to Riya mam, who handled all things for this trip. The room, the neighborhood where we stayed, the guide",
+        "images": [
+            "/images/product/1000x1000.png",
+            "/images/product/1000x1000.png"
+        ],
+        "star": 5
+    },
+    {
+        "id": "7",
+        "category": "yoga",
+        "title": "Quality of Clothing!",
+        "name": "Christin H.",
+        "avatar": "/images/avatar/4.png",
+        "date": "November 15, 2023",
+        "address": "California, USA",
+        "description": "One of the best travel agency for international travel. Me and my wife booked a honeymoon trip to Bali and it was seamless, thanks to Riya mam, who handled all things for this trip. The room, the neighborhood where we stayed, the guide",
+        "images": [
+            "/images/product/1000x1000.png",
+            "/images/product/1000x1000.png"
+        ],
+        "star": 5
+    },
+    {
+        "id": "8",
+        "category": "yoga",
+        "title": "Customer Service!",
+        "name": "Emily G.",
+        "avatar": "/images/avatar/5.png",
+        "date": "November 18, 2023",
+        "address": "Paris, France",
+        "description": "One of the best travel agency for international travel. Me and my wife booked a honeymoon trip to Bali and it was seamless, thanks to Riya mam, who handled all things for this trip. The room, the neighborhood where we stayed, the guide",
+        "images": [
+            "/images/product/1000x1000.png",
+            "/images/product/1000x1000.png"
+        ],
+        "star": 5
+    },
+    {
+        "id": "9",
+        "category": "yoga",
+        "title": "Variety of Styles!",
+        "name": "Carolina C.",
+        "avatar": "/images/avatar/6.png",
+        "date": "November 19, 2023",
+        "address": "London, UK",
+        "description": "One of the best travel agency for international travel. Me and my wife booked a honeymoon trip to Bali and it was seamless, thanks to Riya mam, who handled all things for this trip. The room, the neighborhood where we stayed, the guide",
+        "images": [
+            "/images/product/1000x1000.png",
+            "/images/product/1000x1000.png"
+        ],
+        "star": 4
+    },
+    {
+        "id": "10",
+        "category": "yoga",
+        "title": "Variety of Styles!",
+        "name": "Fukuda E.",
+        "avatar": "/images/avatar/1.png",
+        "date": "November 10, 2023",
+        "address": "Tokyo, Japan",
+        "description": "One of the best travel agency for international travel. Me and my wife booked a honeymoon trip to Bali and it was seamless, thanks to Riya mam, who handled all things for this trip. The room, the neighborhood where we stayed, the guide",
+        "images": [
+            "/images/product/1000x1000.png",
+            "/images/product/1000x1000.png"
+        ],
+        "star": 4
+    },
+    {
+        "id": "11",
+        "category": "yoga",
+        "title": "Quality of Clothing!",
+        "name": "Georgina S.",
+        "avatar": "/images/avatar/2.png",
+        "date": "November 11, 2023",
+        "address": "Madrid, Spain",
+        "description": "One of the best travel agency for international travel. Me and my wife booked a honeymoon trip to Bali and it was seamless, thanks to Riya mam, who handled all things for this trip. The room, the neighborhood where we stayed, the guide",
+        "images": [
+            "/images/product/1000x1000.png",
+            "/images/product/1000x1000.png"
+        ],
+        "star": 5
+    },
+    {
+        "id": "12",
+        "category": "yoga",
+        "title": "Customer Service!",
+        "name": "Elizabeth A.",
+        "avatar": "/images/avatar/3.png",
+        "date": "November 13, 2023",
+        "address": "Manchester, UK",
+        "description": "One of the best travel agency for international travel. Me and my wife booked a honeymoon trip to Bali and it was seamless, thanks to Riya mam, who handled all things for this trip. The room, the neighborhood where we stayed, the guide",
+        "images": [
+            "/images/product/1000x1000.png",
+            "/images/product/1000x1000.png"
+        ],
+        "star": 5
+    }
+]
