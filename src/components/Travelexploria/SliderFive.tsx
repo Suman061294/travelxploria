@@ -1,6 +1,6 @@
 'use client'
 
-import React, { Component, useEffect, useState } from 'react'
+import React, { Component, useEffect, useState,useRef  } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import * as Icon from "@phosphor-icons/react/dist/ssr";
@@ -8,7 +8,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css/bundle';
 import 'swiper/css/effect-fade';
-import Instagram from '../Home1/Instagram';
 import Populardestination from './Populardestination';
 import { useModalSearchContext } from '@/context/ModalSearchContext';
 import Slider from 'rc-slider';
@@ -22,33 +21,42 @@ const SliderFive = () => {
     const [displayedText, setDisplayedText] = useState<string>(""); // Text being displayed
     const [currentIndex, setCurrentIndex] = useState<number>(0); // Tracks the index of the current keyword
     const [isDeleting, setIsDeleting] = useState<boolean>(false); // Typing or deleting mode
-
+  
+    // Ref to keep track of the typing speed and delay
+    const typingTimerRef = useRef<NodeJS.Timeout | null>(null);
+  
     useEffect(() => {
-        const currentWord = keywords[currentIndex];
-        const typingSpeed = isDeleting ? 50 : 100; // Speed for typing and deleting
-        const delayBetweenWords = 1000; // Delay before moving to the next word
-
-        const handleTyping = () => {
-            if (!isDeleting) {
-                // Typing mode
-                setDisplayedText((prev) => currentWord.slice(0, prev.length + 1));
-                if (displayedText === currentWord) {
-                    setTimeout(() => setIsDeleting(true), delayBetweenWords); // Start deleting after a delay
-                }
-            } else {
-                // Deleting mode
-                setDisplayedText((prev) => prev.slice(0, -1));
-                if (displayedText === "") {
-                    setIsDeleting(false);
-                    setCurrentIndex((prev) => (prev + 1) % keywords.length); // Move to the next word
-                }
-            }
-        };
-
-        const typingTimer = setTimeout(handleTyping, typingSpeed);
-
-        return () => clearTimeout(typingTimer); // Cleanup timeout on unmount
-    }, [displayedText, isDeleting, currentIndex, keywords]);
+      const currentWord = keywords[currentIndex];
+      const typingSpeed = isDeleting ? 50 : 100; // Speed for typing and deleting
+      const delayBetweenWords = 1000; // Delay before moving to the next word
+  
+      const handleTyping = () => {
+        if (!isDeleting) {
+          // Typing mode
+          setDisplayedText((prev) => currentWord.slice(0, prev.length + 1));
+          if (displayedText === currentWord) {
+            setTimeout(() => setIsDeleting(true), delayBetweenWords); // Start deleting after a delay
+          }
+        } else {
+          // Deleting mode
+          setDisplayedText((prev) => prev.slice(0, -1));
+          if (displayedText === "") {
+            setIsDeleting(false);
+            setCurrentIndex((prev) => (prev + 1) % keywords.length); // Move to the next word
+          }
+        }
+      };
+  
+      // Use ref to clear the timer on cleanup and avoid stale timers
+      typingTimerRef.current = setTimeout(handleTyping, typingSpeed);
+  
+      // Cleanup function to clear the timer on unmount or rerun
+      return () => {
+        if (typingTimerRef.current) {
+          clearTimeout(typingTimerRef.current);
+        }
+      };
+    }, [currentIndex, isDeleting, displayedText]); // Removed 'keywords' from dependencies
 
 
     const [isModalOpen, setIsModalOpen] = useState(false);

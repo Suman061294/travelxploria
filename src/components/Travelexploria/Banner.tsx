@@ -23,7 +23,7 @@ const Banner = () => {
                             />
                         </div>
                         <div className="banner-content absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
-                            <div className="heading4 text-white text-center">Maldive's Honeymoon package</div>
+                            <div className="heading4 text-white text-center">Maldive&apos;s Honeymoon package</div>
                             <div className="text-button text-white relative inline-block pb-1 border-b-2 border-white duration-500 mt-2">Starting from INR 1,25,500/-</div>
                         </div>
                     </Link>

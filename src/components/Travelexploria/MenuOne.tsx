@@ -5,7 +5,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import * as Icon from "@phosphor-icons/react/dist/ssr";
 import { usePathname } from 'next/navigation';
-import Product from '@/components/Product/Product';
 import productData from '@/data/Product.json'
 import useLoginPopup from '@/store/useLoginPopup';
 import useMenuMobile from '@/store/useMenuMobile';
@@ -67,39 +66,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
         //router.push(`/shop/breadcrumb1?type=${type}`);
     };
 
-    const keywords: string[] = ["Maldives", "Bali", "Thailand", "Kashmir", "Andaman"];
-
-    const [displayedText, setDisplayedText] = useState<string>(""); // Text being displayed
-    const [currentIndex, setCurrentIndex] = useState<number>(0); // Tracks the index of the current keyword
-    const [isDeleting, setIsDeleting] = useState<boolean>(false); // Typing or deleting mode
-  
-    useEffect(() => {
-      const currentWord = keywords[currentIndex];
-      const typingSpeed = isDeleting ? 50 : 100; // Speed for typing and deleting
-      const delayBetweenWords = 1000; // Delay before moving to the next word
-  
-      const handleTyping = () => {
-        if (!isDeleting) {
-          // Typing mode
-          setDisplayedText((prev) => currentWord.slice(0, prev.length + 1));
-          if (displayedText === currentWord) {
-            setTimeout(() => setIsDeleting(true), delayBetweenWords); // Start deleting after a delay
-          }
-        } else {
-          // Deleting mode
-          setDisplayedText((prev) => prev.slice(0, -1));
-          if (displayedText === "") {
-            setIsDeleting(false);
-            setCurrentIndex((prev) => (prev + 1) % keywords.length); // Move to the next word
-          }
-        }
-      };
-  
-      const typingTimer = setTimeout(handleTyping, typingSpeed);
-  
-      return () => clearTimeout(typingTimer); // Cleanup timeout on unmount
-    }, [displayedText, isDeleting, currentIndex, keywords]);
-
+    
     return (
         <>
             <div className={`header-menu style-one ${fixedHeader ? 'fixed' : 'absolute'} top-0 left-0 right-0 w-full md:h-[74px] h-[56px] ${props}`}>
