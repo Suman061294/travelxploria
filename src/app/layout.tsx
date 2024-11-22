@@ -5,8 +5,8 @@ import GlobalProvider from './GlobalProvider'
 const instrument = Instrument_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Anvogue',
-  description: 'Multipurpose eCommerce Template',
+  title: 'TravelXploria',
+  description: 'The Best Travel Agency in Kolkata',
 }
 
 export default function RootLayout({
