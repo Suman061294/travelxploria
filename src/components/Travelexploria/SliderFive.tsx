@@ -2,19 +2,15 @@
 
 import React, { Component, useEffect, useState,useRef  } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import * as Icon from "@phosphor-icons/react/dist/ssr";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css/bundle';
 import 'swiper/css/effect-fade';
 import Populardestination from './Populardestination';
-import { useModalSearchContext } from '@/context/ModalSearchContext';
 import Slider from 'rc-slider';
 
 
 const SliderFive = () => {
-    const { openModalSearch } = useModalSearchContext()
 
     const keywords: string[] = ["Maldives", "Bali", "Thailand", "Kashmir", "Andaman"];
 
@@ -66,11 +62,9 @@ const SliderFive = () => {
 
 
     const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({ min: 50000, max: 500000 });
-    const [currentPage, setCurrentPage] = useState(0);
     const handlePriceChange = (values: number | number[]) => {
         if (Array.isArray(values)) {
             setPriceRange({ min: values[0], max: values[1] });
-            setCurrentPage(0);
         }
     };
     return (
@@ -80,13 +74,7 @@ const SliderFive = () => {
                     <Swiper
                         spaceBetween={0}
                         slidesPerView={1}
-                        // loop={true}
-                        // pagination={{ clickable: true }}
-                        // modules={[Pagination]}
                         className='h-full relative dots-white'
-                    // autoplay={{
-                    //     delay: 4000,
-                    // }}
                     >
 
                         <SwiperSlide>

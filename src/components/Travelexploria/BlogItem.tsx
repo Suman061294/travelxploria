@@ -2,10 +2,8 @@
 
 import React from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import { BlogType } from '@/type/BlogType'
-import * as Icon from "@phosphor-icons/react/dist/ssr";
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 
 interface BlogProps {
     data: BlogType
@@ -13,18 +11,18 @@ interface BlogProps {
 }
 
 const BlogItem: React.FC<BlogProps> = ({ data, type }) => {
-    const router = useRouter()
-    const handleBlogClick = (blogId: string) => {
-        // Go to blog detail with blogId selected
-        // router.push(`/blog/detail1?id=${blogId}`);
-    };
+    // const router = useRouter()
+    // const handleBlogClick = (blogId: string) => {
+    //     // Go to blog detail with blogId selected
+    //     // router.push(`/blog/detail1?id=${blogId}`);
+    // };
 
     return (
         <>
             {type === "style-one" ? (
                 <div
                     className="blog-item style-one h-full cursor-pointer"
-                    onClick={() => handleBlogClick(data.id)}
+                    // onClick={() => handleBlogClick(data.id)}
                 >
                     <div className="blog-main h-full block">
                         <div className="blog-thumb rounded-[20px] overflow-hidden">
@@ -52,7 +50,7 @@ const BlogItem: React.FC<BlogProps> = ({ data, type }) => {
                     {type === "style-list" ? (
                         <div
                             className="blog-item style-list h-full cursor-pointer"
-                            onClick={() => handleBlogClick(data.id)}
+                            // onClick={() => handleBlogClick(data.id)}
                         >
                             <div className="blog-main h-full flex max-md:flex-col md:items-center md:gap-9 gap-6">
                                 <div className="blog-thumb md:w-1/2 w-full rounded-[20px] overflow-hidden flex-shrink-0">
@@ -82,7 +80,7 @@ const BlogItem: React.FC<BlogProps> = ({ data, type }) => {
                             {type === "style-default" && (
                                 <div
                                     className="blog-item style-default h-full cursor-pointer"
-                                    onClick={() => handleBlogClick(data.id)}
+                                    // onClick={() => handleBlogClick(data.id)}
                                 >
                                     <div className="blog-main h-full block pb-8 border-b border-line">
                                         <div className="blog-thumb rounded-[20px] overflow-hidden">

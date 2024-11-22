@@ -2,30 +2,11 @@
 
 import React from 'react'
 import { useState, useEffect } from 'react';
-import Image from 'next/image'
-import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css/bundle';
 
 const Populardestination = () => {
-
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth <= 768); // Set the breakpoint as per your requirement
-        };
-
-        // Set initial state
-        handleResize();
-
-        // Add event listener
-        window.addEventListener('resize', handleResize);
-
-        // Clean up the event listener on component unmount
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
 
     return (
         <>

@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
@@ -11,11 +11,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper/modules';
 
 const TopProduct: React.FC = () => {
-    const router = useRouter();
+    // const router = useRouter();
 
-    const handleDetailProduct = (productId: string) => {
-        // router.push(`/product/default?id=${productId}`);
-    };
+    // const handleDetailProduct = (productId: string) => {
+    //     // router.push(`/product/default?id=${productId}`);
+    // };
 
     const productItems = [
         { id: '149', image: '/photo/5.png', desc: 'Wonderful Bali', nights: '5 Nights / 7 Days', price: '₹75,500', discount: '₹95,000' },
@@ -52,7 +52,7 @@ const TopProduct: React.FC = () => {
                     >
                         {productItems.map((product) => (
                             <SwiperSlide key={product.id}>
-                                <ProductCard product={product} onClick={handleDetailProduct} />
+                                <ProductCard product={product} />
                             </SwiperSlide>
                         ))}
                     </Swiper>
@@ -61,7 +61,7 @@ const TopProduct: React.FC = () => {
                 {/* Grid Layout for Desktop */}
                 <div className="hidden md:grid grid-cols-3 gap-6 mt-6">
                     {productItems.map((product) => (
-                        <div key={product.id} onClick={() => handleDetailProduct(product.id)}>
+                        <div key={product.id}>
                             <ProductCard product={product} />
                         </div>
                     ))}

@@ -1,9 +1,9 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 import 'swiper/css/bundle';
 
 // Define props interface
@@ -12,12 +12,6 @@ interface ThumbneilsliderProps {
 }
 
 const Thumbneilslider: React.FC<ThumbneilsliderProps> = ({ nameprops }) => {
-    const [isLoading, setIsLoading] = useState(true);
-
-    const handleImageLoad = () => {
-        setIsLoading(false);
-    };
-
     return (
         <>
             <div className="instagram-block md:pt-20 pt-20">
@@ -56,20 +50,19 @@ const Thumbneilslider: React.FC<ThumbneilsliderProps> = ({ nameprops }) => {
                         >
                             <SwiperSlide>
                                 <Link href={'https://www.instagram.com/'} target='_blank' className="item relative block rounded-[32px] overflow-hidden">
-                                    <div className={`shimmer-placeholder ${isLoading ? 'loading' : ''}`} />
+                                    <div className={`shimmer-placeholder`} />
                                     <Image
                                         src={'/photo/5.png'}
                                         width={300}
                                         height={300}
                                         alt='1'
                                         className='h-full w-full duration-500 relative'
-                                        onLoadingComplete={handleImageLoad}
                                     />
                                 </Link>
                             </SwiperSlide>
                             <SwiperSlide>
                                 <Link href={'https://www.instagram.com/'} target='_blank' className="item relative block rounded-[32px] overflow-hidden">
-                                <div className={`shimmer-placeholder ${isLoading ? 'loading' : ''}`} />
+                                <div className={`shimmer-placeholder`} />
                                     <Image
                                         src={'/photo/2.png'}
                                         width={300}
@@ -81,7 +74,7 @@ const Thumbneilslider: React.FC<ThumbneilsliderProps> = ({ nameprops }) => {
                             </SwiperSlide>
                             <SwiperSlide>
                                 <Link href={'https://www.instagram.com/'} target='_blank' className="item relative block rounded-[32px] overflow-hidden">
-                                <div className={`shimmer-placeholder ${isLoading ? 'loading' : ''}`} />
+                                <div className={`shimmer-placeholder`} />
                                     <Image
                                         src={'/photo/1.png'}
                                         width={300}
@@ -93,7 +86,7 @@ const Thumbneilslider: React.FC<ThumbneilsliderProps> = ({ nameprops }) => {
                             </SwiperSlide>
                             <SwiperSlide>
                                 <Link href={'https://www.instagram.com/'} target='_blank' className="item relative block rounded-[32px] overflow-hidden">
-                                <div className={`shimmer-placeholder ${isLoading ? 'loading' : ''}`} />
+                                <div className={`shimmer-placeholder`} />
                                     <Image
                                         src={'/photo/3.png'}
                                         width={300}
@@ -105,7 +98,7 @@ const Thumbneilslider: React.FC<ThumbneilsliderProps> = ({ nameprops }) => {
                             </SwiperSlide>
                             <SwiperSlide>
                                 <Link href={'https://www.instagram.com/'} target='_blank' className="item relative block rounded-[32px] overflow-hidden">
-                                <div className={`shimmer-placeholder ${isLoading ? 'loading' : ''}`} />
+                                <div className={`shimmer-placeholder`} />
                                     <Image
                                         src={'/photo/4.png'}
                                         width={300}
@@ -117,7 +110,7 @@ const Thumbneilslider: React.FC<ThumbneilsliderProps> = ({ nameprops }) => {
                             </SwiperSlide>
                             <SwiperSlide>
                                 <Link href={'https://www.instagram.com/'} target='_blank' className="item relative block rounded-[32px] overflow-hidden">
-                                <div className={`shimmer-placeholder ${isLoading ? 'loading' : ''}`} />
+                                <div className={`shimmer-placeholder`} />
                                     <Image
                                         src={'/photo/6.png'}
                                         width={300}
@@ -129,7 +122,7 @@ const Thumbneilslider: React.FC<ThumbneilsliderProps> = ({ nameprops }) => {
                             </SwiperSlide>
                             <SwiperSlide>
                                 <Link href={'https://www.instagram.com/'} target='_blank' className="item relative block rounded-[32px] overflow-hidden">
-                                <div className={`shimmer-placeholder ${isLoading ? 'loading' : ''}`} />
+                                <div className={`shimmer-placeholder`} />
                                     <Image
                                         src={'/photo/7.png'}
                                         width={300}

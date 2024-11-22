@@ -1,19 +1,18 @@
 'use client'
 
 import React from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, Scrollbar } from 'swiper/modules';
-import { useRouter } from 'next/navigation';
+import { Autoplay, Navigation } from 'swiper/modules';
+// import { useRouter } from 'next/navigation';
 import 'swiper/css/bundle';
 
 const TrendingNow = () => {
-    const router = useRouter()
+    // const router = useRouter()
 
-    const handleTypeClick = (type: string) => {
-        // router.push(`/shop/breadcrumb1?type=${type}`);
-    };
+    // const handleTypeClick = (type: string) => {
+    //     // router.push(`/shop/breadcrumb1?type=${type}`);
+    // };
 
     return (
         <>
@@ -49,7 +48,7 @@ const TrendingNow = () => {
                             className='h-full'
                         >
                             <SwiperSlide>
-                                <div className="trending-item block relative cursor-pointer" onClick={() => handleTypeClick('t-shirt')}>
+                                <div className="trending-item block relative cursor-pointer">
                                     <div className="bg-img rounded-full overflow-hidden">
                                         <Image
                                             src={'/test/PORTUGAL/1.png'}
@@ -67,7 +66,7 @@ const TrendingNow = () => {
                                 </div>
                             </SwiperSlide>
                             <SwiperSlide>
-                                <div className="trending-item block relative cursor-pointer" onClick={() => handleTypeClick('sweater')}>
+                                <div className="trending-item block relative cursor-pointer">
                                     <div className="bg-img rounded-full overflow-hidden">
                                         <Image
                                             src={'/test/THAILAND/2.png'}
@@ -85,7 +84,7 @@ const TrendingNow = () => {
                                 </div>
                             </SwiperSlide>
                             <SwiperSlide>
-                                <div className="trending-item block relative cursor-pointer" onClick={() => handleTypeClick('top')}>
+                                <div className="trending-item block relative cursor-pointer">
                                     <div className="bg-img rounded-full overflow-hidden">
                                         <Image
                                             src={'/test/THAILAND/3.png'}
@@ -103,7 +102,7 @@ const TrendingNow = () => {
                                 </div>
                             </SwiperSlide>
                             <SwiperSlide>
-                                <div className="trending-item block relative cursor-pointer" onClick={() => handleTypeClick('dress')}>
+                                <div className="trending-item block relative cursor-pointer">
                                     <div className="bg-img rounded-full overflow-hidden">
                                         <Image
                                             src={'/test/THAILAND/4.png'}
@@ -121,7 +120,7 @@ const TrendingNow = () => {
                                 </div>
                             </SwiperSlide>
                             <SwiperSlide>
-                                <div className="trending-item block relative cursor-pointer" onClick={() => handleTypeClick('swimwear')}>
+                                <div className="trending-item block relative cursor-pointer">
                                     <div className="bg-img rounded-full overflow-hidden">
                                         <Image
                                             src={'/test/THAILAND/5.png'}
@@ -139,7 +138,7 @@ const TrendingNow = () => {
                                 </div>
                             </SwiperSlide>
                             <SwiperSlide>
-                                <div className="trending-item block relative cursor-pointer" onClick={() => handleTypeClick('outerwear')}>
+                                <div className="trending-item block relative cursor-pointer">
                                     <div className="bg-img rounded-full overflow-hidden">
                                         <Image
                                             src={'/test/THAILAND/6.png'}
@@ -157,7 +156,7 @@ const TrendingNow = () => {
                                 </div>
                             </SwiperSlide>
                             <SwiperSlide>
-                                <div className="trending-item block relative cursor-pointer" onClick={() => handleTypeClick('shirt')}>
+                                <div className="trending-item block relative cursor-pointer">
                                     <div className="bg-img rounded-full overflow-hidden">
                                         <Image
                                             src={'/test/THAILAND/7.png'}
@@ -176,7 +175,7 @@ const TrendingNow = () => {
                             </SwiperSlide>
 
                             <SwiperSlide>
-                                <div className="trending-item block relative cursor-pointer" onClick={() => handleTypeClick('shirt')}>
+                                <div className="trending-item block relative cursor-pointer">
                                     <div className="bg-img rounded-full overflow-hidden">
                                         <Image
                                             src={'/test/THAILAND/7.png'}
@@ -195,7 +194,7 @@ const TrendingNow = () => {
                             </SwiperSlide>
 
                             <SwiperSlide>
-                                <div className="trending-item block relative cursor-pointer" onClick={() => handleTypeClick('shirt')}>
+                                <div className="trending-item block relative cursor-pointer">
                                     <div className="bg-img rounded-full overflow-hidden">
                                         <Image
                                             src={'/test/THAILAND/7.png'}
@@ -214,7 +213,7 @@ const TrendingNow = () => {
                             </SwiperSlide>
 
                             <SwiperSlide>
-                                <div className="trending-item block relative cursor-pointer" onClick={() => handleTypeClick('shirt')}>
+                                <div className="trending-item block relative cursor-pointer">
                                     <div className="bg-img rounded-full overflow-hidden">
                                         <Image
                                             src={'/test/THAILAND/7.png'}

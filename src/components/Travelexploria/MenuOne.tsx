@@ -5,13 +5,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import * as Icon from "@phosphor-icons/react/dist/ssr";
 import { usePathname } from 'next/navigation';
-import productData from '@/data/Product.json'
 import useLoginPopup from '@/store/useLoginPopup';
 import useMenuMobile from '@/store/useMenuMobile';
-import { useModalCartContext } from '@/context/ModalCartContext';
-import { useModalWishlistContext } from '@/context/ModalWishlistContext';
-import { useModalSearchContext } from '@/context/ModalSearchContext';
-import { useCart } from '@/context/CartContext';
 import { useRouter } from 'next/navigation';
 
 interface Props {
@@ -21,14 +16,10 @@ interface Props {
 const MenuOne: React.FC<Props> = ({ props }) => {
     const router = useRouter()
     const pathname = usePathname()
-    let [selectedType, setSelectedType] = useState<string | null>()
+    // let [selectedType, setSelectedType] = useState<string | null>()
     const { openLoginPopup, handleLoginPopup } = useLoginPopup()
     const { openMenuMobile, handleMenuMobile } = useMenuMobile()
     const [openSubNavMobile, setOpenSubNavMobile] = useState<number | null>(null)
-    const { openModalCart } = useModalCartContext()
-    const { cartState } = useCart()
-    const { openModalWishlist } = useModalWishlistContext()
-    const { openModalSearch } = useModalSearchContext()
 
     const handleOpenSubNavMobile = (index: number) => {
         setOpenSubNavMobile(openSubNavMobile === index ? null : index)
@@ -53,18 +44,18 @@ const MenuOne: React.FC<Props> = ({ props }) => {
         };
     }, [lastScrollPosition]);
 
-    const handleGenderClick = (gender: string) => {
-        //router.push(`/shop/breadcrumb1?gender=${gender}`);
-    };
+    // const handleGenderClick = (gender: string) => {
+    //     //router.push(`/shop/breadcrumb1?gender=${gender}`);
+    // };
 
-    const handleCategoryClick = (category: string) => {
-        //router.push(`/shop/breadcrumb1?category=${category}`);
-    };
+    // const handleCategoryClick = (category: string) => {
+    //     //router.push(`/shop/breadcrumb1?category=${category}`);
+    // };
 
-    const handleTypeClick = (type: string) => {
-        setSelectedType(type)
-        //router.push(`/shop/breadcrumb1?type=${type}`);
-    };
+    // const handleTypeClick = (type: string) => {
+    //     setSelectedType(type)
+    //     //router.push(`/shop/breadcrumb1?type=${type}`);
+    // };
 
     
     return (
@@ -104,7 +95,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             <ul>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleGenderClick('men')}
+                                                                       
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Thailand
@@ -112,7 +103,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleTypeClick('outerwear')}
+                                                                       
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Bali
@@ -120,7 +111,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleTypeClick('sweater')}
+                                                                  
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Maldives
@@ -128,7 +119,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleTypeClick('shirt')}
+                                                                      
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Indonesia
@@ -136,7 +127,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleGenderClick('men')}
+                                                                       
                                                                         className={`link text-secondary duration-300 cursor-pointer view-all-btn`}
                                                                     >
                                                                         View All
@@ -149,7 +140,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             <ul>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleTypeClick('shirt')}
+                                                                  
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Kashmir
@@ -157,7 +148,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleTypeClick('top')}
+                                                                   
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Kochi
@@ -165,7 +156,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleTypeClick('t-shirt')}
+                                                                     
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Rajansthan
@@ -173,7 +164,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleTypeClick('swimwear')}
+                                                                     
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Andaman
@@ -181,7 +172,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleCategoryClick('fashion')}
+                                                                       
                                                                         className={`link text-secondary duration-300 view-all-btn`}
                                                                     >
                                                                         View All
@@ -194,7 +185,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             <ul>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleTypeClick('face')}
+                                                                   
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         France
@@ -202,7 +193,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleTypeClick('eye')}
+                                                                        
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Greece
@@ -210,7 +201,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleTypeClick('lip')}
+                                                                        
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Switzerland
@@ -218,7 +209,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleTypeClick('hair')}
+                                                                       
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Italy
@@ -226,7 +217,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleCategoryClick('cosmetic')}
+                                                                       
                                                                         className={`link text-secondary duration-300 view-all-btn`}
                                                                     >
                                                                         View All
@@ -239,7 +230,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             <ul>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleTypeClick('candle')}
+                                                                       
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Dubai
@@ -247,7 +238,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleTypeClick('drinks')}
+                                                                        
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Abu dhabi
@@ -255,7 +246,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleTypeClick('clothes')}
+                                                                       
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Egypt
@@ -263,7 +254,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleTypeClick('mats')}
+                                                                       
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Turkey
@@ -271,7 +262,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleCategoryClick('yoga')}
+                                                                       
                                                                         className={`link text-secondary duration-300 view-all-btn`}
                                                                     >
                                                                         View All
@@ -284,7 +275,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             <ul>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleGenderClick('women')}
+                                                                        
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Thailand
@@ -292,7 +283,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleTypeClick('dress')}
+                                                                       
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Maldives
@@ -300,7 +291,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleTypeClick('t-shirt')}
+                                                                       
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Srilanka
@@ -308,7 +299,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleTypeClick('accessories')}
+                                                                       
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Bali
@@ -316,7 +307,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleGenderClick('women')}
+                                                                       
                                                                         className={`link text-secondary duration-300 view-all-btn`}
                                                                     >
                                                                         View All
@@ -329,7 +320,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             <ul>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleTypeClick('bed')}
+                                                                       
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Amsterdam
@@ -337,15 +328,14 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleTypeClick('toy')}
+                                                                        
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Paris
                                                                     </div>
                                                                 </li>
                                                                 <li>
-                                                                    <div
-                                                                        onClick={() => handleTypeClick('blanket')}
+                                                                    <div 
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Italy
@@ -353,7 +343,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleTypeClick('clothing')}
+                                                                        
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Norway
@@ -361,7 +351,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleCategoryClick('toys-kid')}
+                                                                        
                                                                         className={`link text-secondary duration-300 view-all-btn`}
                                                                     >
                                                                         View All
@@ -374,7 +364,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             <ul>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleCategoryClick('furniture')}
+                                                                        
 
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
@@ -382,8 +372,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                     </div>
                                                                 </li>
                                                                 <li>
-                                                                    <div
-                                                                        onClick={() => handleTypeClick('table')}
+                                                                    <div 
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Middle East
@@ -392,7 +381,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
 
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleTypeClick('lighting')}
+                                                                       
                                                                         className={`link text-secondary duration-300 cursor-pointer`}
                                                                     >
                                                                         Turkey
@@ -400,7 +389,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </li>
                                                                 <li>
                                                                     <div
-                                                                        onClick={() => handleCategoryClick('furniture')}
+                                                                        
                                                                         className={`link text-secondary duration-300 view-all-btn`}
                                                                     >
                                                                         View All
@@ -410,7 +399,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                         </div>
                                                     </div>
                                                     <div className="banner-ads-block pl-2.5 basis-1/3">
-                                                        <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden cursor-pointer" onClick={() => handleTypeClick('swimwear')}>
+                                                        <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden cursor-pointer">
                                                             <div className="text-content py-7 pl-8 relative z-[1]">
                                                                 <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Best Package</div>
                                                                 <div className="heading6 mt-2 text-white">Our Best Offer <br />on Winter</div>
@@ -426,7 +415,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 className='basis-1/3 absolute right-0 top-0 duration-700'
                                                             />
                                                         </div>
-                                                        <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden cursor-pointer mt-8" onClick={() => handleTypeClick('accessories')}>
+                                                        <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden cursor-pointer mt-8">
                                                             <div className="text-content py-7 pl-8 relative z-[1]">
                                                                 <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Best Value</div>
                                                                 <div className="heading6 mt-2 text-white">20% off <br /> for All Domestic Packages</div>
@@ -535,7 +524,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                         </div>
                                                     </div>
                                                     <div className="banner-ads-block pl-2.5 basis-1/3">
-                                                        <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden cursor-pointer" onClick={() => handleTypeClick('swimwear')}>
+                                                        <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden cursor-pointer">
                                                             <div className="text-content py-7 pl-8 relative z-[1]">
                                                                 <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Best Package</div>
                                                                 <div className="heading6 mt-2 text-white">Our Best Offer <br />on Winter</div>
@@ -645,7 +634,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                         </div>
                                                     </div>
                                                     <div className="banner-ads-block pl-2.5 basis-1/3">
-                                                        <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden cursor-pointer" onClick={() => handleTypeClick('swimwear')}>
+                                                        <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden cursor-pointer">
                                                             <div className="text-content py-7 pl-8 relative z-[1]">
                                                                 <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Best Package</div>
                                                                 <div className="heading6 mt-2 text-white">Our Best Offer <br />on Winter</div>
@@ -820,7 +809,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                         <ul>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleGenderClick('men')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Thailand
@@ -828,7 +817,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('outerwear')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Bali
@@ -836,7 +825,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('sweater')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Maldives
@@ -844,7 +833,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('shirt')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Indonesia
@@ -852,7 +841,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleGenderClick('men')}
+                                                                   
                                                                     className={`link text-secondary duration-300 view-all-btn`}
                                                                 >
                                                                     View All
@@ -865,7 +854,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                         <ul>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('face')}
+                                                                    
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Kashmir
@@ -873,7 +862,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('eye')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Rajasthan
@@ -881,7 +870,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('lip')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Andaman
@@ -889,7 +878,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('hair')}
+                                                                    
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Kochi / Kerala
@@ -897,7 +886,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleCategoryClick('cosmetic')}
+                                                                   
                                                                     className={`link text-secondary duration-300 view-all-btn`}
                                                                 >
                                                                     View All
@@ -910,7 +899,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                         <ul>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('candle')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Dubai
@@ -918,7 +907,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('drinks')}
+                                                                    
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Abu dhabi
@@ -926,7 +915,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('clothes')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Turkey
@@ -934,7 +923,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('mats')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Egypt
@@ -942,7 +931,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleCategoryClick('yoga')}
+                                                                    
                                                                     className={`link text-secondary duration-300 view-all-btn`}
                                                                 >
                                                                     View All
@@ -955,7 +944,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                         <ul>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleGenderClick('women')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Italy
@@ -963,7 +952,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('dress')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Portugal
@@ -971,7 +960,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('t-shirt')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     France
@@ -979,7 +968,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('accessories')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Switzerland
@@ -987,7 +976,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleGenderClick('women')}
+                                                                   
                                                                     className={`link text-secondary duration-300 view-all-btn`}
                                                                 >
                                                                     View All
@@ -998,7 +987,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
 
                                                 </div>
                                                 <div className="banner-ads-block grid sm:grid-cols-2 items-center gap-6 pt-6">
-                                                    <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden" onClick={() => handleTypeClick('swimwear')}>
+                                                    <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden">
                                                         <div className="text-content py-7 pl-8 relative z-[1]">
                                                             <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Best Value</div>
                                                             <div className="heading6 mt-2 text-white">Our Best Packages <br />on Europe</div>
@@ -1014,7 +1003,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             className='basis-1/3 absolute right-0 top-0'
                                                         />
                                                     </div>
-                                                    <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden" onClick={() => handleTypeClick('accessories')}>
+                                                    <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden">
                                                         <div className="text-content py-7 pl-8 relative z-[1]">
                                                             <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Top Packages</div>
                                                             <div className="heading6 mt-2 text-white">20% off <br />for All Domestic Packages</div>
@@ -1059,7 +1048,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                         <ul>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleGenderClick('men')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Thailand
@@ -1067,7 +1056,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('outerwear')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Bali
@@ -1075,7 +1064,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('sweater')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Maldives
@@ -1083,7 +1072,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('shirt')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Indonesia
@@ -1091,7 +1080,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleGenderClick('men')}
+                                                                   
                                                                     className={`link text-secondary duration-300 view-all-btn`}
                                                                 >
                                                                     View All
@@ -1104,7 +1093,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                         <ul>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('face')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Kashmir
@@ -1112,7 +1101,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('eye')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Rajasthan
@@ -1120,7 +1109,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('lip')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Andaman
@@ -1128,7 +1117,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('hair')}
+                                                                    
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Kochi / Kerala
@@ -1136,7 +1125,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleCategoryClick('cosmetic')}
+                                                                   
                                                                     className={`link text-secondary duration-300 view-all-btn`}
                                                                 >
                                                                     View All
@@ -1149,7 +1138,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                         <ul>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('candle')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Dubai
@@ -1157,7 +1146,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('drinks')}
+                                                                    
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Abu dhabi
@@ -1165,7 +1154,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('clothes')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Turkey
@@ -1173,7 +1162,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('mats')}
+                                                                    
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Egypt
@@ -1181,7 +1170,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleCategoryClick('yoga')}
+                                                                    
                                                                     className={`link text-secondary duration-300 view-all-btn`}
                                                                 >
                                                                     View All
@@ -1194,7 +1183,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                         <ul>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleGenderClick('women')}
+                                                                    
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Italy
@@ -1202,7 +1191,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('dress')}
+                                                                    
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Portugal
@@ -1210,7 +1199,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('t-shirt')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     France
@@ -1218,7 +1207,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('accessories')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Switzerland
@@ -1226,7 +1215,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleGenderClick('women')}
+                                                                   
                                                                     className={`link text-secondary duration-300 view-all-btn`}
                                                                 >
                                                                     View All
@@ -1237,7 +1226,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
 
                                                 </div>
                                                 <div className="banner-ads-block grid sm:grid-cols-2 items-center gap-6 pt-6">
-                                                    <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden" onClick={() => handleTypeClick('swimwear')}>
+                                                    <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden">
                                                         <div className="text-content py-7 pl-8 relative z-[1]">
                                                             <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Best Value</div>
                                                             <div className="heading6 mt-2 text-white">Our Best Packages <br />on Europe</div>
@@ -1253,7 +1242,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             className='basis-1/3 absolute right-0 top-0'
                                                         />
                                                     </div>
-                                                    <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden" onClick={() => handleTypeClick('accessories')}>
+                                                    <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden">
                                                         <div className="text-content py-7 pl-8 relative z-[1]">
                                                             <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Top Packages</div>
                                                             <div className="heading6 mt-2 text-white">20% off <br />for All Domestic Packages</div>
@@ -1298,7 +1287,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                         <ul>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleGenderClick('men')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Thailand
@@ -1306,7 +1295,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('outerwear')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Bali
@@ -1314,7 +1303,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('sweater')}
+                                                                    
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Maldives
@@ -1322,7 +1311,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('shirt')}
+                                                                    
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Indonesia
@@ -1330,7 +1319,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleGenderClick('men')}
+                                                                   
                                                                     className={`link text-secondary duration-300 view-all-btn`}
                                                                 >
                                                                     View All
@@ -1343,7 +1332,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                         <ul>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('face')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Kashmir
@@ -1351,7 +1340,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('eye')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Rajasthan
@@ -1359,7 +1348,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('lip')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Andaman
@@ -1367,7 +1356,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('hair')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Kochi / Kerala
@@ -1375,7 +1364,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleCategoryClick('cosmetic')}
+                                                                    
                                                                     className={`link text-secondary duration-300 view-all-btn`}
                                                                 >
                                                                     View All
@@ -1388,7 +1377,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                         <ul>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('candle')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Dubai
@@ -1396,7 +1385,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('drinks')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Abu dhabi
@@ -1404,7 +1393,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('clothes')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Turkey
@@ -1412,7 +1401,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('mats')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Egypt
@@ -1420,7 +1409,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleCategoryClick('yoga')}
+                                                                   
                                                                     className={`link text-secondary duration-300 view-all-btn`}
                                                                 >
                                                                     View All
@@ -1433,7 +1422,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                         <ul>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleGenderClick('women')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Italy
@@ -1441,7 +1430,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('dress')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Portugal
@@ -1449,7 +1438,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('t-shirt')}
+                                                                   
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     France
@@ -1457,7 +1446,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleTypeClick('accessories')}
+                                                                    
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Switzerland
@@ -1465,7 +1454,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    onClick={() => handleGenderClick('women')}
+                                                                   
                                                                     className={`link text-secondary duration-300 view-all-btn`}
                                                                 >
                                                                     View All
@@ -1476,7 +1465,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
 
                                                 </div>
                                                 <div className="banner-ads-block grid sm:grid-cols-2 items-center gap-6 pt-6">
-                                                    <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden" onClick={() => handleTypeClick('swimwear')}>
+                                                    <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden">
                                                         <div className="text-content py-7 pl-8 relative z-[1]">
                                                             <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Best Value</div>
                                                             <div className="heading6 mt-2 text-white">Our Best Packages <br />on Europe</div>
@@ -1492,7 +1481,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                             className='basis-1/3 absolute right-0 top-0'
                                                         />
                                                     </div>
-                                                    <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden" onClick={() => handleTypeClick('accessories')}>
+                                                    <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden">
                                                         <div className="text-content py-7 pl-8 relative z-[1]">
                                                             <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Top Packages</div>
                                                             <div className="heading6 mt-2 text-white">20% off <br />for All Domestic Packages</div>
