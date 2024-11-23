@@ -8,6 +8,7 @@ import 'swiper/css/bundle';
 import 'swiper/css/effect-fade';
 import Populardestination from './Populardestination';
 import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css'
 
 
 const SliderFive = () => {
@@ -184,12 +185,12 @@ const SliderFive = () => {
                             <div className="relative w-full h-full" >
                                 <Icon.MagnifyingGlass
                                     size={20}
-                                    className="absolute left-3 top-1/2 -translate-y-1/2 cursor-pointer text-black"
+                                    className="absolute left-4 top-1/2 -translate-y-1/2 cursor-pointer text-black"
                                 />
                                 <input
                                     type="text"
                                     
-                                    className="caption1 w-full h-full lg:pl-12 md:pl-12 pl-4 pr-14 rounded-xl border border-line text-md text-secondary"
+                                    className="caption1 w-full h-full lg:pl-12 md:pl-12 pl-12 pr-14 rounded-xl border border-line text-md text-secondary"
                                     placeholder='Enter Your Destination'
                                 />
 

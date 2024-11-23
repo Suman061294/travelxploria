@@ -13,8 +13,8 @@ const Newsletter: React.FC<Props> = ({ props }) => {
                     <div className='text-white text-center mt-3'>Lat&apos;s connect with us</div>
                     <div className="input-block lg:w-1/2 sm:w-3/5 w-full h-[52px] sm:mt-10 mt-7">
                         <form className='w-full h-full relative' action="post">
-                            <input type="email" placeholder='Enter your e-mail' className='caption1 w-full h-full pl-4 pr-14 rounded-xl border border-line' required />
-                            <button className='button-main bg-green text-black absolute top-1 bottom-1 right-1 flex items-center justify-center'>Connect With Us
+                            <input type="email" placeholder='Enter your first message' className='caption1 w-full h-full pl-4 pr-14 rounded-xl border border-line' required />
+                            <button className='button-main bg-green text-black absolute top-1 bottom-1 right-1 flex items-center justify-center'>Start
                             </button>
                         </form>
                     </div>

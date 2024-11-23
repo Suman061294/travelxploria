@@ -28,12 +28,12 @@ const Populardestination = () => {
                             // pagination={isMobile ? { clickable: true } : false} // Conditionally set pagination for mobile only
                             breakpoints={{
                                 300: {
-                                    slidesPerView: 6, // Show 3 slides on smaller screens
-                                    spaceBetween: 32,
+                                    slidesPerView: 7, // Show 3 slides on smaller screens
+                                    spaceBetween: 0,
                                 },
                                 500: {
-                                    slidesPerView: 6,
-                                    spaceBetween: 8,
+                                    slidesPerView: 12,
+                                    spaceBetween: 0,
                                 },
                                 680: {
                                     slidesPerView: 5,
@@ -50,7 +50,7 @@ const Populardestination = () => {
                             }}
                         >
                             <SwiperSlide>
-                                <div className="flex flex-col justify-center items-center md:p-5 lg:p-5 p-2 text-center">
+                                <div className="flex flex-col justify-center items-center md:p-5 lg:p-5 p-5 text-center">
                                     <div className="shiny-effect-container p-2">
                                         {/* Inline SVG */}
                                         <svg

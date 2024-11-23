@@ -21,7 +21,15 @@ const Budget = () => {
                         <div className="heading3 text-center">Holiday for your Budget! </div>
                         <div className="heading6 font-normal normal-case text-secondary md:mt-4 mt-2">Exclusive For you</div>
                     </div>
-                    <div className="list-collection grid lg:grid-cols-5 grid-cols-3 gap-12 place-items-center md:mt-10 mt-6 py-5-20 lg:px-20 md:px-20 p-10">
+                    <div className="list-collection grid lg:grid-cols-6 grid-cols-2 gap-12 place-items-center md:mt-10 mt-6 py-5-20 lg:px-20 md:px-20 p-10">
+                    <div className="collection-item block relative rounded-1 overflow-hidden cursor-pointer" onClick={() => handleTypeClick('swimwear')}>
+                                <Image
+                                    src={'/offer/5.png'}
+                                    width={400}
+                                    height={400}
+                                    alt='underwear1'
+                                />
+                        </div>
                         <div className="collection-item block relative rounded-1 overflow-hidden cursor-pointer" onClick={() => handleTypeClick('swimwear')}>
                                 <Image
                                     src={'/offer/1.png'}
@@ -56,7 +64,7 @@ const Budget = () => {
                         </div>
                         <div className="collection-item block relative rounded-1 overflow-hidden cursor-pointer" onClick={() => handleTypeClick('swimwear')}>
                                 <Image
-                                    src={'/offer/5.png'}
+                                    src={'/offer/6.png'}
                                     width={400}
                                     height={400}
                                     alt='underwear1'

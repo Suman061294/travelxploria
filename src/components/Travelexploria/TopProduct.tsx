@@ -27,7 +27,7 @@ const TopProduct: React.FC = () => {
     ];
 
     return (
-        <div className="top-product md:mt-[60px] mt-10 md:py-[60px] py-10 bg-light-yellow">
+        <div className="top-product md:mt-[60px] mt-[60px] md:py-[60px] py-10 bg-light-yellow">
             <div className="container">
                 <div className="heading flex items-center justify-between gap-5 flex-wrap">
                     <div className="heading3">Budget Packages</div>
@@ -96,6 +96,11 @@ const ProductCard: React.FC<{ product: any; onClick?: (id: string) => void }> = 
             <div className="flex items-center gap-3 mt-1">
                 <span className="text-title inline-block text-xs font-bold grey">{product.nights}</span>
             </div>
+
+            <div className="flex items-center gap-3 mt-1">
+                <span className="text-title inline-block text-xs text-black">3 Hotel , 3 Activity , 2 Transfer , 1 Intercity</span>
+            </div>
+
             <div className="absolute bottom-1 w-full">
                 <div className="flex items-center gap-1 mt-3">
                     <del className="text-red text-sm rotate-1">{product.discount}</del>
