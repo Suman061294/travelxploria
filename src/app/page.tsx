@@ -16,6 +16,7 @@ import TrendingNow from '@/components/Travelexploria/TrendingNow'
 import Newsletter from '@/components/Travelexploria/Newsletter'
 import Budget from '@/components/Travelexploria/Budget'
 import Collectionthumb from '@/components/Travelexploria/Collection2'
+import MenuOrganic from '@/components/Header/Menu/MenuOrganic'
 
 
 export default function Home() {
@@ -26,7 +27,8 @@ export default function Home() {
       {/* <TopNavOne props="style-one bg-black shine-effect" slogan="New customers save 10% with the code GET10" /> */}
       <TopNavOne props="style-one bg-black" slogan="New customers save 10% with the code GET10" />
       <div id="header" className='relative w-full'>
-        <MenuOne props="bg-transparent" />
+        {/* <MenuOne props="bg-transparent" /> */}
+        <MenuOrganic />
         <SliderFive />
       </div>
       <Thumbneilslider nameprops={`Explore Packages`} />

@@ -14,7 +14,7 @@ const Populardestination = () => {
                 <div className="container">
                     <div className="heading">
                         {/* <div className="heading3 text-center">Popular Destination</div> */}
-                        <div className="text-center mt-3">Our Popular Destination</div>
+                        <div className="text-center mt-3">No #1 Customer Choice</div>
                     </div>
                     <div className="list-instagram md:mt-4 mt-6">
                         <Swiper

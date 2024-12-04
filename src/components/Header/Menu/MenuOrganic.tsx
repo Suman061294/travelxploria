@@ -1,25 +1,38 @@
 'use client'
-
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState,useRef  } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import * as Icon from "@phosphor-icons/react/dist/ssr";
 import { usePathname } from 'next/navigation';
+import Product from '@/components/Product/Product';
+import productData from '@/data/Product.json'
 import useLoginPopup from '@/store/useLoginPopup';
+import useShopDepartmentPopup from '@/store/useShopDepartmentPopup';
 import useMenuMobile from '@/store/useMenuMobile';
-import { useRouter } from 'next/navigation';
+import { useModalCartContext } from '@/context/ModalCartContext';
+import { useModalWishlistContext } from '@/context/ModalWishlistContext';
+import { useCart } from '@/context/CartContext';
+import 'rc-slider/assets/index.css'
+import Slider from 'rc-slider';
 
-interface Props {
-    props: string;
-}
-
-const MenuOne: React.FC<Props> = ({ props }) => {
-    const router = useRouter()
+const MenuOrganic = () => {
     const pathname = usePathname()
-    // let [selectedType, setSelectedType] = useState<string | null>()
     const { openLoginPopup, handleLoginPopup } = useLoginPopup()
+    const { openShopDepartmentPopup, handleShopDepartmentPopup } = useShopDepartmentPopup()
     const { openMenuMobile, handleMenuMobile } = useMenuMobile()
     const [openSubNavMobile, setOpenSubNavMobile] = useState<number | null>(null)
+    const { openModalCart } = useModalCartContext()
+    const { cartState } = useCart()
+    const { openModalWishlist } = useModalWishlistContext()
+
+    const [searchKeyword, setSearchKeyword] = useState('');
+    const router = useRouter()
+
+    const handleSearch = (value: string) => {
+        router.push(`/search-result?query=${value}`)
+        setSearchKeyword('')
+    }
 
     const handleOpenSubNavMobile = (index: number) => {
         setOpenSubNavMobile(openSubNavMobile === index ? null : index)
@@ -44,49 +57,145 @@ const MenuOne: React.FC<Props> = ({ props }) => {
         };
     }, [lastScrollPosition]);
 
-    // const handleGenderClick = (gender: string) => {
-    //     //router.push(`/shop/breadcrumb1?gender=${gender}`);
-    // };
+    const handleGenderClick = (gender: string) => {
+        router.push(`/shop/breadcrumb1?gender=${gender}`);
+    };
 
-    // const handleCategoryClick = (category: string) => {
-    //     //router.push(`/shop/breadcrumb1?category=${category}`);
-    // };
+    const handleCategoryClick = (category: string) => {
+        router.push(`/shop/breadcrumb1?category=${category}`);
+    };
 
-    // const handleTypeClick = (type: string) => {
-    //     setSelectedType(type)
-    //     //router.push(`/shop/breadcrumb1?type=${type}`);
-    // };
+    const handleTypeClick = (type: string) => {
+        router.push(`/shop/breadcrumb1?type=${type}`);
+    };
 
-    
+
+    /*------------------------ Search --------------------------------*/
+
+    const keywords: string[] = ["Maldives", "Bali", "Thailand", "Kashmir", "Andaman"];
+
+    const [displayedText, setDisplayedText] = useState<string>(""); // Text being displayed
+    const [currentIndex, setCurrentIndex] = useState<number>(0); // Tracks the index of the current keyword
+    const [isDeleting, setIsDeleting] = useState<boolean>(false); // Typing or deleting mode
+  
+    // Ref to keep track of the typing speed and delay
+    const typingTimerRef = useRef<NodeJS.Timeout | null>(null);
+  
+    useEffect(() => {
+      const currentWord = keywords[currentIndex];
+      const typingSpeed = isDeleting ? 50 : 100; // Speed for typing and deleting
+      const delayBetweenWords = 1000; // Delay before moving to the next word
+  
+      const handleTyping = () => {
+        if (!isDeleting) {
+          // Typing mode
+          setDisplayedText((prev) => currentWord.slice(0, prev.length + 1));
+          if (displayedText === currentWord) {
+            setTimeout(() => setIsDeleting(true), delayBetweenWords); // Start deleting after a delay
+          }
+        } else {
+          // Deleting mode
+          setDisplayedText((prev) => prev.slice(0, -1));
+          if (displayedText === "") {
+            setIsDeleting(false);
+            setCurrentIndex((prev) => (prev + 1) % keywords.length); // Move to the next word
+          }
+        }
+      };
+  
+      // Use ref to clear the timer on cleanup and avoid stale timers
+      typingTimerRef.current = setTimeout(handleTyping, typingSpeed);
+  
+      // Cleanup function to clear the timer on unmount or rerun
+      return () => {
+        if (typingTimerRef.current) {
+          clearTimeout(typingTimerRef.current);
+        }
+      };
+    }, [currentIndex, isDeleting, displayedText]); // Removed 'keywords' from dependencies
+
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const toggleModal = () => {
+        setIsModalOpen((prev) => !prev);
+    };
+
+
+    const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({ min: 50000, max: 500000 });
+    const handlePriceChange = (values: number | number[]) => {
+        if (Array.isArray(values)) {
+            setPriceRange({ min: values[0], max: values[1] });
+        }
+    };
+    /*---------------------------------------------------*/
+
     return (
         <>
-            <div className={`header-menu style-one ${fixedHeader ? 'fixed' : 'absolute'} top-0 left-0 right-0 w-full md:h-[74px] h-[56px] ${props} coll17`}>
-                <div className="container mx-auto h-full">
-                    <div className="header-main flex justify-between h-full">
-                        <div className="menu-mobile-icon lg:hidden flex items-center" onClick={handleMenuMobile}>
-                            <i className="icon-category text-2xl"></i>
-                        </div>
-                        <div className="left flex items-center gap-16">
-                            <Link href={'/'} className='flex items-center max-lg:absolute max-lg:left-1/2 max-lg:-translate-x-1/2'>
-                                <div className="heading4">
-                                    <Image
-                                        src={'/images/logo.png'}
-                                        width={2560}
-                                        height={1080}
-                                        alt='bg5-1'
-                                        priority={true}
-                                        className='w-full h-full object-cover'
-                                    />
-                                </div>
+            <div className={`${fixedHeader ? ' fixed' : 'relative'} header-menu bg-white w-full top-0 z-10 duration-500`}>
+                <div className={`header-menu-main style-eight bg-white w-full md:h-[60px] h-[56px]`}>
+                    <div className="container mx-auto h-full">
+                        <div className="header-main flex items-center justify-between h-full">
+                            <div className="menu-mobile-icon lg:hidden flex items-center" onClick={handleMenuMobile}>
+                                <i className="icon-category text-2xl"></i>
+                            </div>
+                            <Link href={'/'} className='flex items-center'>
+                                <div className="heading4"><Image
+                                    src={'/images/logo.png'}
+                                    width={2560}
+                                    height={1080}
+                                    alt='bg5-1'
+                                    priority={true}
+                                    className='w-full md:h-[40px] h-[35px] object-cover'
+                                /></div>
                             </Link>
-                            <div className="menu-main h-full max-lg:hidden">
-                                <ul className='flex items-center gap-8 h-full'>
+                            <div className="form-search w-2/3 pl-8 flex items-center h-[44px] max-lg:hidden">
 
-                                    <li className='h-full'>
-                                        <Link href="#!" className='text-button-uppercase duration-300 h-full flex items-center justify-center menu-header-text'>
+                                <div className='w-full flex items-center h-full justify-center'>
+
+                                <div className="input-block lg:w-2/5 sm:w-5/5 h-[40px]">
+                                            <div className="relative w-full h-full" onClick={toggleModal}>
+                                                <Icon.MagnifyingGlass
+                                                    size={20}
+                                                    className="absolute left-3 top-1/2 -translate-y-1/2 cursor-pointer text-black"
+                                                />
+                                                <input
+                                                    type="text"
+                                                    value="Explore & Discover"
+                                                    className="caption1 w-full h-full pl-12 pr-14 rounded-full border border-line cursor-pointer text-xs text-secondary shadow-custom"
+                                                    readOnly
+                                                />
+                                                {/* Overlay for displayedText */}
+                                                <span className="absolute md:left-[157px] left-[160px] top-1/2 -translate-y-1/2 font-bold text-sm text-black">
+                                                    {displayedText}
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                    
+                                </div>
+                            </div>
+                            <div className="right flex gap-12">
+                                <div className="list-action flex items-center gap-4">
+                                <div className="m-width-call product-tag text-button-uppercase bg-green px-3 py-1 inline-block rounded-full z-[1] auto-shining text-sm">+91 74390-20962</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="top-nav-menu relative bg-white border-t border-b border-line h-[44px] max-lg:hidden z-10">
+                    <div className="container h-full">
+                        <div className="top-nav-menu-main flex items-center justify-between h-full">
+                            <div className="left flex items-center h-full">
+                               
+                                <div className="menu-main style-eight h-full pl-12 max-lg:hidden">
+                                    <ul className='flex items-center gap-8 h-full'>
+                                        
+                                        <li className='h-full'>
+                                            <Link href="#!" className='text-button-uppercase duration-300 h-full flex items-center justify-center'>
                                             Destination
-                                        </Link>
-                                        <div className="mega-menu absolute top-[74px] left-0 bg-white w-screen">
+                                            </Link>
+                                            <div className="mega-menu absolute top-[43px] left-0 bg-white w-screen">
                                             <div className="container">
                                                 <div className="flex justify-between py-8">
                                                     <div className="nav-link basis-2/3 grid grid-cols-4 gap-y-8">
@@ -434,16 +543,13 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li className='h-full'>
-                                        <Link
-                                            href="#!"
-                                            className={`text-button-uppercase duration-300 h-full flex items-center justify-center menu-header-text ${pathname.includes('/shop/') ? 'active' : ''}`}
-                                        >
+                                            </div>
+                                        </li>
+                                        <li className='h-full'>
+                                            <Link href="#!" className='text-button-uppercase duration-300 h-full flex items-center justify-center'>
                                             Family Packages
-                                        </Link>
-                                        <div className="mega-menu absolute top-[74px] left-0 bg-white w-screen">
+                                            </Link>
+                                            <div className="mega-menu absolute top-[43px] left-0 bg-white w-screen">
                                             <div className="container">
                                                 <div className="flex justify-center py-8">
                                                     <div className="nav-link basis-2/4 flex justify-between pr-12">
@@ -544,16 +650,13 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li className='h-full'>
-                                        <Link
-                                            href="#!"
-                                            className={`text-button-uppercase duration-300 h-full flex items-center justify-center menu-header-text ${pathname.includes('/shop/') ? 'active' : ''}`}
-                                        >
-                                            Holiday Packages
-                                        </Link>
-                                        <div className="mega-menu absolute top-[74px] left-0 bg-white w-screen">
+                                            </div>
+                                        </li>
+                                        <li className='h-full'>
+                                            <Link href="#!" className='text-button-uppercase duration-300 h-full flex items-center justify-center'>
+                                                Holiday Packages
+                                            </Link>
+                                            <div className="mega-menu absolute top-[43px] left-0 bg-white w-screen">
                                             <div className="container">
                                                 <div className="flex justify-center py-8">
                                                     <div className="nav-link basis-2/4 flex justify-between pr-12">
@@ -643,7 +746,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                                 </div>
                                                             </div>
                                                             <Image
-                                                                src={'/photo/menu/1.png'}
+                                                                src={'/photo/menu/2.png'}
                                                                 width={1000}
                                                                 height={400}
                                                                 alt='bg-img'
@@ -654,47 +757,14 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    {/* <li className='h-full relative'>
-                                        <Link href="#!" className={`text-button-uppercase duration-300 h-full flex items-center justify-center menu-header-text ${pathname.includes('/blog') ? 'active' : ''}`}>
-                                            Blog
-                                        </Link>
-                                        <div className="sub-menu py-3 px-5 -left-10 absolute bg-white rounded-b-xl">
-                                            <ul className='w-full'>
-                                                <li>
-                                                    <Link href="/blog/default" className={`link text-secondary duration-300 ${pathname === '/blog/default' ? 'active' : ''}`}>
-                                                        Blog Default
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    <Link href="/blog/list" className={`link text-secondary duration-300 ${pathname === '/blog/list' ? 'active' : ''}`}>
-                                                        Blog List
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    <Link href="/blog/grid" className={`link text-secondary duration-300 ${pathname === '/blog/grid' ? 'active' : ''}`}>
-                                                        Blog Grid
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    <Link href="/blog/detail1" className={`link text-secondary duration-300 ${pathname === '/blog/detail1' ? 'active' : ''}`}>
-                                                        Blog Detail 1
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    <Link href="/blog/detail2" className={`link text-secondary duration-300 ${pathname === '/blog/detail2' ? 'active' : ''}`}>
-                                                        Blog Detail 2
-                                                    </Link>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li> */}
-                                    <li className='h-full relative'>
-                                        <Link href="#!" className={`text-button-uppercase duration-300 h-full flex items-center justify-center menu-header-text ${pathname.includes('/pages') ? 'active' : ''}`}>
-                                            Usefull Links
-                                        </Link>
-                                        <div className="sub-menu py-3 px-5 -left-10 absolute bg-white rounded-b-xl">
+                                            </div>
+                                        </li>
+                                        
+                                        <li className='h-full relative'>
+                                            <Link href="#!" className={`text-button-uppercase duration-300 h-full flex items-center justify-center ${pathname.includes('/pages') ? 'active' : ''}`}>
+                                                Usefull Links
+                                            </Link>
+                                            <div className="sub-menu py-3 px-5 -left-10 absolute bg-white rounded-b-xl">
                                             <ul className='w-full'>
                                                 <li>
                                                     <Link href="/pages/about" className={`link text-secondary duration-300 ${pathname === '/pages/about' ? 'active' : ''}`}>
@@ -738,22 +808,15 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                                 </li> */}
                                             </ul>
                                         </div>
-                                    </li>
-                                </ul>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-
-                            <div className="right flex gap-12 z-[1] h-full max-lg:hidden">
-                            
-                           
-                                <div className="form-search relative mt-4" >
-                                <div className="m-width-call product-tag text-button-uppercase bg-green px-3 py-1 inline-block rounded-full absolute top-3 left-3 z-[1] auto-shining text-sm">+91 74390-20962</div>
-                               
-                            </div> 
-                            
-                           
+                            <div className="right flex items-center gap-1">
+                                {/* <div className="caption1">Hotline:</div>
+                                <div className="text-button-uppercase">+01 1234 8888</div> */}
+                            </div>
                         </div>
-                        </div>
-                        
                     </div>
                 </div>
             </div>
@@ -769,7 +832,7 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                 >
                                     <Icon.X size={14} />
                                 </div>
-                                <Link href={'/'} className='logo text-3xl font-semibold text-center'> <Image
+                                <Link href={'/'} className='logo text-3xl font-semibold text-center'><Image
                                     src={'/images/logo.png'}
                                     width={2560}
                                     height={1080}
@@ -784,12 +847,11 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                             </div>
                             <div className="list-nav mt-6">
                                 <ul>
-
                                     <li
-                                        className={`${openSubNavMobile === 2 ? 'open' : ''}`}
-                                        onClick={() => handleOpenSubNavMobile(2)}
+                                        className={`${openSubNavMobile === 1 ? 'open' : ''}`}
+                                        onClick={() => handleOpenSubNavMobile(1)}
                                     >
-                                        <a href={'#!'} className='text-xl font-semibold flex items-center justify-between mt-5'>Destination
+                                        <a href={'#!'} className={`text-xl font-semibold flex items-center justify-between`}>Destination
                                             <span className='text-right'>
                                                 <Icon.CaretRight size={20} />
                                             </span>
@@ -1023,7 +1085,6 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                             </div>
                                         </div>
                                     </li>
-
                                     <li
                                         className={`${openSubNavMobile === 2 ? 'open' : ''}`}
                                         onClick={() => handleOpenSubNavMobile(2)}
@@ -1263,9 +1324,10 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                         </div>
                                     </li>
 
+
                                     <li
-                                        className={`${openSubNavMobile === 2 ? 'open' : ''}`}
-                                        onClick={() => handleOpenSubNavMobile(2)}
+                                        className={`${openSubNavMobile === 3 ? 'open' : ''}`}
+                                        onClick={() => handleOpenSubNavMobile(3)}
                                     >
                                         <a href={'#!'} className='text-xl font-semibold flex items-center justify-between mt-5'>Holiday Packages
                                             <span className='text-right'>
@@ -1502,6 +1564,8 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                                         </div>
                                     </li>
 
+                                   
+                                   
                                     <li
                                         className={`${openSubNavMobile === 6 ? 'open' : ''}`}
                                         onClick={() => handleOpenSubNavMobile(6)}
@@ -1566,8 +1630,106 @@ const MenuOne: React.FC<Props> = ({ props }) => {
                     </div>
                 </div>
             </div>
+
+            {/* Modal */}
+            {isModalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative">
+                        {/* Close Button */}
+                        <button
+                            className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+                            onClick={toggleModal}
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth={2}
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M6 18L18 6M6 6l12 12"
+                                />
+                            </svg>
+                        </button>
+
+
+                        <div className="input-block lg:w-2/2 sm:w-5/5 w-full h-[40px] sm:mt-10 mt-7">
+                            <div className="relative w-full h-full" >
+                                <Icon.MagnifyingGlass
+                                    size={20}
+                                    className="absolute left-4 top-1/2 -translate-y-1/2 cursor-pointer text-black"
+                                />
+                                <input
+                                    type="text"
+                                    
+                                    className="caption1 w-full h-full lg:pl-12 md:pl-12 pl-12 pr-14 rounded-xl border border-line text-md text-secondary"
+                                    placeholder='Enter Your Destination'
+                                />
+
+                            </div>
+
+                        </div>
+
+                        {/* Modal Content */}
+                        <h4 className="text-sm font-bold mb-2 mt-8">Trip Duration</h4>
+                        <div className="list-size flex items-center flex-wrap gap-1 gap-y-4 mt-2 mb-4">
+                            <div className="size-item text-button px-4 py-2 flex items-center justify-center rounded-full border border-line text-xs">2-3 Days</div>
+                            <div className="size-item text-button px-4 py-2 flex items-center justify-center rounded-full border border-line text-xs">3-5 Days</div>
+                            <div className="size-item text-button px-4 py-2 flex items-center justify-center rounded-full border border-line text-xs">5-7 Days</div>
+                            <div className="size-item text-button px-4 py-2 flex items-center justify-center rounded-full border border-line text-xs">7+ Days</div>
+                        </div>
+                        <hr />
+                        <div className="filter-price pb-8 border-b border-line mt-2">
+                            <div className="text-sm font-bold mb-2">Price Range</div>
+                            <Slider
+                                range
+                                defaultValue={[50000, 500000]}
+                                min={50000}
+                                max={500000}
+                                onChange={handlePriceChange}
+                                className='mt-5'
+                            />
+                            <div className="price-block flex items-center justify-between flex-wrap mt-4">
+                                <div className="min flex items-center gap-1">
+                                    <div>Min price:</div>
+                                    <div className='price-min'>
+                                        <span>{priceRange.min}</span>
+                                    </div>
+                                </div>
+                                <div className="min flex items-center gap-1">
+                                    <div>Max price:</div>
+                                    <div className='price-max'>
+                                        <span>{priceRange.max}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        {/* Footer Buttons */}
+                        <div className="flex justify-end mt-6 space-x-4">
+                            <button
+                                className="px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400"
+                                onClick={toggleModal}
+                            >
+                                Cancel
+                            </button>
+                            
+                           
+                            <button type="button" className="hover:bg-black hover:text-white text-gray-900 bg-green focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                            View Packages
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
     )
 }
 
-export default MenuOne
+export default MenuOrganic
