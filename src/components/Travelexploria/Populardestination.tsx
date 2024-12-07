@@ -32,8 +32,8 @@ const Populardestination = () => {
                                     spaceBetween: 0,
                                 },
                                 500: {
-                                    slidesPerView: 12,
-                                    spaceBetween: 0,
+                                    slidesPerView: 5,
+                                    spaceBetween: 16,
                                 },
                                 680: {
                                     slidesPerView: 5,

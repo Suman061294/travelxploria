@@ -16,6 +16,9 @@ import Newsletter from '../Travelexploria/Newsletter';
 import Collectioncta from '../Travelexploria/Collectioncta';
 import Thumbneilslider from '../Travelexploria/Thumbneilsilder';
 import Collectionoffer from '../Travelexploria/Collectionoffer';
+import CollectionOverview from '../Travelexploria/Collectionoverview';
+import Collectionreview from '../Travelexploria/Collectionreview';
+import Footer from '../Travelexploria/Footer';
 
 interface Props {
     data: Array<ProductType>;
@@ -852,9 +855,9 @@ const ShopSidebarList: React.FC<Props> = ({ data, productPerPage, dataType }) =>
                                 </div>
                             </InfiniteScroll>
 
+                           <Collectionreview />
 
-
-
+                           {/* <Footer /> */}
                         </div>
                     </div>
                 </div>
