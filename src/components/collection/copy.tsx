@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo, useRef } from 'react'
 import Link from 'next/link'
 import * as Icon from "@phosphor-icons/react/dist/ssr";
 import { ProductType } from '@/type/ProductType'
@@ -10,6 +10,8 @@ import 'rc-slider/assets/index.css'
 import HandlePagination from '../Other/HandlePagination';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { ColorRing } from 'react-loader-spinner';
+import ContentLoader from 'react-content-loader';
+import SkeletonLoader from './Skeleton';
 
 interface Props {
     data: Array<ProductType>;
@@ -19,7 +21,12 @@ interface Props {
 
 
 
-const Copy: React.FC<Props> = ({ data, productPerPage, dataType }) => {
+const ShopSidebarList: React.FC<Props> = ({ data, productPerPage, dataType }) => {
+    /*----------------------------------------------------*/
+    const [visibleProducts, setVisibleProducts] = useState<Array<ProductType>>([]);
+    const [hasMore, setHasMore] = useState<boolean>(true);
+    const [page, setPage] = useState<number>(0);
+    const [loading, setLoading] = useState<boolean>(false);
 
     /*---------------------- Type view for product ------------*/
     const [viewType, setViewType] = useState('grid'); // Default to 'grid' for mobile
@@ -33,14 +40,8 @@ const Copy: React.FC<Props> = ({ data, productPerPage, dataType }) => {
                 setViewType('grid'); // Grid for mobile
             }
         };
-
-        // Set initial view type
         updateViewType();
-
-        // Add event listener for window resize
         window.addEventListener('resize', updateViewType);
-
-        // Cleanup event listener
         return () => window.removeEventListener('resize', updateViewType);
     }, []);
     /*---------------END ----------------------*/
@@ -52,121 +53,75 @@ const Copy: React.FC<Props> = ({ data, productPerPage, dataType }) => {
     const [color, setColor] = useState<string | null>()
     const [brand, setBrand] = useState<string | null>()
     const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({ min: 10000, max: 450000 });
-    const [currentPage, setCurrentPage] = useState(0);
-    const productsPerPage = productPerPage;
-    const offset = currentPage * productsPerPage;
+
+
 
     const handleType = (type: string) => {
         setType((prevType) => (prevType === type ? null : type))
-        setCurrentPage(0);
+        setPage(0);
     }
 
     const handleShowOnlySale = () => {
         setShowOnlySale(toggleSelect => !toggleSelect)
-        setCurrentPage(0);
+        setPage(0);
     }
 
     const handleSortChange = (option: string) => {
         setSortOption(option);
-        setCurrentPage(0);
+        setPage(0);
     };
 
     const handleSize = (size: string) => {
         setSize((prevSize) => (prevSize === size ? null : size))
-        setCurrentPage(0);
+        setPage(0);
     }
 
     const handlePriceChange = (values: number | number[]) => {
         if (Array.isArray(values)) {
             setPriceRange({ min: values[0], max: values[1] });
-            setCurrentPage(0);
+            setPage(1);
         }
     };
 
     const handleColor = (color: string) => {
         setColor((prevColor) => (prevColor === color ? null : color))
-        setCurrentPage(0);
+        setPage(0);
     }
 
     const handleBrand = (brand: string) => {
         setBrand((prevBrand) => (prevBrand === brand ? null : brand));
-        setCurrentPage(0);
+        setPage(0);
     }
+    const filteredData = data.filter(product => {
+        const isSaleMatched = !showOnlySale || product.sale;
+        const isTypeMatched = !type || product.type === type;
+        const isSizeMatched = !size || product.sizes.includes(size);
+        const isColorMatched = !color || product.variation.some(v => v.color === color);
+        const isBrandMatched = !brand || product.brand === brand;
+        const isPriceMatched = product.price >= priceRange.min && product.price <= priceRange.max;
+        return isSaleMatched && isTypeMatched && isSizeMatched && isColorMatched && isBrandMatched && isPriceMatched;
+    });
 
-
-    // Filter product data by dataType
-    let filteredData = data.filter(product => {
-        let isShowOnlySaleMatched = true;
-        if (showOnlySale) {
-            isShowOnlySaleMatched = product.sale
-        }
-
-        let isDataTypeMatched = true;
-        if (dataType) {
-            isDataTypeMatched = product.type === dataType
-        }
-
-        let isTypeMatched = true;
-        if (type) {
-            dataType = type
-            isTypeMatched = product.type === type;
-        }
-
-        let isSizeMatched = true;
-        if (size) {
-            isSizeMatched = product.sizes.includes(size)
-        }
-
-        let isPriceRangeMatched = true;
-        if (priceRange.min !== 10000 || priceRange.max !== 450000) {
-            isPriceRangeMatched = product.price >= priceRange.min && product.price <= priceRange.max;
-        }
-
-        let isColorMatched = true;
-        if (color) {
-            isColorMatched = product.variation.some(item => item.color === color)
-        }
-
-        let isBrandMatched = true;
-        if (brand) {
-            isBrandMatched = product.brand === brand;
-        }
-
-        return isShowOnlySaleMatched && isDataTypeMatched && isTypeMatched && isSizeMatched && isColorMatched && isBrandMatched && isPriceRangeMatched && product.category === 'fashion'
-    })
-
-    // Create a copy array filtered to sort
-    let sortedData = [...filteredData];
-
+    // Sorting filtered data
+    const sortedData = [...filteredData];
     if (sortOption === 'soldQuantityHighToLow') {
-        filteredData = sortedData.sort((a, b) => b.sold - a.sold)
+        sortedData.sort((a, b) => b.sold - a.sold);
+    } else if (sortOption === 'discountHighToLow') {
+        sortedData.sort((a, b) => (100 - (b.price / b.originPrice) * 100) - (100 - (a.price / a.originPrice) * 100));
+    } else if (sortOption === 'priceHighToLow') {
+        sortedData.sort((a, b) => b.price - a.price);
+    } else if (sortOption === 'priceLowToHigh') {
+        sortedData.sort((a, b) => a.price - b.price);
     }
 
-    if (sortOption === 'discountHighToLow') {
-        filteredData = sortedData
-            .sort((a, b) => (
-                (Math.floor(100 - ((b.price / b.originPrice) * 100))) - (Math.floor(100 - ((a.price / a.originPrice) * 100)))
-            ))
-
-    }
-
-    if (sortOption === 'priceHighToLow') {
-        filteredData = sortedData.sort((a, b) => b.price - a.price)
-    }
-
-    if (sortOption === 'priceLowToHigh') {
-        filteredData = sortedData.sort((a, b) => a.price - b.price)
-    }
-
-    const totalProducts = filteredData.length
     const selectedType = type
     const selectedSize = size
     const selectedColor = color
     const selectedBrand = brand
 
-
-    if (filteredData.length === 0) {
-        filteredData = [{
+    let filerdat = filteredData;
+    if (filerdat.length === 0) {
+        filerdat = [{
             id: 'no-data',
             category: 'no-data',
             type: 'no-data',
@@ -192,111 +147,126 @@ const Copy: React.FC<Props> = ({ data, productPerPage, dataType }) => {
     }
 
 
-    // Find page number base on filteredData
-    const pageCount = Math.ceil(filteredData.length / productsPerPage);
-
-    // If page number 0, set current page = 0
-    if (pageCount === 0) {
-        setCurrentPage(0);
-    }
-
-    // Get product data for current page
-    let currentProducts: ProductType[];
-
-    if (filteredData.length > 0) {
-        currentProducts = filteredData.slice(offset, offset + productsPerPage);
-    } else {
-        currentProducts = []
-    }
-
-    const handlePageChange = (selected: number) => {
-        setCurrentPage(selected);
-    };
+    const totalProducts = filteredData.length;
+    const pageCount = Math.ceil(totalProducts / productPerPage);
+    console.log("pageCount", pageCount);
 
     const handleClearAll = () => {
         setType(null);
         setSize(null);
         setColor(null);
         setBrand(null);
-        setPriceRange({ min: 0, max: 100 });
-        setCurrentPage(0);
+        setPriceRange({ min: 10000, max: 450000 });
+        setShowOnlySale(false);
+        setSortOption('');
+        setPage(0);
         dataType = null
         setType(dataType);
-    };
+    }
 
 
+    // Memoize filtered and sorted data
+    const filteredSortedData = useMemo(() => {
+        const filteredData = data.filter(product => {
+            const isSaleMatched = !showOnlySale || product.sale;
+            const isTypeMatched = !type || product.type === type;
+            const isSizeMatched = !size || product.sizes.includes(size);
+            const isColorMatched = !color || product.variation.some(v => v.color === color);
+            const isBrandMatched = !brand || product.brand === brand;
+            const isPriceMatched = product.price >= priceRange.min && product.price <= priceRange.max;
+            return isSaleMatched && isTypeMatched && isSizeMatched && isColorMatched && isBrandMatched && isPriceMatched;
+        });
+
+        // Sort the filtered data
+        const sortedData = [...filteredData];
+        if (sortOption === 'soldQuantityHighToLow') {
+            sortedData.sort((a, b) => b.sold - a.sold);
+        } else if (sortOption === 'discountHighToLow') {
+            sortedData.sort((a, b) => (100 - (b.price / b.originPrice) * 100) - (100 - (a.price / a.originPrice) * 100));
+        } else if (sortOption === 'priceHighToLow') {
+            sortedData.sort((a, b) => b.price - a.price);
+        } else if (sortOption === 'priceLowToHigh') {
+            sortedData.sort((a, b) => a.price - b.price);
+        }
+        return sortedData;
+    }, [data, type, showOnlySale, size, color, brand, priceRange, sortOption]);
 
 
-
-    /*----------------------------------------------------*/
-    const [visibleProducts, setVisibleProducts] = useState<Array<ProductType>>([]);
-    const [hasMore, setHasMore] = useState<boolean>(true);
-    const [page, setPage] = useState<number>(1);
-    const [loading, setLoading] = useState<boolean>(false);
-
-    // Load initial products when `data` changes
     useEffect(() => {
-        const initialProducts = data.slice(0, productPerPage);
+        const initialProducts = filteredSortedData.slice(0, productPerPage);
         setVisibleProducts(initialProducts);
-        setHasMore(initialProducts.length < data.length);
-        setPage(1); // Reset the page counter
-    }, [data, productPerPage]);
+        setHasMore(filteredSortedData.length > productPerPage);
+        setPage(0);
+    }, [filteredSortedData, productPerPage]);
 
-    // Load more products with 10-second delay
     const loadMoreProducts = () => {
-        if (loading) return; // Prevent multiple fetches
+        if (loading || !hasMore) return;
+
         setLoading(true);
 
+        // Simulate a minimum loading time of 1 second
         setTimeout(() => {
             const nextPage = page + 1;
-            const newProducts = data.slice(
-                visibleProducts.length,
-                visibleProducts.length + productPerPage
-            );
+            const nextProducts = filteredSortedData.slice(nextPage * productPerPage, (nextPage + 1) * productPerPage);
 
-            setVisibleProducts((prev) => [...prev, ...newProducts]);
+            setVisibleProducts(prev => [...prev, ...nextProducts]);
             setPage(nextPage);
+            setHasMore((nextPage + 1) * productPerPage < filteredSortedData.length);
             setLoading(false);
-
-            if (visibleProducts.length + productPerPage >= data.length) {
-                setHasMore(false); // No more products to load
-            }
-        }, 1000);
+        }, 1000); // 1000ms = 1 second
     };
+
+
+
+
+
+    const stickyRef = useRef<HTMLDivElement>(null);
+    const [isFixed, setIsFixed] = useState(false);
+    const [offsetTop, setOffsetTop] = useState(0);
+
+    useEffect(() => {
+        if (stickyRef.current) {
+            // Save the initial offset position of the sticky div
+            setOffsetTop(stickyRef.current.offsetTop);
+        }
+
+        const handleScroll = () => {
+            if (stickyRef.current) {
+                const scrollTop = window.scrollY; // Current scroll position
+                if (scrollTop > offsetTop) {
+                    setIsFixed(true); // Fix the div when scrolling down
+                } else {
+                    setIsFixed(false); // Reset to normal position when scrolling up
+                }
+            }
+        };
+
+        // Attach scroll event listener
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            // Cleanup on unmount
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [offsetTop]);
+
+
     return (
         <>
-            {/* <div className="breadcrumb-block style-img">
-                <div className="breadcrumb-main bg-linear overflow-hidden">
-                    <div className="container lg:pt-[134px] pt-24 pb-10 relative">
-                        <div className="main-content w-full h-full flex flex-col items-center justify-center relative z-[1]">
-                            <div className="text-content">
-                                <div className="heading2 text-center">{dataType === null ? 'Shop' : dataType}</div>
-                                <div className="link flex items-center justify-center gap-1 caption1 mt-3">
-                                    <Link href={'/'}>Homepage</Link>
-                                    <Icon.CaretRight size={14} className='text-secondary2' />
-                                    <div className='text-secondary2 capitalize'>{dataType === null ? 'Shop' : dataType}</div>
-                                </div>
-                            </div>
-                            <div className="list-tab flex flex-wrap items-center justify-center gap-y-5 gap-8 lg:mt-[70px] mt-12 overflow-hidden">
-                                {['t-shirt', 'dress', 'top', 'swimwear', 'shirt'].map((item, index) => (
-                                    <div
-                                        key={index}
-                                        className={`tab-item text-button-uppercase cursor-pointer has-line-before line-2px ${dataType === item ? 'active' : ''}`}
-                                        onClick={() => handleType(item)}
-                                    >
-                                        {item}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
 
-            <div className="shop-product breadcrumb1 lg:py-5 md:py-5 py-5 main-bg-contain">
-                <div className="container padding-0 rounded-2xl shadow-custom2 bg-white pls-site-container">
+            <div className="shop-product breadcrumb1 lg:py-5 md:py-5 py-5 main-bg-contain" style={{ height: "2000px" }}
+
+            >
+                <div className="container padding-0 rounded-2xl shadow-custom2 bg-white" style={{ height: "2000px" }}
+                >
                     <div className="flex max-md:flex-wrap max-md:flex-col-reverse gap-8">
-                        <div className="sidebar bg-white lg:w-1/4 md:w-1/3 w-full md:pr-12 lg:p-10 md:p-10 p-10 rounded-2xl sticky top-4">
+                        <div className="sidebar bg-white lg:w-1/4 md:w-1/3 w-full md:pr-12 lg:p-10 md:p-10 p-10 rounded-2xl">
+                        <div  ref={stickyRef} style={{
+                            position: isFixed ? "sticky" : "relative",
+                            top: isFixed ? "0" : "auto",
+                            padding: "10px",
+                            zIndex: 1000,
+                        }}>
                             <div className="filter-type pb-8 border-b border-line">
                                 <div className="heading6">Cities</div>
                                 <div className="list-type mt-4">
@@ -328,12 +298,6 @@ const Copy: React.FC<Props> = ({ data, productPerPage, dataType }) => {
                                             </div>
                                         ))
                                     }
-                                    {/* <div
-                                        className={`size-item text-button px-4 py-2 flex items-center justify-center rounded-full border border-line ${size === 'freesize' ? 'active' : ''}`}
-                                        onClick={() => handleSize('freesize')}
-                                    >
-                                        Freesize
-                                    </div> */}
                                 </div>
                             </div>
                             <div className="filter-price pb-8 border-b border-line mt-8">
@@ -428,6 +392,7 @@ const Copy: React.FC<Props> = ({ data, productPerPage, dataType }) => {
                                 </div>
                             </div>
                         </div>
+                        </div>
 
                         <div className="list-product-block lg:w-3/4 md:w-2/3 w-full md:pl-3 md:p-10 p-5">
                             <div className="filter-heading flex items-center justify-between gap-5 flex-wrap">
@@ -439,6 +404,7 @@ const Copy: React.FC<Props> = ({ data, productPerPage, dataType }) => {
                                             id="filter-sale"
                                             className='border-line'
                                             onChange={handleShowOnlySale}
+                                            checked={showOnlySale}
                                         />
                                         <label htmlFor="filter-sale" className='cation1 cursor-pointer'>Trending Package Only</label>
                                     </div>
@@ -511,21 +477,18 @@ const Copy: React.FC<Props> = ({ data, productPerPage, dataType }) => {
                                 }
                             </div>
 
-                            {/* <div className="list-product hide-product-sold flex flex-col gap-8 mt-7">
-                                {currentProducts.map((item) => (
-                                    item.id === 'no-data' ? (
-                                        <div key={item.id} className="no-data-product">No Package match the selected criteria.</div>
-                                    ) : (
-                                        <Product key={item.id} data={item} type={viewType} />
-                                    )
-                                ))}
-                            </div>  */}
 
                             <InfiniteScroll
                                 dataLength={visibleProducts.length}
                                 next={loadMoreProducts}
                                 hasMore={hasMore}
-                                loader={loading ? <div className="loader"><div className="loader-ring"></div></div> : null} // Hide when not loading
+                                loader={
+                                    <div className="placeholder-grid">
+                                        {Array.from({ length: 1 }).map((_, idx) => (
+                                            <SkeletonLoader viewType={viewType} key={idx} />
+                                        ))}
+                                    </div>
+                                }
                                 endMessage={<p>No more products to show.</p>}
                             >
                                 <div className="list-product hide-product-sold flex flex-col gap-8 mt-7">
@@ -539,26 +502,9 @@ const Copy: React.FC<Props> = ({ data, productPerPage, dataType }) => {
                                         )
                                     )}
                                 </div>
-                                {loading && (
-                                    <div className="loader">
-                                        <ColorRing
-                                            visible={true}
-                                            height="80"
-                                            width="80"
-                                            ariaLabel="color-ring-loading"
-                                            wrapperStyle={{}}
-                                            wrapperClass="color-ring-wrapper"
-                                            colors={['#ffcbbe', '#ffa58f', '#ffa38c', '#fab2a0', '#ffcbbe']}
-                                        />
-                                    </div>
-                                )}
                             </InfiniteScroll>
-{/* 
-                            {pageCount > 1 && (
-                                <div className="list-pagination flex items-center md:mt-10 mt-7">
-                                    <HandlePagination pageCount={pageCount} onPageChange={handlePageChange} />
-                                </div>
-                            )} */}
+
+
                         </div>
                     </div>
                 </div>
@@ -567,4 +513,4 @@ const Copy: React.FC<Props> = ({ data, productPerPage, dataType }) => {
     )
 }
 
-export default Copy
+export default ShopSidebarList

@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState,useRef  } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -77,41 +77,41 @@ const MenuOrganic = () => {
     const [displayedText, setDisplayedText] = useState<string>(""); // Text being displayed
     const [currentIndex, setCurrentIndex] = useState<number>(0); // Tracks the index of the current keyword
     const [isDeleting, setIsDeleting] = useState<boolean>(false); // Typing or deleting mode
-  
+
     // Ref to keep track of the typing speed and delay
     const typingTimerRef = useRef<NodeJS.Timeout | null>(null);
-  
+
     useEffect(() => {
-      const currentWord = keywords[currentIndex];
-      const typingSpeed = isDeleting ? 50 : 100; // Speed for typing and deleting
-      const delayBetweenWords = 1000; // Delay before moving to the next word
-  
-      const handleTyping = () => {
-        if (!isDeleting) {
-          // Typing mode
-          setDisplayedText((prev) => currentWord.slice(0, prev.length + 1));
-          if (displayedText === currentWord) {
-            setTimeout(() => setIsDeleting(true), delayBetweenWords); // Start deleting after a delay
-          }
-        } else {
-          // Deleting mode
-          setDisplayedText((prev) => prev.slice(0, -1));
-          if (displayedText === "") {
-            setIsDeleting(false);
-            setCurrentIndex((prev) => (prev + 1) % keywords.length); // Move to the next word
-          }
-        }
-      };
-  
-      // Use ref to clear the timer on cleanup and avoid stale timers
-      typingTimerRef.current = setTimeout(handleTyping, typingSpeed);
-  
-      // Cleanup function to clear the timer on unmount or rerun
-      return () => {
-        if (typingTimerRef.current) {
-          clearTimeout(typingTimerRef.current);
-        }
-      };
+        const currentWord = keywords[currentIndex];
+        const typingSpeed = isDeleting ? 50 : 100; // Speed for typing and deleting
+        const delayBetweenWords = 1000; // Delay before moving to the next word
+
+        const handleTyping = () => {
+            if (!isDeleting) {
+                // Typing mode
+                setDisplayedText((prev) => currentWord.slice(0, prev.length + 1));
+                if (displayedText === currentWord) {
+                    setTimeout(() => setIsDeleting(true), delayBetweenWords); // Start deleting after a delay
+                }
+            } else {
+                // Deleting mode
+                setDisplayedText((prev) => prev.slice(0, -1));
+                if (displayedText === "") {
+                    setIsDeleting(false);
+                    setCurrentIndex((prev) => (prev + 1) % keywords.length); // Move to the next word
+                }
+            }
+        };
+
+        // Use ref to clear the timer on cleanup and avoid stale timers
+        typingTimerRef.current = setTimeout(handleTyping, typingSpeed);
+
+        // Cleanup function to clear the timer on unmount or rerun
+        return () => {
+            if (typingTimerRef.current) {
+                clearTimeout(typingTimerRef.current);
+            }
+        };
     }, [currentIndex, isDeleting, displayedText]); // Removed 'keywords' from dependencies
 
 
@@ -131,7 +131,8 @@ const MenuOrganic = () => {
 
     return (
         <>
-            <div className={`${fixedHeader ? ' fixed' : 'relative'} header-menu bg-white w-full top-0 z-10 duration-500`}>
+            {/* <div className={`${fixedHeader ? ' fixed' : 'relative'} header-menu bg-white w-full top-0 z-10 duration-500`}></div> */}
+            <div className={`relative header-menu bg-white w-full top-0 z-10 duration-500`}>
                 <div className={`header-menu-main style-eight bg-white w-full md:h-[60px] h-[56px]`}>
                     <div className="container mx-auto h-full">
                         <div className="header-main flex items-center justify-between h-full">
@@ -152,31 +153,36 @@ const MenuOrganic = () => {
 
                                 <div className='w-full flex items-center h-full justify-center'>
 
-                                <div className="input-block lg:w-2/5 sm:w-5/5 h-[40px]">
-                                            <div className="relative w-full h-full" onClick={toggleModal}>
-                                                <Icon.MagnifyingGlass
-                                                    size={20}
-                                                    className="absolute left-3 top-1/2 -translate-y-1/2 cursor-pointer text-black"
-                                                />
-                                                <input
-                                                    type="text"
-                                                    value="Explore & Discover"
-                                                    className="caption1 w-full h-full pl-12 pr-14 rounded-full border border-line cursor-pointer text-xs text-secondary shadow-custom"
-                                                    readOnly
-                                                />
-                                                {/* Overlay for displayedText */}
-                                                <span className="absolute md:left-[157px] left-[160px] top-1/2 -translate-y-1/2 font-bold text-sm text-black">
-                                                    {displayedText}
-                                                </span>
-                                            </div>
-
+                                    <div className="input-block lg:w-2/5 sm:w-5/5 h-[40px]">
+                                        <div className="relative w-full h-full" onClick={toggleModal}>
+                                            <Icon.MagnifyingGlass
+                                                size={20}
+                                                className="absolute left-3 top-1/2 -translate-y-1/2 cursor-pointer text-black"
+                                            />
+                                            <input
+                                                type="text"
+                                                value="Explore & Discover"
+                                                className="caption1 w-full h-full pl-12 pr-14 rounded-full border border-line cursor-pointer text-xs text-secondary shadow-custom"
+                                                readOnly
+                                            />
+                                            {/* Overlay for displayedText */}
+                                            <span className="absolute md:left-[157px] left-[160px] top-1/2 -translate-y-1/2 font-bold text-sm text-black">
+                                                {displayedText}
+                                            </span>
                                         </div>
-                                    
+
+                                    </div>
+
                                 </div>
                             </div>
                             <div className="right flex gap-12">
                                 <div className="list-action flex items-center gap-4">
-                                <div className="m-width-call product-tag text-button-uppercase bg-green px-3 py-1 inline-block rounded-full z-[1] auto-shining text-sm">+91 74390-20962</div>
+                                    <div className="m-width-call product-tag text-button-uppercase bg-green px-3 py-1 inline-block rounded-full z-[1] auto-shining text-sm hidden md:block lg:block">+91 74390-20962</div>
+                                    <Icon.MagnifyingGlass
+                                        size={20}
+                                        onClick={toggleModal}
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-black"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -187,469 +193,470 @@ const MenuOrganic = () => {
                     <div className="container h-full">
                         <div className="top-nav-menu-main flex items-center justify-between h-full">
                             <div className="left flex items-center h-full">
-                               
+
                                 <div className="menu-main style-eight h-full pl-12 max-lg:hidden">
                                     <ul className='flex items-center gap-8 h-full'>
-                                        
+
                                         <li className='h-full'>
                                             <Link href="#!" className='text-button-uppercase duration-300 h-full flex items-center justify-center'>
-                                            Destination
+                                                Destination
                                             </Link>
                                             <div className="mega-menu absolute top-[43px] left-0 bg-white w-screen">
-                                            <div className="container">
-                                                <div className="flex justify-between py-8">
-                                                    <div className="nav-link basis-2/3 grid grid-cols-4 gap-y-8">
-                                                        <div className="nav-item">
-                                                            <div className="text-button-uppercase pb-2">Eastern Asia</div>
-                                                            <ul>
-                                                                <li>
-                                                                    <div
-                                                                       
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Thailand
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                       
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Bali
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                  
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Maldives
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                      
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Indonesia
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                       
-                                                                        className={`link text-secondary duration-300 cursor-pointer view-all-btn`}
-                                                                    >
-                                                                        View All
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="nav-item">
-                                                            <div className="text-button-uppercase pb-2">Domestic Places</div>
-                                                            <ul>
-                                                                <li>
-                                                                    <div
-                                                                  
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Kashmir
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                   
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Kochi
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                     
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Rajansthan
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                     
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Andaman
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                       
-                                                                        className={`link text-secondary duration-300 view-all-btn`}
-                                                                    >
-                                                                        View All
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="nav-item">
-                                                            <div className="text-button-uppercase pb-2">Europe</div>
-                                                            <ul>
-                                                                <li>
-                                                                    <div
-                                                                   
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        France
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                        
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Greece
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                        
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Switzerland
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                       
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Italy
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                       
-                                                                        className={`link text-secondary duration-300 view-all-btn`}
-                                                                    >
-                                                                        View All
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="nav-item">
-                                                            <div className="text-button-uppercase pb-2">Middle East</div>
-                                                            <ul>
-                                                                <li>
-                                                                    <div
-                                                                       
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Dubai
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                        
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Abu dhabi
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                       
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Egypt
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                       
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Turkey
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                       
-                                                                        className={`link text-secondary duration-300 view-all-btn`}
-                                                                    >
-                                                                        View All
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="nav-item">
-                                                            <div className="text-button-uppercase pb-2">E-visa Places</div>
-                                                            <ul>
-                                                                <li>
-                                                                    <div
-                                                                        
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Thailand
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                       
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Maldives
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                       
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Srilanka
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                       
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Bali
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                       
-                                                                        className={`link text-secondary duration-300 view-all-btn`}
-                                                                    >
-                                                                        View All
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="nav-item">
-                                                            <div className="text-button-uppercase pb-2">Schen-Visa Places</div>
-                                                            <ul>
-                                                                <li>
-                                                                    <div
-                                                                       
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Amsterdam
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                        
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Paris
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div 
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Italy
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                        
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Norway
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                        
-                                                                        className={`link text-secondary duration-300 view-all-btn`}
-                                                                    >
-                                                                        View All
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="nav-item">
-                                                            <div className="text-button-uppercase pb-2">Sessional Packages</div>
-                                                            <ul>
-                                                                <li>
-                                                                    <div
-                                                                        
-
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Eastern Europe
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div 
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Middle East
-                                                                    </div>
-                                                                </li>
-
-                                                                <li>
-                                                                    <div
-                                                                       
-                                                                        className={`link text-secondary duration-300 cursor-pointer`}
-                                                                    >
-                                                                        Turkey
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                        
-                                                                        className={`link text-secondary duration-300 view-all-btn`}
-                                                                    >
-                                                                        View All
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div className="banner-ads-block pl-2.5 basis-1/3">
-                                                        <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden cursor-pointer">
-                                                            <div className="text-content py-7 pl-8 relative z-[1]">
-                                                                <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Best Package</div>
-                                                                <div className="heading6 mt-2 text-white">Our Best Offer <br />on Winter</div>
-                                                                <div className="body1 mt-3 text-secondary">
-                                                                    Starting at <span className='text-red'>INR 75,000/-</span>
-                                                                </div>
+                                                <div className="container">
+                                                    <div className="flex justify-between py-8">
+                                                        <div className="nav-link basis-2/3 grid grid-cols-4 gap-y-8">
+                                                            <div className="nav-item">
+                                                                <div className="text-button-uppercase pb-2">Eastern Asia</div>
+                                                                <ul>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Thailand
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Bali
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Maldives
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Indonesia
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            View All
+                                                                        </Link>
+                                                                    </li>
+                                                                </ul>
                                                             </div>
-                                                            <Image
-                                                                src={'/photo/menu/2.png'}
-                                                                width={1000}
-                                                                height={400}
-                                                                alt='bg-img'
-                                                                className='basis-1/3 absolute right-0 top-0 duration-700'
-                                                            />
-                                                        </div>
-                                                        <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden cursor-pointer mt-8">
-                                                            <div className="text-content py-7 pl-8 relative z-[1]">
-                                                                <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Best Value</div>
-                                                                <div className="heading6 mt-2 text-white">20% off <br /> for All Domestic Packages</div>
-                                                                <div className="body1 mt-3 text-secondary">
-                                                                    Starting at <span className='text-red'>INR 50,000/-</span>
-                                                                </div>
+                                                            <div className="nav-item">
+                                                                <div className="text-button-uppercase pb-2">Domestic Places</div>
+                                                                <ul>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Kashmir
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Kochi
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Rajansthan
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Andaman
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            View All
+                                                                        </Link>
+                                                                    </li>
+                                                                </ul>
                                                             </div>
-                                                            <Image
-                                                                src={'/photo/menu/1.png'}
-                                                                width={1000}
-                                                                height={400}
-                                                                alt='bg-img'
-                                                                className='basis-1/3 absolute right-0 top-0 duration-700'
-                                                            />
+                                                            <div className="nav-item">
+                                                                <div className="text-button-uppercase pb-2">Europe</div>
+                                                                <ul>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            France
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Greece
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Switzerland
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Italy
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            View All
+                                                                        </Link>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div className="nav-item">
+                                                                <div className="text-button-uppercase pb-2">Middle East</div>
+                                                                <ul>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Dubai
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Abu dhabi
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Egypt
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Turkey
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            View All
+                                                                        </Link>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div className="nav-item">
+                                                                <div className="text-button-uppercase pb-2">E-visa Places</div>
+                                                                <ul>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Thailand
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Maldives
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Srilanka
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Bali
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            View All
+                                                                        </Link>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div className="nav-item">
+                                                                <div className="text-button-uppercase pb-2">Schen-Visa Places</div>
+                                                                <ul>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Amsterdam
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Paris
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Italy
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Norway
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            View All
+                                                                        </Link>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div className="nav-item">
+                                                                <div className="text-button-uppercase pb-2">Sessional Packages</div>
+                                                                <ul>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Eastern Europe
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Middle East
+                                                                        </Link>
+                                                                    </li>
+
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            Turkey
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 cursor-pointer`}
+                                                                        >
+                                                                            View All
+                                                                        </Link>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div className="banner-ads-block pl-2.5 basis-1/3">
+                                                            <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden cursor-pointer">
+                                                                <div className="text-content py-7 pl-8 relative z-[1]">
+                                                                    <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Best Package</div>
+                                                                    <div className="heading6 mt-2 text-white">Our Best Offer <br />on Winter</div>
+                                                                    <div className="body1 mt-3 text-secondary">
+                                                                        Starting at <span className='text-red'>INR 75,000/-</span>
+                                                                    </div>
+                                                                </div>
+                                                                <Image
+                                                                    src={'/photo/menu/2.png'}
+                                                                    width={1000}
+                                                                    height={400}
+                                                                    alt='bg-img'
+                                                                    className='basis-1/3 absolute right-0 top-0 duration-700'
+                                                                />
+                                                            </div>
+                                                            <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden cursor-pointer mt-8">
+                                                                <div className="text-content py-7 pl-8 relative z-[1]">
+                                                                    <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Best Value</div>
+                                                                    <div className="heading6 mt-2 text-white">20% off <br /> for All Domestic Packages</div>
+                                                                    <div className="body1 mt-3 text-secondary">
+                                                                        Starting at <span className='text-red'>INR 50,000/-</span>
+                                                                    </div>
+                                                                </div>
+                                                                <Image
+                                                                    src={'/photo/menu/1.png'}
+                                                                    width={1000}
+                                                                    height={400}
+                                                                    alt='bg-img'
+                                                                    className='basis-1/3 absolute right-0 top-0 duration-700'
+                                                                />
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
                                             </div>
                                         </li>
                                         <li className='h-full'>
                                             <Link href="#!" className='text-button-uppercase duration-300 h-full flex items-center justify-center'>
-                                            Family Packages
+                                                Family Packages
                                             </Link>
                                             <div className="mega-menu absolute top-[43px] left-0 bg-white w-screen">
-                                            <div className="container">
-                                                <div className="flex justify-center py-8">
-                                                    <div className="nav-link basis-2/4 flex justify-between pr-12">
-                                                        <div className="nav-item">
-                                                            <div className="text-button-uppercase pb-2">Domestic Tour Packages</div>
-                                                            <ul>
-                                                                <li>
-                                                                    <Link
-                                                                        href={'/'}
-                                                                        className={`link text-secondary duration-300 ${pathname === '/shop/breadcrumb-img' ? 'active' : ''}`}
-                                                                    >
-                                                                        Delight Kashmir
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link
-                                                                        href={'/'}
-                                                                        className={`link text-secondary duration-300 ${pathname === '/shop/breadcrumb1' ? 'active' : ''}`}
-                                                                    >
-                                                                        Rajasthan Packages
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link
-                                                                        href={'/'}
-                                                                        className={`link text-secondary duration-300 ${pathname === '/shop/breadcrumb2' ? 'active' : ''}`}
-                                                                    >
-                                                                        Beyond Andaman
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link
-                                                                        href={'/'}
-                                                                        className={`link text-secondary duration-300 ${pathname === '/shop/collection' ? 'active' : ''}`}
-                                                                    >
-                                                                        Riverside Kerala
-                                                                    </Link>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-
-                                                        <div className="nav-item">
-                                                            <div className="text-button-uppercase pb-2">International Tour Packages</div>
-                                                            <ul>
-                                                                <li>
-                                                                    <Link
-                                                                        href={'/'}
-                                                                        className={`link text-secondary duration-300 ${pathname === '/wishlist' ? 'active' : ''}`}
-                                                                    >
-                                                                        Paris Nightlife
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link
-                                                                        href={'/'}
-                                                                        className={`link text-secondary duration-300 ${pathname === '/search-result' ? 'active' : ''}`}
-                                                                    >
-                                                                        Small town Amsterdam
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link
-                                                                        href={'/'}
-                                                                        className={`link text-secondary duration-300 ${pathname === '/cart' ? 'active' : ''}`}
-                                                                    >
-                                                                        Persian Greece
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link
-                                                                        href={'/'}
-                                                                        className={`link text-secondary duration-300 ${pathname === '/login' ? 'active' : ''}`}
-                                                                    >
-                                                                        Delight Collosium
-                                                                    </Link>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div className="banner-ads-block pl-2.5 basis-1/3">
-                                                        <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden cursor-pointer">
-                                                            <div className="text-content py-7 pl-8 relative z-[1]">
-                                                                <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Best Package</div>
-                                                                <div className="heading6 mt-2 text-white">Our Best Offer <br />on Winter</div>
-                                                                <div className="body1 mt-3 text-secondary">
-                                                                    Starting at <span className='text-red'>INR 75,000/-</span>
-                                                                </div>
+                                                <div className="container">
+                                                    <div className="flex justify-center py-8">
+                                                        <div className="nav-link basis-2/4 flex justify-between pr-12">
+                                                            <div className="nav-item">
+                                                                <div className="text-button-uppercase pb-2">Domestic Tour Packages</div>
+                                                                <ul>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 ${pathname === '/shop/breadcrumb-img' ? 'active' : ''}`}
+                                                                        >
+                                                                            Delight Kashmir
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 ${pathname === '/shop/breadcrumb1' ? 'active' : ''}`}
+                                                                        >
+                                                                            Rajasthan Packages
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 ${pathname === '/shop/breadcrumb2' ? 'active' : ''}`}
+                                                                        >
+                                                                            Beyond Andaman
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 ${pathname === '/shop/collection' ? 'active' : ''}`}
+                                                                        >
+                                                                            Riverside Kerala
+                                                                        </Link>
+                                                                    </li>
+                                                                </ul>
                                                             </div>
-                                                            <Image
-                                                                src={'/photo/menu/2.png'}
-                                                                width={1000}
-                                                                height={400}
-                                                                alt='bg-img'
-                                                                className='basis-1/3 absolute right-0 top-0 duration-700'
-                                                            />
-                                                        </div>
 
+                                                            <div className="nav-item">
+                                                                <div className="text-button-uppercase pb-2">International Tour Packages</div>
+                                                                <ul>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 ${pathname === '/wishlist' ? 'active' : ''}`}
+                                                                        >
+                                                                            Paris Nightlife
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 ${pathname === '/search-result' ? 'active' : ''}`}
+                                                                        >
+                                                                            Small town Amsterdam
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 ${pathname === '/cart' ? 'active' : ''}`}
+                                                                        >
+                                                                            Persian Greece
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 ${pathname === '/login' ? 'active' : ''}`}
+                                                                        >
+                                                                            Delight Collosium
+                                                                        </Link>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div className="banner-ads-block pl-2.5 basis-1/3">
+                                                            <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden cursor-pointer">
+                                                                <div className="text-content py-7 pl-8 relative z-[1]">
+                                                                    <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Best Package</div>
+                                                                    <div className="heading6 mt-2 text-white">Our Best Offer <br />on Winter</div>
+                                                                    <div className="body1 mt-3 text-secondary">
+                                                                        Starting at <span className='text-red'>INR 75,000/-</span>
+                                                                    </div>
+                                                                </div>
+                                                                <Image
+                                                                    src={'/photo/menu/2.png'}
+                                                                    width={1000}
+                                                                    height={400}
+                                                                    alt='bg-img'
+                                                                    className='basis-1/3 absolute right-0 top-0 duration-700'
+                                                                />
+                                                            </div>
+
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
                                             </div>
                                         </li>
                                         <li className='h-full'>
@@ -657,157 +664,157 @@ const MenuOrganic = () => {
                                                 Holiday Packages
                                             </Link>
                                             <div className="mega-menu absolute top-[43px] left-0 bg-white w-screen">
-                                            <div className="container">
-                                                <div className="flex justify-center py-8">
-                                                    <div className="nav-link basis-2/4 flex justify-between pr-12">
-                                                        <div className="nav-item">
-                                                            <div className="text-button-uppercase pb-2">Domestic Tour Packages</div>
-                                                            <ul>
-                                                                <li>
-                                                                    <Link
-                                                                        href={'/'}
-                                                                        className={`link text-secondary duration-300 ${pathname === '/shop/breadcrumb-img' ? 'active' : ''}`}
-                                                                    >
-                                                                        Delight Kashmir
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link
-                                                                        href={'/'}
-                                                                        className={`link text-secondary duration-300 ${pathname === '/shop/breadcrumb1' ? 'active' : ''}`}
-                                                                    >
-                                                                        Rajasthan Packages
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link
-                                                                        href={'/'}
-                                                                        className={`link text-secondary duration-300 ${pathname === '/shop/breadcrumb2' ? 'active' : ''}`}
-                                                                    >
-                                                                        Beyond Andaman
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link
-                                                                        href={'/'}
-                                                                        className={`link text-secondary duration-300 ${pathname === '/shop/collection' ? 'active' : ''}`}
-                                                                    >
-                                                                        Riverside Kerala
-                                                                    </Link>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-
-                                                        <div className="nav-item">
-                                                            <div className="text-button-uppercase pb-2">International Tour Packages</div>
-                                                            <ul>
-                                                                <li>
-                                                                    <Link
-                                                                        href={'/'}
-                                                                        className={`link text-secondary duration-300 ${pathname === '/wishlist' ? 'active' : ''}`}
-                                                                    >
-                                                                        Paris Nightlife
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link
-                                                                        href={'/'}
-                                                                        className={`link text-secondary duration-300 ${pathname === '/search-result' ? 'active' : ''}`}
-                                                                    >
-                                                                        Small town Amsterdam
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link
-                                                                        href={'/'}
-                                                                        className={`link text-secondary duration-300 ${pathname === '/cart' ? 'active' : ''}`}
-                                                                    >
-                                                                        Persian Greece
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link
-                                                                        href={'/'}
-                                                                        className={`link text-secondary duration-300 ${pathname === '/login' ? 'active' : ''}`}
-                                                                    >
-                                                                        Delight Collosium
-                                                                    </Link>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div className="banner-ads-block pl-2.5 basis-1/3">
-                                                        <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden cursor-pointer">
-                                                            <div className="text-content py-7 pl-8 relative z-[1]">
-                                                                <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Best Package</div>
-                                                                <div className="heading6 mt-2 text-white">Our Best Offer <br />on Winter</div>
-                                                                <div className="body1 mt-3 text-secondary">
-                                                                    Starting at <span className='text-red'>INR 75,000/-</span>
-                                                                </div>
+                                                <div className="container">
+                                                    <div className="flex justify-center py-8">
+                                                        <div className="nav-link basis-2/4 flex justify-between pr-12">
+                                                            <div className="nav-item">
+                                                                <div className="text-button-uppercase pb-2">Domestic Tour Packages</div>
+                                                                <ul>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 ${pathname === '/shop/breadcrumb-img' ? 'active' : ''}`}
+                                                                        >
+                                                                            Delight Kashmir
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 ${pathname === '/shop/breadcrumb1' ? 'active' : ''}`}
+                                                                        >
+                                                                            Rajasthan Packages
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 ${pathname === '/shop/breadcrumb2' ? 'active' : ''}`}
+                                                                        >
+                                                                            Beyond Andaman
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 ${pathname === '/shop/collection' ? 'active' : ''}`}
+                                                                        >
+                                                                            Riverside Kerala
+                                                                        </Link>
+                                                                    </li>
+                                                                </ul>
                                                             </div>
-                                                            <Image
-                                                                src={'/photo/menu/2.png'}
-                                                                width={1000}
-                                                                height={400}
-                                                                alt='bg-img'
-                                                                className='basis-1/3 absolute right-0 top-0 duration-700'
-                                                            />
-                                                        </div>
 
+                                                            <div className="nav-item">
+                                                                <div className="text-button-uppercase pb-2">International Tour Packages</div>
+                                                                <ul>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 ${pathname === '/wishlist' ? 'active' : ''}`}
+                                                                        >
+                                                                            Paris Nightlife
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 ${pathname === '/search-result' ? 'active' : ''}`}
+                                                                        >
+                                                                            Small town Amsterdam
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 ${pathname === '/cart' ? 'active' : ''}`}
+                                                                        >
+                                                                            Persian Greece
+                                                                        </Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link
+                                                                            href={'/destination'}
+                                                                            className={`link text-secondary duration-300 ${pathname === '/login' ? 'active' : ''}`}
+                                                                        >
+                                                                            Delight Collosium
+                                                                        </Link>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div className="banner-ads-block pl-2.5 basis-1/3">
+                                                            <div className="banner-ads-item bg-linear rounded-2xl relative overflow-hidden cursor-pointer">
+                                                                <div className="text-content py-7 pl-8 relative z-[1]">
+                                                                    <div className="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Best Package</div>
+                                                                    <div className="heading6 mt-2 text-white">Our Best Offer <br />on Winter</div>
+                                                                    <div className="body1 mt-3 text-secondary">
+                                                                        Starting at <span className='text-red'>INR 75,000/-</span>
+                                                                    </div>
+                                                                </div>
+                                                                <Image
+                                                                    src={'/photo/menu/2.png'}
+                                                                    width={1000}
+                                                                    height={400}
+                                                                    alt='bg-img'
+                                                                    className='basis-1/3 absolute right-0 top-0 duration-700'
+                                                                />
+                                                            </div>
+
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            </div>
                                         </li>
-                                        
+
                                         <li className='h-full relative'>
                                             <Link href="#!" className={`text-button-uppercase duration-300 h-full flex items-center justify-center ${pathname.includes('/pages') ? 'active' : ''}`}>
                                                 Usefull Links
                                             </Link>
                                             <div className="sub-menu py-3 px-5 -left-10 absolute bg-white rounded-b-xl">
-                                            <ul className='w-full'>
-                                                <li>
-                                                    <Link href="/pages/about" className={`link text-secondary duration-300 ${pathname === '/pages/about' ? 'active' : ''}`}>
-                                                        About Us
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    <Link href="/pages/contact" className={`link text-secondary duration-300 ${pathname === '/pages/contact' ? 'active' : ''}`}>
-                                                        Contact Us
-                                                    </Link>
-                                                </li>
-                                                {/* <li>
+                                                <ul className='w-full'>
+                                                    <li>
+                                                        <Link href="/pages/about" className={`link text-secondary duration-300 ${pathname === '/pages/about' ? 'active' : ''}`}>
+                                                            About Us
+                                                        </Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link href="/pages/contact" className={`link text-secondary duration-300 ${pathname === '/pages/contact' ? 'active' : ''}`}>
+                                                            Contact Us
+                                                        </Link>
+                                                    </li>
+                                                    {/* <li>
                                                     <Link href="/pages/store-list" className={`link text-secondary duration-300 ${pathname === '/pages/store-list' ? 'active' : ''}`}>
                                                         Store List
                                                     </Link>
                                                 </li> */}
-                                                {/* <li>
+                                                    {/* <li>
                                                     <Link href="/pages/page-not-found" className={`link text-secondary duration-300 ${pathname === '/pages/page-not-found' ? 'active' : ''}`}>
                                                         404
                                                     </Link>
                                                 </li> */}
-                                                <li>
-                                                    <Link href="/" className={`link text-secondary duration-300 ${pathname === '/pages/faqs' ? 'active' : ''}`}>
-                                                        FAQs
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    <Link href="/" className={`link text-secondary duration-300 ${pathname === '/pages/faqs' ? 'active' : ''}`}>
-                                                        Blog
-                                                    </Link>
-                                                </li>
-                                                {/* <li>
+                                                    <li>
+                                                        <Link href="/" className={`link text-secondary duration-300 ${pathname === '/pages/faqs' ? 'active' : ''}`}>
+                                                            FAQs
+                                                        </Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link href="/" className={`link text-secondary duration-300 ${pathname === '/pages/faqs' ? 'active' : ''}`}>
+                                                            Blog
+                                                        </Link>
+                                                    </li>
+                                                    {/* <li>
                                                     <Link href="/pages/coming-soon" className={`link text-secondary duration-300 ${pathname === '/pages/coming-soon' ? 'active' : ''}`}>
                                                         Coming Soon
                                                     </Link>
                                                 </li> */}
-                                                {/* <li>
+                                                    {/* <li>
                                                     <Link href="/pages/customer-feedbacks" className={`link text-secondary duration-300 ${pathname === '/pages/customer-feedbacks' ? 'active' : ''}`}>
                                                         Customer Feedbacks
                                                     </Link>
                                                 </li> */}
-                                            </ul>
-                                        </div>
+                                                </ul>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
@@ -832,7 +839,7 @@ const MenuOrganic = () => {
                                 >
                                     <Icon.X size={14} />
                                 </div>
-                                <Link href={'/'} className='logo text-3xl font-semibold text-center'><Image
+                                <Link href={'/destination'} className='logo text-3xl font-semibold text-center'><Image
                                     src={'/images/logo.png'}
                                     width={2560}
                                     height={1080}
@@ -870,44 +877,44 @@ const MenuOrganic = () => {
                                                         <div className="text-button-uppercase pb-1">Eastern Asia</div>
                                                         <ul>
                                                             <li>
-                                                                <div
-                                                                   
+                                                                <Link
+                                                                    href={'/destination'}
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Thailand
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                             <li>
-                                                                <div
-                                                                   
+                                                                <Link
+                                                                    href={'/destination'}
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Bali
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                             <li>
-                                                                <div
-                                                                   
+                                                                <Link
+                                                                    href={'/destination'}
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Maldives
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                             <li>
-                                                                <div
-                                                                   
+                                                                <Link
+                                                                    href={'/destination'}
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Indonesia
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                             <li>
-                                                                <div
-                                                                   
-                                                                    className={`link text-secondary duration-300 view-all-btn`}
+                                                                <Link
+                                                                    href={'/destination'}
+                                                                    className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     View All
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -915,44 +922,44 @@ const MenuOrganic = () => {
                                                         <div className="text-button-uppercase pb-1">Domestic Places</div>
                                                         <ul>
                                                             <li>
-                                                                <div
-                                                                    
+                                                                <Link
+                                                                    href={'/destination'}
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Kashmir
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                             <li>
-                                                                <div
-                                                                   
+                                                                <Link
+                                                                    href={'/destination'}
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Rajasthan
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                             <li>
-                                                                <div
-                                                                   
+                                                                <Link
+                                                                    href={'/destination'}
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Andaman
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                             <li>
-                                                                <div
-                                                                    
+                                                                <Link
+                                                                    href={'/destination'}
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Kochi / Kerala
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                             <li>
-                                                                <div
-                                                                   
-                                                                    className={`link text-secondary duration-300 view-all-btn`}
+                                                                <Link
+                                                                    href={'/destination'}
+                                                                    className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     View All
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -960,44 +967,44 @@ const MenuOrganic = () => {
                                                         <div className="text-button-uppercase pb-1">Middle East</div>
                                                         <ul>
                                                             <li>
-                                                                <div
-                                                                   
+                                                                <Link
+                                                                    href={'/destination'}
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Dubai
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                             <li>
-                                                                <div
-                                                                    
+                                                                <Link
+                                                                    href={'/destination'}
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Abu dhabi
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                             <li>
-                                                                <div
-                                                                   
+                                                                <Link
+                                                                    href={'/destination'}
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Turkey
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                             <li>
-                                                                <div
-                                                                   
+                                                                <Link
+                                                                    href={'/destination'}
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Egypt
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                             <li>
-                                                                <div
-                                                                    
-                                                                    className={`link text-secondary duration-300 view-all-btn`}
+                                                                <Link
+                                                                    href={'/destination'}
+                                                                    className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     View All
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -1005,44 +1012,44 @@ const MenuOrganic = () => {
                                                         <div className="text-button-uppercase pb-1">Europe</div>
                                                         <ul>
                                                             <li>
-                                                                <div
-                                                                   
+                                                                <Link
+                                                                    href={'/destination'}
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Italy
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                             <li>
-                                                                <div
-                                                                   
+                                                                <Link
+                                                                    href={'/destination'}
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Portugal
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                             <li>
-                                                                <div
-                                                                   
+                                                                <Link
+                                                                    href={'/destination'}
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     France
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                             <li>
-                                                                <div
-                                                                   
+                                                                <Link
+                                                                    href={'/destination'}
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Switzerland
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                             <li>
-                                                                <div
-                                                                   
-                                                                    className={`link text-secondary duration-300 view-all-btn`}
+                                                                <Link
+                                                                    href={'/destination'}
+                                                                    className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     View All
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -1108,44 +1115,44 @@ const MenuOrganic = () => {
                                                         <div className="text-button-uppercase pb-1">Eastern Asia</div>
                                                         <ul>
                                                             <li>
-                                                                <div
-                                                                   
+                                                                <Link
+                                                                    href={'/destination'}
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Thailand
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                             <li>
-                                                                <div
-                                                                   
+                                                                <Link
+                                                                    href={'/destination'}
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Bali
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                             <li>
-                                                                <div
-                                                                   
+                                                                <Link
+                                                                    href={'/destination'}
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Maldives
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                             <li>
-                                                                <div
-                                                                   
+                                                                <Link
+                                                                    href={'/destination'}
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Indonesia
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                             <li>
-                                                                <div
-                                                                   
-                                                                    className={`link text-secondary duration-300 view-all-btn`}
+                                                                <Link
+                                                                    href={'/destination'}
+                                                                    className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     View All
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -1153,24 +1160,24 @@ const MenuOrganic = () => {
                                                         <div className="text-button-uppercase pb-1">Domestic Places</div>
                                                         <ul>
                                                             <li>
-                                                                <div
-                                                                   
+                                                                <Link
+                                                                    href={'/destination'}
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Kashmir
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                             <li>
-                                                                <div
-                                                                   
+                                                                <Link
+                                                                    href={'/destination'}
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Rajasthan
-                                                                </div>
+                                                                </Link>
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Andaman
@@ -1178,7 +1185,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Kochi / Kerala
@@ -1186,7 +1193,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 view-all-btn`}
                                                                 >
                                                                     View All
@@ -1199,7 +1206,7 @@ const MenuOrganic = () => {
                                                         <ul>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Dubai
@@ -1207,7 +1214,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Abu dhabi
@@ -1215,7 +1222,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Turkey
@@ -1223,7 +1230,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Egypt
@@ -1231,7 +1238,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    
+
                                                                     className={`link text-secondary duration-300 view-all-btn`}
                                                                 >
                                                                     View All
@@ -1244,7 +1251,7 @@ const MenuOrganic = () => {
                                                         <ul>
                                                             <li>
                                                                 <div
-                                                                    
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Italy
@@ -1252,7 +1259,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Portugal
@@ -1260,7 +1267,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     France
@@ -1268,7 +1275,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Switzerland
@@ -1276,7 +1283,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 view-all-btn`}
                                                                 >
                                                                     View All
@@ -1349,7 +1356,7 @@ const MenuOrganic = () => {
                                                         <ul>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Thailand
@@ -1357,7 +1364,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Bali
@@ -1365,7 +1372,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Maldives
@@ -1373,7 +1380,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Indonesia
@@ -1381,7 +1388,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 view-all-btn`}
                                                                 >
                                                                     View All
@@ -1394,7 +1401,7 @@ const MenuOrganic = () => {
                                                         <ul>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Kashmir
@@ -1402,7 +1409,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Rajasthan
@@ -1410,7 +1417,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Andaman
@@ -1418,7 +1425,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Kochi / Kerala
@@ -1426,7 +1433,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    
+
                                                                     className={`link text-secondary duration-300 view-all-btn`}
                                                                 >
                                                                     View All
@@ -1439,7 +1446,7 @@ const MenuOrganic = () => {
                                                         <ul>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Dubai
@@ -1447,7 +1454,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Abu dhabi
@@ -1455,7 +1462,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Turkey
@@ -1463,7 +1470,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Egypt
@@ -1471,7 +1478,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 view-all-btn`}
                                                                 >
                                                                     View All
@@ -1484,7 +1491,7 @@ const MenuOrganic = () => {
                                                         <ul>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Italy
@@ -1492,7 +1499,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Portugal
@@ -1500,7 +1507,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     France
@@ -1508,7 +1515,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                    
+
                                                                     className={`link text-secondary duration-300 cursor-pointer`}
                                                                 >
                                                                     Switzerland
@@ -1516,7 +1523,7 @@ const MenuOrganic = () => {
                                                             </li>
                                                             <li>
                                                                 <div
-                                                                   
+
                                                                     className={`link text-secondary duration-300 view-all-btn`}
                                                                 >
                                                                     View All
@@ -1564,8 +1571,8 @@ const MenuOrganic = () => {
                                         </div>
                                     </li>
 
-                                   
-                                   
+
+
                                     <li
                                         className={`${openSubNavMobile === 6 ? 'open' : ''}`}
                                         onClick={() => handleOpenSubNavMobile(6)}
@@ -1665,7 +1672,7 @@ const MenuOrganic = () => {
                                 />
                                 <input
                                     type="text"
-                                    
+
                                     className="caption1 w-full h-full lg:pl-12 md:pl-12 pl-12 pr-14 rounded-xl border border-line text-md text-secondary"
                                     placeholder='Enter Your Destination'
                                 />
@@ -1719,10 +1726,10 @@ const MenuOrganic = () => {
                             >
                                 Cancel
                             </button>
-                            
-                           
+
+
                             <button type="button" className="hover:bg-black hover:text-white text-gray-900 bg-green focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-                            View Packages
+                                View Packages
                             </button>
                         </div>
                     </div>

@@ -10,7 +10,7 @@ export default function CollectionOverview() {
             const scrollTop = window.scrollY;
 
             // Show the close button after scrolling down
-            if (scrollTop > 100) {
+            if (scrollTop > 135) {
                 setShowCloseButton(true);
             } else {
                 setShowCloseButton(false);

@@ -118,8 +118,13 @@ const Product: React.FC<ProductProps> = ({ data, type }) => {
                                     <span className="ml-2 text-xs">Trending</span>
                                 </div>
                             )}
+
+                            <div className="product-tag compare-crs px-3 py-0.5 inline-block rounded-sm absolute top-3 right-3 z-[1]">
+                                + Compare
+                            </div>
+
                             <div className="list-action-right absolute top-3 right-3 max-lg:hidden">
-                                <div
+                                {/* <div
                                     className={`add-wishlist-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative ${wishlistState.wishlistArray.some(item => item.id === data.id) ? 'active' : ''}`}
                                     onClick={(e) => {
                                         e.stopPropagation()
@@ -136,7 +141,7 @@ const Product: React.FC<ProductProps> = ({ data, type }) => {
                                             <Icon.Heart size={18} />
                                         </>
                                     )}
-                                </div>
+                                </div> */}
                                 <div
                                     className={`compare-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative mt-2 ${compareState.compareArray.some(item => item.id === data.id) ? 'active' : ''}`}
                                     onClick={(e) => {
@@ -198,87 +203,8 @@ const Product: React.FC<ProductProps> = ({ data, type }) => {
                                     </Marquee>
                                 </>
                             )}
-                            <div className="list-action grid grid-cols-2 gap-3 px-5 absolute w-full bottom-5 max-lg:hidden">
-                                <div
-                                    className="quick-view-btn w-full text-button-uppercase py-2 text-center rounded-full duration-300 bg-white hover:bg-black hover:text-white"
-                                    onClick={(e) => {
-                                        e.stopPropagation()
-                                        handleQuickviewOpen()
-                                    }}
-                                >
-                                    Quick View
-                                </div>
-                                {data.action === 'add to cart' ? (
-                                    <div
-                                        className="add-cart-btn w-full text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white"
-                                        onClick={e => {
-                                            e.stopPropagation();
-                                            handleAddToCart()
-                                        }}
-                                    >
-                                        Add To Cart
-                                    </div>
-                                ) : (
-                                    <>
-                                        <div
-                                            className="quick-shop-btn text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white"
-                                            onClick={e => {
-                                                e.stopPropagation();
-                                                setOpenQuickShop(!openQuickShop)
-                                            }}
-                                        >
-                                            Quick Shop
-                                        </div>
-                                        <div
-                                            className={`quick-shop-block absolute left-5 right-5 bg-white p-5 rounded-[20px] ${openQuickShop ? 'open' : ''}`}
-                                            onClick={(e) => {
-                                                e.stopPropagation()
-                                            }}
-                                        >
-                                            <div className="list-size flex items-center justify-center flex-wrap gap-2">
-                                                {data.sizes.map((item, index) => (
-                                                    <div
-                                                        className={`size-item w-10 h-10 rounded-full flex items-center justify-center text-button bg-white border border-line ${activeSize === item ? 'active' : ''}`}
-                                                        key={index}
-                                                        onClick={() => handleActiveSize(item)}
-                                                    >
-                                                        {item}
-                                                    </div>
-                                                ))}
-                                            </div>
-                                            <div
-                                                className="button-main w-full text-center rounded-full py-3 mt-4"
-                                                onClick={() => {
-                                                    handleAddToCart()
-                                                    setOpenQuickShop(false)
-                                                }}
-                                            >
-                                                Add To cart
-                                            </div>
-                                        </div>
-                                    </>
-                                )}
-                            </div>
-                            <div className="list-action-icon flex items-center justify-center gap-2 absolute w-full bottom-3 z-[1] lg:hidden">
-                                <div
-                                    className="quick-view-btn w-9 h-9 flex items-center justify-center rounded-lg duration-300 bg-white hover:bg-black hover:text-white"
-                                    onClick={(e) => {
-                                        e.stopPropagation()
-                                        handleQuickviewOpen()
-                                    }}
-                                >
-                                    <Icon.Eye className='text-lg' />
-                                </div>
-                                <div
-                                    className="add-cart-btn w-9 h-9 flex items-center justify-center rounded-lg duration-300 bg-white hover:bg-black hover:text-white"
-                                    onClick={e => {
-                                        e.stopPropagation();
-                                        handleAddToCart()
-                                    }}
-                                >
-                                    <Icon.ShoppingBagOpen className='text-lg' />
-                                </div>
-                            </div>
+
+
                         </div>
                         <div className="product-infor mt-4 lg:mb-7">
                             <div className="product-sold sm:pb-4 pb-2">
@@ -342,16 +268,73 @@ const Product: React.FC<ProductProps> = ({ data, type }) => {
                                 </div>
                             )}
 
-                            <div className="product-price-block flex items-center gap-2 flex-wrap mt-1 duration-300 relative z-[1]">
-                                <div className="product-price text-title">${data.price}.00</div>
-                                {percentSale > 0 && (
-                                    <>
-                                        <div className="product-origin-price caption1 text-secondary2"><del>${data.originPrice}.00</del></div>
-                                        <div className="product-sale caption1 font-medium bg-green px-3 py-0.5 inline-block rounded-full">
-                                            -{percentSale}%
-                                        </div>
-                                    </>
+                            <div className="product-price-block flex items-center gap-4 flex-wrap mt-2 duration-300 relative z-[1]">
+
+                                <div className="flex items-center text-sm text-secondary">
+                                    <span className="places">
+                                        <span className='font-bold text-light-red places'>3N </span>
+                                        Zurich
+                                    </span>
+                                    <span className="animate-bounce-x mx-2 places">→</span>
+                                    <span className="places">
+                                        <span className='font-bold text-light-red places'>2N </span>
+                                        Milan
+                                    </span>
+                                    <span className="animate-bounce-x mx-2 places">→</span>
+                                    <span className="places">
+                                        <span className='font-bold text-light-red places'>2N </span>
+                                        Paris
+                                    </span>
+
+                                    <span className="animate-bounce-x mx-2 places">→</span>
+                                    <span className="places">
+                                        <span className='font-bold text-light-red places'>2N </span>
+                                        Venice
+                                    </span>
+
+                                    <span className="ms-1 places">...</span>
+                                    <span className="places">
+                                        <span className='font-bold text-light-red places'>+1</span>
+                                    </span>
+
+
+                                </div>
+                            </div>
+
+                            <div className="flex items-center flex-wrap gap-3 gap-y-4 mt-4">
+                                <div className="color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border border-line">
+                                    <div className="caption10">3 Star</div>
+                                </div>
+                                <div className="color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border border-line ">
+                                    <div className="caption10">4 Star</div>
+                                </div>
+                                <div className="color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border border-line ">
+                                    <div className="caption10">5 Star</div>
+                                </div>
+                            </div>
+
+                            <div className="product-price-block flex items-center gap-2 mt-3 justify-between duration-300 relative z-[1]">
+                                <div className='w-3/5 flex gap-1 items-center flex-wrap'>
+                                <div className="product-price heading6 font-bold">₹{data.price}</div>
+                                <div className="product-origin-price caption1 text-red">
+                                    <del>₹{data.originPrice}</del>
+                                </div>
+                                {data.originPrice && (
+                                    <div className="product-sale caption1 text-xs bg-dark-green px-3 py-0.5 inline-block rounded-full">
+                                        -{percentSale}%
+                                    </div>
                                 )}
+                                </div>
+
+                                <div
+                                    className="auto-shining quick-shop-btn button-main whitespace-nowrap py-3 px-10 max-lg:px-2 rounded-md bg-green text-black hover:bg-black hover:text-white text-xs text-capitalize w-2/5 text-center"
+                                    onClick={e => {
+                                        e.stopPropagation();
+                                        setOpenQuickShop(!openQuickShop)
+                                    }}
+                                >
+                                    Request Callback
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -428,7 +411,7 @@ const Product: React.FC<ProductProps> = ({ data, type }) => {
                         <div className='flex sm:items-between gap-7 max-lg:gap-4 max-lg:flex-wrap max-lg:w-full max-sm:flex-col max-sm:w-1/2' style={{ maxWidth: '70%', minWidth: '70%' }}>
                             <div className="product-infor max-sm:w-full" style={{ maxWidth: '65%', minWidth: '65%' }}>
 
-                               
+
 
                                 <div className="product-price-block flex items-center gap-2 flex-wrap mt-2 duration-300 relative z-[1]">
                                     <div className="product-price text-md text-secondary">3 days & 2 nights</div>
@@ -505,7 +488,7 @@ const Product: React.FC<ProductProps> = ({ data, type }) => {
 
                             <div className="action w-fit flex flex-col items-start justify-between" style={{ maxWidth: '30%', minWidth: '30%' }}>
 
-                            <div className="list-action-right flex items-center justify-start gap-1 text-xs">
+                                <div className="list-action-right flex items-center justify-start gap-1 text-xs">
                                     <div
                                         className={`compare-btn w-[27px] h-[27px] flex items-center justify-center rounded-full bg-white duration-300 relative ${compareState.compareArray.some(item => item.id === data.id) ? 'active' : ''}`}
                                         onClick={(e) => {
@@ -515,7 +498,7 @@ const Product: React.FC<ProductProps> = ({ data, type }) => {
                                     >
                                         <div className="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">Add to Compare</div>
                                         <Icon.ArrowsCounterClockwise size={14} className='compare-icon' />
-                                        <Icon.CheckCircle size={15} className='checked-icon' /> 
+                                        <Icon.CheckCircle size={15} className='checked-icon' />
                                     </div>
                                     Add to Compare
                                 </div>
@@ -545,7 +528,7 @@ const Product: React.FC<ProductProps> = ({ data, type }) => {
                                     Request Callback
                                 </div>
 
-                                
+
                                 {/* <div className="list-action-right flex items-center justify-center gap-3 mt-4">
                                     <div
                                         className={`add-wishlist-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative ${wishlistState.wishlistArray.some(item => item.id === data.id) ? 'active' : ''}`}

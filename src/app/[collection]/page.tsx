@@ -28,7 +28,9 @@ export default function SidebarList() {
             </div>
             <CollectionOverview />
             <ShopSidebarList data={productData} productPerPage={4} dataType={type} />
-            <Footer />
+
+            
+            {/* <Footer /> */}
         </>
     )
 }

@@ -17,6 +17,12 @@ export default function RootLayout({
   return (
     <GlobalProvider>
       <html lang="en">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet"
+        />
+      </head>
         <body className={instrument.className}>
           {children}
         </body>
