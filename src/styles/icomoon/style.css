@@ -612,12 +612,12 @@ hr{
 
 .compare-crs{
   font-size: 12px;
-  background: #108470;
-  padding: 0px 7px;
-  height: 25px;
-  border-radius: 3px;
-  border: 1px solid #108470;
-  color: white;
+    background: #108470;
+    padding: 0px 7px !important;
+    height: 25px;
+    border-radius: 4px !important;
+    border: 1px solid #108470;
+    color: white;
 }
 
 .fixed-bottom-menu{

@@ -28,7 +28,7 @@ const Populardestination = () => {
                             // pagination={isMobile ? { clickable: true } : false} // Conditionally set pagination for mobile only
                             breakpoints={{
                                 300: {
-                                    slidesPerView: 7, // Show 3 slides on smaller screens
+                                    slidesPerView: 5, // Show 3 slides on smaller screens
                                     spaceBetween: 0,
                                 },
                                 500: {

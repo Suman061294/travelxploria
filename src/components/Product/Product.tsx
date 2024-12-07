@@ -119,7 +119,7 @@ const Product: React.FC<ProductProps> = ({ data, type }) => {
                                 </div>
                             )}
 
-                            <div className="product-tag compare-crs px-3 py-0.5 inline-block rounded-sm absolute top-3 right-3 z-[1]">
+                            <div className="product-tag compare-crs px-3 py-1 inline-block rounded-sm absolute top-3 right-3 z-[1]">
                                 + Compare
                             </div>
 
