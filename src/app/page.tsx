@@ -17,6 +17,7 @@ import Newsletter from '@/components/Travelexploria/Newsletter'
 import Budget from '@/components/Travelexploria/Budget'
 import Collectionthumb from '@/components/Travelexploria/Collection2'
 import MenuOrganic from '@/components/Header/Menu/MenuOrganic'
+import Collectionfooter from '@/components/Travelexploria/Collectionfooter'
 
 
 export default function Home() {
@@ -65,6 +66,7 @@ export default function Home() {
       
       {/* <Brand /> */}
       <Footer />
+      {/* <Collectionfooter /> */}
       {/* <ModalNewsletter /> */}
     </>
   )

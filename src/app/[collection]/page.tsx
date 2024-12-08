@@ -3,13 +3,8 @@
 import React, { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation';
 import productData from '@/data/Product.json'
-import MenuOne from '@/components/Travelexploria/MenuOne';
-import Footer from '@/components/Travelexploria/Footer';
-import TopNavOne from '@/components/Travelexploria/TopNavOne';
 import ShopSidebarList from '@/components/collection/ShopSidebarList';
 import Collectionslider from '@/components/collection/Collectionslider';
-import MenuFour from '@/components/Travelexploria/MenuFour';
-import MenuYoga from '@/components/Header/Menu/MenuYoga';
 import MenuOrganic from '@/components/Header/Menu/MenuOrganic';
 import Collectiontag from '@/components/Travelexploria/Collectiontag';
 import CollectionOverview from '@/components/Travelexploria/Collectionoverview';

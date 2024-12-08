@@ -19,7 +19,7 @@ const Footer = () => {
                                             height={400}
                                             alt='bg5-1'
                                             priority={true}
-                                            className='w-full h-full object-cover'
+                                            className='w-full h-full w-[200px] object-cover'
                                         /></div>
                                 </Link>
                                 <div className='flex gap-3 mt-3'>

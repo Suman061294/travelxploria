@@ -19,6 +19,8 @@ import Collectionoffer from '../Travelexploria/Collectionoffer';
 import CollectionOverview from '../Travelexploria/Collectionoverview';
 import Collectionreview from '../Travelexploria/Collectionreview';
 import Footer from '../Travelexploria/Footer';
+import Collectionfooter from '../Travelexploria/Collectionfooter';
+import Enquery from '../Travelexploria/Enquery';
 
 interface Props {
     data: Array<ProductType>;
@@ -295,12 +297,26 @@ const ShopSidebarList: React.FC<Props> = ({ data, productPerPage, dataType }) =>
     };
 
 
+    const [isOpen, setIsOpen] = useState(false);
+
+    // Function to toggle the form visibility
+    const toggleForm = () => {
+        setIsOpen(!isOpen);
+    };
+
     return (
         <>
 
             {isFilterOpen && (
                 <div
-                    className={`shadow-custom2 fixed bottom-0 left-0 w-full h-[300px] bg-white shadow-lg z-50 transition-transform duration-500 ease-in-out transform ${isFilterOpen ? 'translate-y-0' : 'translate-y-full'
+                    className="fixed inset-0 bg-black opacity-50 z-40"
+                    onClick={() => setIsFilterOpen(false)} // Optional: close the panel when overlay is clicked
+                />
+            )}
+
+            {isFilterOpen && (
+                <div
+                    className={`shadow-custom2 fixed bottom-0 left-0 w-full h-[450px] bg-white shadow-lg z-50 transition-transform duration-500 ease-in-out transform ${isFilterOpen ? 'translate-y-0' : 'translate-y-full'
                         }`}
                 >
                     <div className="p-4 pr-10 h-full overflow-auto">
@@ -384,7 +400,7 @@ const ShopSidebarList: React.FC<Props> = ({ data, productPerPage, dataType }) =>
                                             <span className='text-red text-xs'></span>
                                         </div>
 
-                                       
+
                                     </>
                                 )
                             }
@@ -532,10 +548,27 @@ const ShopSidebarList: React.FC<Props> = ({ data, productPerPage, dataType }) =>
                 </div>
             )}
 
+            {isOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 max-w-md relative">
+                        <h2 className="text-lg font-bold mb-4">Tell Us how can we help you?</h2>
+
+                        {/* Close button */}
+                        <button
+                            className="absolute top-2 right-2 text-gray-500 hover:text-red-500"
+                            onClick={toggleForm}
+                        >
+                            ✕
+                        </button>
+                        <Enquery props='' />
+                    </div>
+                </div>
+            )}
+
             <div className="fixed-bottom-menu shadow-custom2 w-full p-2 bg-white z-50 block md:hidden lg:hidden">
                 <div className="flex justify-between items-center gap-2">
                     <div className="w-4/6 flex items-center gap-2">
-                        <button className="flex items-center justify-center w-full py-3 h-[40px] bg-green text-black rounded-md">
+                        <button className="flex items-center justify-center w-full py-3 h-[40px] bg-green text-black rounded-md" onClick={toggleForm}>
                             <span className="material-icons mr-2">call</span>
                             Request A Call Back
                         </button>
@@ -601,7 +634,7 @@ const ShopSidebarList: React.FC<Props> = ({ data, productPerPage, dataType }) =>
                                     }}>
                                         <div className='font-bold'>Filters</div>
                                     </div>
-                                    <div className="filter-type pb-8 border-b border-line p-3 px-5">
+                                    <div className="filter-type pb-8 border-b mt-12 border-line px-7">
                                         <div className="heading6">Cities</div>
                                         <div className="list-type list-type1 mt-4 ">
                                             {['Maldives', 'Srilanka', 'France', 'Dubai', 'Paris', 'Kashmir', 'Europe', 'Andaman'].map((item, index) => (
@@ -618,7 +651,7 @@ const ShopSidebarList: React.FC<Props> = ({ data, productPerPage, dataType }) =>
                                             ))}
                                         </div>
                                     </div>
-                                    <div className="filter-size pb-8 border-b border-line mt-8 p-3">
+                                    <div className="filter-size pb-8 border-b border-line mt-1 px-7">
                                         <div className="heading6">Hotel Rating</div>
                                         <div className="list-size flex items-center flex-wrap gap-3 gap-y-4 mt-4">
                                             {
@@ -634,7 +667,7 @@ const ShopSidebarList: React.FC<Props> = ({ data, productPerPage, dataType }) =>
                                             }
                                         </div>
                                     </div>
-                                    <div className="filter-price pb-8 p-3 border-b border-line mt-8 p-3">
+                                    <div className="filter-price pb-8 border-b border-line mt-1 px-7">
                                         <div className="heading6">Price Range</div>
                                         <Slider
                                             range
@@ -659,7 +692,7 @@ const ShopSidebarList: React.FC<Props> = ({ data, productPerPage, dataType }) =>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="filter-color pb-8 border-b border-line mt-8 p-3">
+                                    <div className="filter-color pb-8 border-b border-line mt-1 px-7">
                                         <div className="heading6">Duration (in Days)</div>
                                         <div className="list-color flex items-center flex-wrap gap-3 gap-y-4 mt-4">
                                             <div
@@ -701,7 +734,7 @@ const ShopSidebarList: React.FC<Props> = ({ data, productPerPage, dataType }) =>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="filter-brand mt-8 p-3">
+                                    <div className="filter-brand mt-1 px-7">
                                         <div className="heading6">Activities</div>
                                         <div className="list-brand mt-4">
                                             {['Adventure', 'Nature', 'Hill Station', 'Rekigion', 'Water Activities'].map((item, index) => (
@@ -843,7 +876,7 @@ const ShopSidebarList: React.FC<Props> = ({ data, productPerPage, dataType }) =>
                                             {/* Conditional Section Logic */}
                                             {((index + 1) % 4 === 0) && index + 1 < visibleProducts.length && (
                                                 <div key={`section-${index}`} className="custom-section">
-                                                    {Math.random() > 0.5 ? (
+                                                    {Math.random() > 1 ? (
                                                         <Collectioncta props="bg-green md:mt-5 mt-5" />
                                                     ) : (
                                                         <Collectionoffer nameprops={`Europe Packages By Theme`} />
@@ -855,9 +888,9 @@ const ShopSidebarList: React.FC<Props> = ({ data, productPerPage, dataType }) =>
                                 </div>
                             </InfiniteScroll>
 
-                           <Collectionreview />
+                            <Collectionreview />
 
-                           {/* <Footer /> */}
+                            <Collectionfooter />
                         </div>
                     </div>
                 </div>

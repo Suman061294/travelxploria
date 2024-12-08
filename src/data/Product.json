@@ -3,7 +3,7 @@
     "id": "1",
     "category": "fashion",
     "type": "Srilanka",
-    "name": "Enchanting New Zealand Honeymoon: Romantic 13-Night Itinerary for Couples",
+    "name": "Highlights of Philadelphia and New York",
     "gender": "women",
     "new": true,
     "sale": false,
@@ -38,10 +38,11 @@
       "/product/2.webp"
     ],
     "images": [
-      "/images/product/1000x1000.png",
-      "/images/product/1000x1000.png",
-      "/images/product/1000x1000.png",
-      "/images/product/1000x1000.png"
+      "/product/1.webp",
+      "/product/2.webp",
+      "/product/3.webp",
+      "/product/4.webp",
+      "/product/5.webp"
     ],
     "description": "Keep your home organized, yet elegant with storage cabinets by Onita Patio Furniture. Traditionally designed, they are perfect to be used in the any place where you need to store.",
     "action": "quick shop",
@@ -51,7 +52,7 @@
     "id": "2",
     "category": "fashion",
     "type": "Europe",
-    "name": "Enchanting New Zealand Honeymoon: Romantic 13-Night Itinerary for Couples",
+    "name": "Highlights of Philadelphia and New York",
     "gender": "women",
     "new": true,
     "sale": false,
