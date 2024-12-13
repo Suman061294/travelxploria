@@ -650,7 +650,9 @@ hr{
   font-size: 9px;
 }
 
-
+.font-12px{
+  font-size: 12px;
+}
 
 @media (min-width: 768px) {
   .days,
@@ -665,6 +667,10 @@ hr{
   
   .font-9px{
     font-size: 14px;
+  }
+
+  .font-12px{
+    font-size: 16px;
   }
 }
 
@@ -682,8 +688,8 @@ hr{
 
 .desc-block1 {
   position: relative;
-  padding-bottom: 1rem; /* Adjust padding as needed */
-  margin-top: 1rem;     /* Adjust margin as needed */
+  margin-bottom: 0.5rem; /* Adjust padding as needed */
+  margin-top: 0.5rem;     /* Adjust margin as needed */
 }
 
 .border-content {
@@ -742,6 +748,127 @@ hr{
   border-radius: 50%;
   transition: all ease 0.4s;
 }
+
+.h-80px{
+  height: 80px;
+}
+
+
+.color-green{
+  color: #108470;
+}
+
+
+.th-lde-wrapper {
+  display: flex;
+  border-radius: 5px;
+  border: 1px solid #e1ffc4;
+  background: rgb(69 252 23 / 10%);
+  width: 100%;
+  height: 49px;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 20px;
+  margin: 10px 0 0;
+  color: #35ab38;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.th-lde-wrapper .th-lde-label {
+  margin-right: 2.5px;
+  margin-left: 10px;
+}
+
+.th-suggestion-section {
+  padding: 15px 0 15px 15px;
+  width: auto;
+  background: rgb(236 255 231);
+  border-radius: 5px;
+}
+
+.th-suggestion-section .suggestion-head {
+  padding-right: 15px;
+}
+
+.th-suggestion-section .suggestion-type {
+  display: flex;
+  justify-content: space-between;
+}
+
+.th-lead-form-widget-wrapper, div, input, span {
+  box-sizing: border-box !important;
+}
+
+.th-suggestion-section .suggestion-type .left-section-wrapper .recommended-section {
+  display: flex
+;
+  align-items: center;
+  gap: 10px;
+}
+
+.th-suggestion-section .suggestion-type .text {
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 18px;
+  font-style: normal;
+  letter-spacing: .2px;
+  /* text-transform: uppercase; */
+  color: #2a952d;
+  /* font-family: Bebas Neue; */
+}
+
+.th-suggestion-section .suggestion-type .line {
+  height: 1px;
+  width: 54px;
+  background-color: #35ab38;
+}
+
+
+.th-suggestion-section .suggestion-type .right-section-wrapper {
+  display: flex
+;
+  position: relative;
+  top: -15px;
+  width: 64px;
+  height: 62px;
+  align-items: center;
+  right: -5px;
+}
+
+.td-inclusion{
+  background: rgb(255 237 197 / 31%);
+  border: 1px solid #ffedc5;
+}
+
+.th-suggestion-section .suggestion-text {
+  color: #35ab38;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 33px;
+  text-transform: capitalize;
+  width: calc(100% + 20px) !important;
+  display: flex;
+}
+
+.included{
+  font-size: 20px !important;
+    color: #fda900;
+}
+
+.sticky-top1 {
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 10;
+}
+
+
+.container {
+  padding-right: 8px !important;
+  padding-left: 8px !important;
+}
+
 
 
 

@@ -8,6 +8,7 @@ import Collectionslider from '@/components/collection/Collectionslider';
 import MenuOrganic from '@/components/Header/Menu/MenuOrganic';
 import Collectiontag from '@/components/Travelexploria/Collectiontag';
 import CollectionOverview from '@/components/Travelexploria/Collectionoverview';
+import Footer from '@/components/Travelexploria/Footer';
 
 export default function SidebarList() {
     const searchParams = useSearchParams()
@@ -25,7 +26,7 @@ export default function SidebarList() {
             <ShopSidebarList data={productData} productPerPage={4} dataType={type} />
 
             
-            {/* <Footer /> */}
+            <Footer />
         </>
     )
 }

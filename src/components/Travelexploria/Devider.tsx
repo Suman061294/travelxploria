@@ -2,7 +2,7 @@ import React from 'react'
 
 const Devider = () => {
     return (
-        <div className="desc-block1 pb-6 relative">
+        <div className="desc-block1  relative">
             <div className="border-content">
                 <span className="border-left"></span>
                 <span className="icon-center">

@@ -26,7 +26,7 @@ const ProductFixedPrice = () => {
                 {/* <BreadcrumbProduct data={productData} productPage='fixed-price' productId={productId} /> */}
             </div>
             <FixedPrice data={productData} productId={productId} />
-            <Footer />
+           
         </>
     )
 }

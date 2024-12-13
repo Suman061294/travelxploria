@@ -131,8 +131,8 @@ const MenuOrganic = () => {
 
     return (
         <>
-            <div className={`${fixedHeader ? ' fixed' : 'relative'} header-menu bg-white w-full top-0 z-10 duration-500`}>
-            {/* <div className={`relative header-menu bg-white w-full top-0 z-10 duration-500`}> */}
+            {/* <div className={`${fixedHeader ? ' fixed' : 'relative'} header-menu bg-white w-full top-0 z-10 duration-500`}> */}
+            <div className={`relative header-menu bg-white w-full top-0 z-10 duration-500`}>
                 <div className={`header-menu-main style-eight bg-white w-full md:h-[60px] h-[56px]`}>
                     <div className="container mx-auto h-full">
                         <div className="header-main flex items-center justify-between h-full">

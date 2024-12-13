@@ -1,24 +1,16 @@
 'use client'
 
 import React, { useState, useEffect, useMemo, useRef } from 'react'
-import Link from 'next/link'
 import * as Icon from "@phosphor-icons/react/dist/ssr";
 import { ProductType } from '@/type/ProductType'
 import Product from '../Product/Product';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css'
-import HandlePagination from '../Other/HandlePagination';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { ColorRing } from 'react-loader-spinner';
-import ContentLoader from 'react-content-loader';
 import SkeletonLoader from './Skeleton';
-import Newsletter from '../Travelexploria/Newsletter';
 import Collectioncta from '../Travelexploria/Collectioncta';
-import Thumbneilslider from '../Travelexploria/Thumbneilsilder';
 import Collectionoffer from '../Travelexploria/Collectionoffer';
-import CollectionOverview from '../Travelexploria/Collectionoverview';
 import Collectionreview from '../Travelexploria/Collectionreview';
-import Footer from '../Travelexploria/Footer';
 import Collectionfooter from '../Travelexploria/Collectionfooter';
 import Enquery from '../Travelexploria/Enquery';
 
@@ -600,167 +592,135 @@ const ShopSidebarList: React.FC<Props> = ({ data, productPerPage, dataType }) =>
             <div className="shop-product breadcrumb1 lg:py-5 md:py-5 py-5 main-bg-contain" style={{ height: "auto" }} >
                 <div className="container bg-white shadow-custom2 padding-0" style={{ height: "auto" }}>
                     <div className="flex max-md:flex-wrap max-md:flex-col-reverse gap-0">
-                        <div className="sidebar lg:w-1/4 md:w-1/3 w-full hidden md:block"
-                            ref={sidebarRef}
-                        >
-                            <div
-                                ref={stickyRef}
-                                className={`sticky-container bg-white rounded-2xl ${isFixed ? "fixed" : ""}`}
-                                style={{
-                                    position: isFixed ? "fixed" : "relative",
-                                    top: isFixed ? "0px" : "auto",
-                                    width: isFixed ? `${sidebarWidth}px` : "auto", // Set width for fixed state
-                                    padding: isFixed ? `0rem` : "0rem",
-                                    paddingRight: isFixed ? `0rem` : "0rem",
-                                    left: isFixed ? `${sidebarRef.current?.getBoundingClientRect().left || 0}px` : "auto",
-                                }}
-                            >
-
-                                <div
-                                    style={{
-                                        maxHeight: "calc(100vh - 2rem)", // Ensure the content has a maximum height (subtracting any top offsets)
-                                        overflowY: "auto", // Allow the content to scroll
-                                        paddingRight: "0rem", // Add some padding for scroll appearance
-                                    }}
-                                >
-                                    <div className='shadow-custom2 sticky-bread flex justify-between' style={{
-                                        position: isFixed ? "fixed" : "relative",
-                                        top: isFixed ? "0px" : "auto",
-                                        width: isFixed ? `${sidebarWidth}px` : "auto", // Set width for fixed state
-                                        padding: isFixed ? `.5rem` : ".5rem",
-                                        paddingRight: isFixed ? `0rem` : "0rem",
-                                        left: isFixed ? `${sidebarRef.current?.getBoundingClientRect().left || 0}px` : "auto",
-                                        zIndex: 1
-                                    }}>
-                                        <div className='font-bold'>Filters</div>
+                        <div className="sidebar lg:w-1/4 md:w-1/3 w-full hidden md:block">
+                            <div className={`sticky-container bg-white rounded-2xl sticky-top1 border-r border-line top-0`} >
+                                <div className='shadow-custom2 sticky-bread flex justify-between p-3'>
+                                    <div className='font-bold'>Filters</div>
+                                </div>
+                                <div className="filter-type pb-8 border-b mt-5 border-line px-7">
+                                    <div className="heading6">Cities</div>
+                                    <div className="list-type list-type1 mt-4 ">
+                                        {['Maldives', 'Srilanka', 'France', 'Dubai', 'Paris', 'Kashmir', 'Europe', 'Andaman'].map((item, index) => (
+                                            <div
+                                                key={index}
+                                                className={`city-filter item flex items-center justify-between cursor-pointer ${dataType === item ? 'active' : ''}`}
+                                                onClick={() => handleType(item)}
+                                            >
+                                                <div className='text-secondary has-line-before hover:text-black capitalize'>{item}</div>
+                                                <div className='text-secondary2'>
+                                                    ({data.filter(dataItem => dataItem.type === item && dataItem.category === 'fashion').length})
+                                                </div>
+                                            </div>
+                                        ))}
                                     </div>
-                                    <div className="filter-type pb-8 border-b mt-12 border-line px-7">
-                                        <div className="heading6">Cities</div>
-                                        <div className="list-type list-type1 mt-4 ">
-                                            {['Maldives', 'Srilanka', 'France', 'Dubai', 'Paris', 'Kashmir', 'Europe', 'Andaman'].map((item, index) => (
+                                </div>
+                                <div className="filter-size pb-8 border-b border-line mt-1 px-7">
+                                    <div className="heading6">Hotel Rating</div>
+                                    <div className="list-size flex items-center flex-wrap gap-3 gap-y-4 mt-4">
+                                        {
+                                            ['2', '3', '4', '5'].map((item, index) => (
                                                 <div
                                                     key={index}
-                                                    className={`city-filter item flex items-center justify-between cursor-pointer ${dataType === item ? 'active' : ''}`}
-                                                    onClick={() => handleType(item)}
+                                                    className={`size-item text-sm w-[44px] h-[44px] flex items-center justify-center rounded-full border border-line ${size === item ? 'active' : ''}`}
+                                                    onClick={() => handleSize(item)}
                                                 >
-                                                    <div className='text-secondary has-line-before hover:text-black capitalize'>{item}</div>
-                                                    <div className='text-secondary2'>
-                                                        ({data.filter(dataItem => dataItem.type === item && dataItem.category === 'fashion').length})
-                                                    </div>
+                                                    {item} <span className="text-yellow-500">⭐</span>
                                                 </div>
-                                            ))}
-                                        </div>
+                                            ))
+                                        }
                                     </div>
-                                    <div className="filter-size pb-8 border-b border-line mt-1 px-7">
-                                        <div className="heading6">Hotel Rating</div>
-                                        <div className="list-size flex items-center flex-wrap gap-3 gap-y-4 mt-4">
-                                            {
-                                                ['2', '3', '4', '5'].map((item, index) => (
-                                                    <div
-                                                        key={index}
-                                                        className={`size-item text-sm w-[44px] h-[44px] flex items-center justify-center rounded-full border border-line ${size === item ? 'active' : ''}`}
-                                                        onClick={() => handleSize(item)}
-                                                    >
-                                                        {item} <span className="text-yellow-500">⭐</span>
-                                                    </div>
-                                                ))
-                                            }
-                                        </div>
-                                    </div>
-                                    <div className="filter-price pb-8 border-b border-line mt-1 px-7">
-                                        <div className="heading6">Price Range</div>
-                                        <Slider
-                                            range
-                                            defaultValue={[10000, 450000]}
-                                            min={10000}
-                                            max={450000}
-                                            onChange={handlePriceChange}
-                                            className='mt-5'
-                                        />
-                                        <div className="price-block flex items-center justify-between flex-wrap mt-4 text-xs">
-                                            <div className="min flex items-center gap-1">
-                                                <div>Min:</div>
-                                                <div className='price-min'>₹
-                                                    <span>{priceRange.min}</span>
-                                                </div>
-                                            </div>
-                                            <div className="min flex items-center gap-1">
-                                                <div>Max:</div>
-                                                <div className='price-max'>₹
-                                                    <span>{priceRange.max}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="filter-color pb-8 border-b border-line mt-1 px-7">
-                                        <div className="heading6">Duration (in Days)</div>
-                                        <div className="list-color flex items-center flex-wrap gap-3 gap-y-4 mt-4">
-                                            <div
-                                                className={`color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border border-line ${color === 'pink' ? 'active' : ''}`}
-                                                onClick={() => handleColor('2 to 3')}
-                                            >
-
-                                                <div className="caption1">2 to 3</div>
-                                            </div>
-                                            <div
-                                                className={`color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border border-line ${color === 'red' ? 'active' : ''}`}
-                                                onClick={() => handleColor('4 to 5')}
-                                            >
-                                                <div className="caption1">4 to 5</div>
-                                            </div>
-                                            <div
-                                                className={`color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border border-line ${color === 'green' ? 'active' : ''}`}
-                                                onClick={() => handleColor('5 to 7')}
-                                            >
-                                                <div className="caption1">5 to 7</div>
-                                            </div>
-                                            <div
-                                                className={`color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border border-line ${color === 'yellow' ? 'active' : ''}`}
-                                                onClick={() => handleColor('7 to 9')}
-                                            >
-                                                <div className="caption1">7 to 9</div>
-                                            </div>
-                                            <div
-                                                className={`color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border border-line ${color === 'purple' ? 'active' : ''}`}
-                                                onClick={() => handleColor('9 to 13')}
-                                            >
-                                                <div className="caption1">9 to 13</div>
-                                            </div>
-                                            <div
-                                                className={`color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border border-line ${color === 'black' ? 'active' : ''}`}
-                                                onClick={() => handleColor('13+')}
-                                            >
-                                                <div className="caption1">13+</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="filter-brand mt-1 px-7">
-                                        <div className="heading6">Activities</div>
-                                        <div className="list-brand mt-4">
-                                            {['Adventure', 'Nature', 'Hill Station', 'Rekigion', 'Water Activities'].map((item, index) => (
-                                                <div key={index} className="brand-item flex items-center justify-between">
-                                                    <div className="left flex items-center cursor-pointer">
-                                                        <div className="block-input">
-                                                            <input
-                                                                type="checkbox"
-                                                                name={item}
-                                                                id={item}
-                                                                checked={brand === item}
-                                                                onChange={() => handleBrand(item)} />
-                                                            <Icon.CheckSquare size={20} weight='fill' className='icon-checkbox' />
-                                                        </div>
-                                                        <label htmlFor={item} className="brand-name capitalize pl-2 cursor-pointer">{item}</label>
-                                                    </div>
-                                                    <div className='text-secondary2'>
-                                                        ({data.filter(dataItem => dataItem.brand === item && dataItem.category === 'fashion').length})
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-
                                 </div>
+                                <div className="filter-price pb-8 border-b border-line mt-1 px-7">
+                                    <div className="heading6">Price Range</div>
+                                    <Slider
+                                        range
+                                        defaultValue={[10000, 450000]}
+                                        min={10000}
+                                        max={450000}
+                                        onChange={handlePriceChange}
+                                        className='mt-5'
+                                    />
+                                    <div className="price-block flex items-center justify-between flex-wrap mt-4 text-xs">
+                                        <div className="min flex items-center gap-1">
+                                            <div>Min:</div>
+                                            <div className='price-min'>₹
+                                                <span>{priceRange.min}</span>
+                                            </div>
+                                        </div>
+                                        <div className="min flex items-center gap-1">
+                                            <div>Max:</div>
+                                            <div className='price-max'>₹
+                                                <span>{priceRange.max}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="filter-color pb-8 border-b border-line mt-1 px-7">
+                                    <div className="heading6">Duration (in Days)</div>
+                                    <div className="list-color flex items-center flex-wrap gap-3 gap-y-4 mt-4">
+                                        <div
+                                            className={`color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border border-line ${color === 'pink' ? 'active' : ''}`}
+                                            onClick={() => handleColor('2 to 3')}
+                                        >
 
+                                            <div className="caption1">2 to 3</div>
+                                        </div>
+                                        <div
+                                            className={`color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border border-line ${color === 'red' ? 'active' : ''}`}
+                                            onClick={() => handleColor('4 to 5')}
+                                        >
+                                            <div className="caption1">4 to 5</div>
+                                        </div>
+                                        <div
+                                            className={`color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border border-line ${color === 'green' ? 'active' : ''}`}
+                                            onClick={() => handleColor('5 to 7')}
+                                        >
+                                            <div className="caption1">5 to 7</div>
+                                        </div>
+                                        <div
+                                            className={`color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border border-line ${color === 'yellow' ? 'active' : ''}`}
+                                            onClick={() => handleColor('7 to 9')}
+                                        >
+                                            <div className="caption1">7 to 9</div>
+                                        </div>
+                                        <div
+                                            className={`color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border border-line ${color === 'purple' ? 'active' : ''}`}
+                                            onClick={() => handleColor('9 to 13')}
+                                        >
+                                            <div className="caption1">9 to 13</div>
+                                        </div>
+                                        <div
+                                            className={`color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border border-line ${color === 'black' ? 'active' : ''}`}
+                                            onClick={() => handleColor('13+')}
+                                        >
+                                            <div className="caption1">13+</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="filter-brand mt-1 px-7">
+                                    <div className="heading6">Activities</div>
+                                    <div className="list-brand mt-4">
+                                        {['Adventure', 'Nature', 'Hill Station', 'Rekigion', 'Water Activities'].map((item, index) => (
+                                            <div key={index} className="brand-item flex items-center justify-between">
+                                                <div className="left flex items-center cursor-pointer">
+                                                    <div className="block-input">
+                                                        <input
+                                                            type="checkbox"
+                                                            name={item}
+                                                            id={item}
+                                                            checked={brand === item}
+                                                            onChange={() => handleBrand(item)} />
+                                                        <Icon.CheckSquare size={20} weight='fill' className='icon-checkbox' />
+                                                    </div>
+                                                    <label htmlFor={item} className="brand-name capitalize pl-2 cursor-pointer">{item}</label>
+                                                </div>
+                                                <div className='text-secondary2'>
+                                                    ({data.filter(dataItem => dataItem.brand === item && dataItem.category === 'fashion').length})
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -887,10 +847,7 @@ const ShopSidebarList: React.FC<Props> = ({ data, productPerPage, dataType }) =>
                                     ))}
                                 </div>
                             </InfiniteScroll>
-
                             <Collectionreview />
-
-                            <Collectionfooter />
                         </div>
                     </div>
                 </div>

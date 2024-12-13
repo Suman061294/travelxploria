@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ProductType } from '@/type/ProductType'
@@ -20,7 +20,10 @@ import { useModalCompareContext } from '@/context/ModalCompareContext'
 import { Autoplay } from 'swiper/modules';
 import Devider from '@/components/Travelexploria/Devider';
 import Packageday from '@/components/Travelexploria/Packageday';
-// import ModalSizeguide from '@/components/Modal/ModalSizeguide'
+import BookingForm from '@/components/Travelexploria/BookingForm';
+import Collectionfooter from '@/components/Travelexploria/Collectionfooter'
+import Footer from '@/components/Travelexploria/Footer'
+
 
 SwiperCore.use([Navigation, Thumbs]);
 
@@ -99,21 +102,7 @@ const FixedPrice: React.FC<Props> = ({ data, productId }) => {
         openModalWishlist();
     };
 
-    const handleAddToCompare = () => {
-        // if product existed in wishlit, remove from wishlist and set state to false
-        if (compareState.compareArray.length < 3) {
-            if (compareState.compareArray.some(item => item.id === productMain.id)) {
-                removeFromCompare(productMain.id);
-            } else {
-                // else, add to wishlist and set state to true
-                addToCompare(productMain);
-            }
-        } else {
-            alert('Compare up to 3 products')
-        }
 
-        openModalCompare();
-    };
 
     const handleActiveTab = (tab: string) => {
         setActiveTab(prevTab => prevTab === tab ? undefined : tab)
@@ -160,6 +149,18 @@ const FixedPrice: React.FC<Props> = ({ data, productId }) => {
             city: 'Chicago',
         }
     ]);
+
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    // Function to toggle the form visibility
+    const toggleForm = () => {
+        setIsOpen(!isOpen);
+    };
+
+  
+
+    
 
     return (
         <>
@@ -432,45 +433,51 @@ const FixedPrice: React.FC<Props> = ({ data, productId }) => {
 
                             </div>
 
-                            <Devider />
+
 
 
                             <div className="desc-tab">
                                 <div className="container-full">
-                                    <div className="flex items-center justify-start w-full p-3 bg-green">
-                                        <div className="menu-tab flex items-center md:gap-[60px] gap-2">
-                                            <div
-                                                className={`tab-item heading7 has-line-before text-black hover:text-black duration-300 ${activeTab === 'description' ? 'active' : ''}`}
-                                                onClick={() => handleActiveTab('description')}
-                                            >
-                                                Itinerary
-                                            </div>
-                                            <div
-                                                className={`tab-item heading7 has-line-before text-black hover:text-black duration-300 ${activeTab === 'specifications' ? 'active' : ''}`}
-                                                onClick={() => handleActiveTab('specifications')}
-                                            >
-                                                Summary
-                                            </div>
-                                            <div
-                                                className={`tab-item heading7 has-line-before text-black hover:text-black duration-300 ${activeTab === 'hotel' ? 'active' : ''}`}
-                                                onClick={() => handleActiveTab('hotel')}
-                                            >
-                                                Hotel
-                                            </div>
-                                            <div
-                                                className={`tab-item heading7 has-line-before text-black hover:text-black duration-300 ${activeTab === 'activity' ? 'active' : ''}`}
-                                                onClick={() => handleActiveTab('activity')}
-                                            >
-                                                Activity
-                                            </div>
-                                            <div
-                                                className={`tab-item heading7 has-line-before text-black hover:text-black duration-300 ${activeTab === 'incexc' ? 'active' : ''}`}
-                                                onClick={() => handleActiveTab('incexc')}
-                                            >
-                                                Inclusion / Exclusion
+                                    <div className='sticky-top1 top-0'>
+
+                                        <div className="flex items-center justify-start w-full p-3 bg-green">
+                                            <div className="menu-tab flex items-center md:gap-[60px] gap-2">
+                                                <div
+                                                    className={`font-12px tab-item has-line-before text-black hover:text-black duration-300 ${activeTab === 'description' ? 'active' : ''}`}
+                                                    onClick={() => handleActiveTab('description')}
+                                                >
+                                                    Itinerary
+                                                </div>
+                                                <div
+                                                    className={`font-12px tab-item has-line-before text-black hover:text-black duration-300 ${activeTab === 'specifications' ? 'active' : ''}`}
+                                                    onClick={() => handleActiveTab('specifications')}
+                                                >
+                                                    Summary
+                                                </div>
+                                                <div
+                                                    className={`font-12px tab-item has-line-before text-black hover:text-black duration-300 ${activeTab === 'hotel' ? 'active' : ''}`}
+                                                    onClick={() => handleActiveTab('hotel')}
+                                                >
+                                                    Hotel
+                                                </div>
+                                                <div
+                                                    className={`font-12px tab-item has-line-before text-black hover:text-black duration-300 ${activeTab === 'activity' ? 'active' : ''}`}
+                                                    onClick={() => handleActiveTab('activity')}
+                                                >
+                                                    Activity
+                                                </div>
+                                                <div
+                                                    className={`font-12px tab-item has-line-before text-black hover:text-black duration-300 ${activeTab === 'incexc' ? 'active' : ''}`}
+                                                    onClick={() => handleActiveTab('incexc')}
+                                                >
+                                                    Inclusion / Exclusion
+                                                </div>
                                             </div>
                                         </div>
+
                                     </div>
+
+
                                     <div className="desc-block mt-2">
                                         <div className={`desc-item description ${activeTab === 'description' ? 'open' : ''}`}>
                                             <Packageday images={productMain.images} cityname={`Dubai`} />
@@ -490,18 +497,21 @@ const FixedPrice: React.FC<Props> = ({ data, productId }) => {
                                         </div>
 
                                     </div>
+
                                 </div>
                             </div>
                         </div>
 
-                        <div className="product-infor md:w-2/5 w-full lg:pl-[30px] md:pl-4">
-                            <div className="content bg-white lg:p-10 p-6 lg:rounded-3xl rounded-2xl box-shadow-sm">
-                                <div className="flex justify-between">
-                                    <div>
-                                        <div className="caption2 text-secondary font-semibold uppercase">{productMain.type}</div>
-                                        <div className="heading4 mt-1">{productMain.name}</div>
-                                    </div>
-                                    <div
+                        <div className="product-infor md:w-2/5 w-full lg:pl-[30px] md:pl-4 hidden md:block lg:block">
+                            <div className='sticky-top1 top-[20px]'>
+                                <div className="content bg-white lg:py-6 lg:px-10 p-6 lg:rounded-3xl rounded-2xl box-shadow-sm"
+                                    style={{ border: '1px solid #e5e5e5' }}
+                                >
+                                    <div className="flex justify-between">
+                                        <div>
+                                            <div className="heading7 mt-1 font-bold">{productMain.name}</div>
+                                        </div>
+                                        {/* <div
                                         className={`add-wishlist-btn w-12 h-12 flex items-center justify-center border border-line cursor-pointer rounded-xl duration-300 hover:bg-black hover:text-white ${wishlistState.wishlistArray.some(item => item.id === productMain.id) ? 'active' : ''}`}
                                         onClick={handleAddToWishlist}
                                     >
@@ -514,215 +524,110 @@ const FixedPrice: React.FC<Props> = ({ data, productId }) => {
                                                 <Icon.Heart size={24} />
                                             </>
                                         )}
+                                    </div> */}
                                     </div>
-                                </div>
-                                <div className="flex items-center mt-3">
+                                    {/* <div className="flex items-center mt-3">
                                     <Rate currentRate={productMain.rate} size={14} />
                                     <span className='caption1 text-secondary'>(1.234 reviews)</span>
-                                </div>
-                                <div className="flex items-center gap-3 flex-wrap mt-5 pb-6 border-b border-line">
-                                    <div className="product-price heading5">${productMain.price}.00</div>
-                                    <div className='w-px h-4 bg-line'></div>
-                                    <div className="product-origin-price font-normal text-secondary2"><del>${productMain.originPrice}.00</del></div>
-                                    {productMain.originPrice && (
-                                        <div className="product-sale caption2 font-semibold bg-green px-3 py-0.5 inline-block rounded-full">
-                                            -{percentSale}%
+                                </div> */}
+
+                                    <div className="flex items-center flex-wrap gap-3 gap-y-4 mt-4">
+                                        <div className="color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border border-line">
+                                            <div className="caption10 text-sm">3 Star</div>
                                         </div>
-                                    )}
-                                    <div className='desc text-secondary mt-3'>{productMain.description}</div>
-                                </div>
-                                <div className="list-action mt-6">
-                                    <div className="choose-color mt-5">
-                                        <div className="text-title">Colors: <span className='text-title color'>{activeColor}</span></div>
-                                        <div className="list-color flex items-center gap-2 flex-wrap mt-3">
-                                            {productMain.variation.map((item, index) => (
-                                                <div
-                                                    className={`color-item w-12 h-12 rounded-xl duration-300 relative ${activeColor === item.color ? 'active' : ''}`}
-                                                    key={index}
-                                                    onClick={() => handleActiveColor(item.color)}
-                                                >
-                                                    <Image
-                                                        src={item.colorImage}
-                                                        width={100}
-                                                        height={100}
-                                                        alt='color'
-                                                        className='rounded-xl'
-                                                    />
-                                                    <div className="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
-                                                        {item.color}
-                                                    </div>
-                                                </div>
-                                            ))}
+                                        <div className="color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border border-line ">
+                                            <div className="caption10 text-sm">4 Star</div>
+                                        </div>
+                                        <div className="color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border border-line ">
+                                            <div className="caption10 text-sm">5 Star</div>
                                         </div>
                                     </div>
-                                    <div className="choose-size mt-5">
-                                        <div className="heading flex items-center justify-between">
-                                            <div className="text-title">Size: <span className='text-title size'>{activeSize}</span></div>
-                                            <div
-                                                className="caption1 size-guide text-red underline cursor-pointer"
-                                                onClick={handleOpenSizeGuide}
-                                            >
-                                                Size Guide
+
+                                    <div className="flex items-center gap-3 flex-wrap mt-2 pb-6">
+                                        <div className="product-price heading5 font-bold text-red">₹{productMain.price}.00</div>
+
+
+
+
+
+                                        <div className="product-origin-price font-normal text-secondary2"><del>₹{productMain.originPrice}.00</del></div>
+                                        {productMain.originPrice && (
+                                            <div className="product-sale caption2 font-semibold bg-green px-3 py-0.5 inline-block rounded-full">
+                                                -{percentSale}%
                                             </div>
-                                            {/* <ModalSizeguide data={productMain} isOpen={openSizeGuide} onClose={handleCloseSizeGuide} /> */}
-                                        </div>
-                                        <div className="list-size flex items-center gap-2 flex-wrap mt-3">
-                                            {productMain.sizes.map((item, index) => (
-                                                <div
-                                                    className={`size-item ${item === 'freesize' ? 'px-3 py-2' : 'w-12 h-12'} flex items-center justify-center text-button rounded-full bg-white border border-line ${activeSize === item ? 'active' : ''}`}
-                                                    key={index}
-                                                    onClick={() => handleActiveSize(item)}
-                                                >
-                                                    {item}
-                                                </div>
-                                            ))}
-                                        </div>
+                                        )}
+                                        {/* <div className='desc text-secondary mt-3'>{productMain.description}</div> */}
                                     </div>
-                                    <div className="text-title mt-5">Quantity:</div>
-                                    <div className="choose-quantity flex items-center lg:justify-between md:flex-wrap gap-5 gap-y-3 mt-3">
-                                        <div className="quantity-block md:p-3 max-md:py-1.5 max-md:px-3 flex items-center justify-between rounded-lg border border-line sm:w-[180px] w-[120px] flex-shrink-0">
-                                            <Icon.Minus
-                                                size={20}
-                                                onClick={handleDecreaseQuantity}
-                                                className={`${productMain.quantityPurchase === 1 ? 'disabled' : ''} cursor-pointer`}
-                                            />
-                                            <div className="body1 font-semibold">{productMain.quantityPurchase}</div>
-                                            <Icon.Plus
-                                                size={20}
-                                                onClick={handleIncreaseQuantity}
-                                                className='cursor-pointer'
-                                            />
-                                        </div>
-                                        <div onClick={handleAddToCart} className="button-main w-full text-center bg-white text-black border border-black">Add To Cart</div>
-                                    </div>
-                                    <div className="button-block mt-5">
-                                        <div className="button-main w-full text-center">Buy It Now</div>
-                                    </div>
-                                    <div className="flex items-center flex-wrap lg:gap-20 gap-5 gap-y-4 mt-5">
-                                        <div className="compare flex items-center gap-3 cursor-pointer" onClick={(e) => { e.stopPropagation(); handleAddToCompare() }}>
-                                            <div className="compare-btn md:w-12 md:h-12 w-10 h-10 flex items-center justify-center border border-line cursor-pointer rounded-xl duration-300 hover:bg-black hover:text-white">
-                                                <Icon.ArrowsCounterClockwise className='heading6' />
-                                            </div>
-                                            <span>Compare</span>
-                                        </div>
-                                        <div className="share flex items-center gap-3 cursor-pointer">
-                                            <div className="share-btn md:w-12 md:h-12 w-10 h-10 flex items-center justify-center border border-line cursor-pointer rounded-xl duration-300 hover:bg-black hover:text-white">
-                                                <Icon.ShareNetwork weight='fill' className='heading6' />
-                                            </div>
-                                            <span>Share Products</span>
-                                        </div>
-                                    </div><div className="more-infor mt-6">
-                                        <div className="flex items-center gap-4 flex-wrap">
-                                            <div className="flex items-center gap-1">
-                                                <Icon.ArrowClockwise className='body1' />
-                                                <div className="text-title">Delivery & Return</div>
-                                            </div>
-                                            <div className="flex items-center gap-1">
-                                                <Icon.Question className='body1' />
-                                                <div className="text-title">Ask A Question</div>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-center gap-1 mt-3">
-                                            <Icon.Timer className='body1' />
-                                            <div className="text-title">Estimated Delivery:</div>
-                                            <div className="text-secondary">14 January - 18 January</div>
-                                        </div>
-                                        <div className="flex items-center gap-1 mt-3">
-                                            <Icon.Eye className='body1' />
-                                            <div className="text-title">38</div>
-                                            <div className="text-secondary">people viewing this product right now!</div>
-                                        </div>
-                                        <div className="flex items-center gap-1 mt-3">
-                                            <div className="text-title">SKU:</div>
-                                            <div className="text-secondary">53453412</div>
-                                        </div>
-                                        <div className="flex items-center gap-1 mt-3">
-                                            <div className="text-title">Categories:</div>
-                                            <div className="text-secondary">{productMain.category}, {productMain.gender}</div>
-                                        </div>
-                                        <div className="flex items-center gap-1 mt-3">
-                                            <div className="text-title">Tag:</div>
-                                            <div className="text-secondary">{productMain.type}</div>
-                                        </div>
-                                    </div>
-                                    <div className="list-payment mt-7">
-                                        <div className="main-content lg:pt-8 pt-6 lg:pb-6 pb-4 sm:px-4 px-3 border border-line rounded-xl relative max-md:w-2/3 max-sm:w-full">
-                                            <div className="heading6 px-5 bg-white absolute -top-[14px] left-1/2 -translate-x-1/2 whitespace-nowrap">Guranteed safe checkout</div>
-                                            <div className="list grid grid-cols-6">
-                                                <div className="item flex items-center justify-center lg:px-3 px-1">
-                                                    <Image
-                                                        src={'/images/payment/Frame-0.png'}
-                                                        width={500}
-                                                        height={450}
-                                                        alt='payment'
-                                                        className='w-full'
-                                                    />
-                                                </div>
-                                                <div className="item flex items-center justify-center lg:px-3 px-1">
-                                                    <Image
-                                                        src={'/images/payment/Frame-1.png'}
-                                                        width={500}
-                                                        height={450}
-                                                        alt='payment'
-                                                        className='w-full'
-                                                    />
-                                                </div>
-                                                <div className="item flex items-center justify-center lg:px-3 px-1">
-                                                    <Image
-                                                        src={'/images/payment/Frame-2.png'}
-                                                        width={500}
-                                                        height={450}
-                                                        alt='payment'
-                                                        className='w-full'
-                                                    />
-                                                </div>
-                                                <div className="item flex items-center justify-center lg:px-3 px-1">
-                                                    <Image
-                                                        src={'/images/payment/Frame-3.png'}
-                                                        width={500}
-                                                        height={450}
-                                                        alt='payment'
-                                                        className='w-full'
-                                                    />
-                                                </div>
-                                                <div className="item flex items-center justify-center lg:px-3 px-1">
-                                                    <Image
-                                                        src={'/images/payment/Frame-4.png'}
-                                                        width={500}
-                                                        height={450}
-                                                        alt='payment'
-                                                        className='w-full'
-                                                    />
-                                                </div>
-                                                <div className="item flex items-center justify-center lg:px-3 px-1">
-                                                    <Image
-                                                        src={'/images/payment/Frame-5.png'}
-                                                        width={500}
-                                                        height={450}
-                                                        alt='payment'
-                                                        className='w-full'
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <BookingForm />
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
 
-                    <div className="related-product md:pb-20 pb-10">
-                        <div className="container">
-                            <div className="heading3 text-center">Related Products</div>
-                            <div className="list-product hide-product-sold  grid lg:grid-cols-4 grid-cols-2 md:gap-[30px] gap-5 md:mt-10 mt-6">
-                                {data.slice(Number(productId), Number(productId) + 4).map((item, index) => (
-                                    <Product key={index} data={item} type='grid' />
-                                ))}
+
+                </div >
+            </div>
+
+
+            {isOpen && (
+                <div
+                    className="fixed inset-0 bg-black opacity-50 z-40"
+                    onClick={() => setIsOpen(false)} // Optional: close the panel when overlay is clicked
+                />
+            )}
+
+            {isOpen && (
+
+                <div
+                    className={`shadow-custom2 fixed bottom-5 left-0 w-full h-[500px] bg-white shadow-lg z-50 transition-transform duration-500 ease-in-out transform ${isOpen ? 'translate-y-0' : 'translate-y-full'}`}>
+                    <div className="p-4 pr-10 h-full overflow-auto">
+                        <div className="fixed inset-0 bg-white bg-opacity-50 flex items-center justify-center z-50">
+                            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md relative">
+                                <h2 className="text-lg font-bold mb-4">Tell Us how can we help you?</h2>
+
+                                {/* Close button */}
+                                <button
+                                    className="absolute top-2 right-2 text-gray-500 hover:text-red-500"
+                                    onClick={toggleForm}
+                                >
+                                    ✕
+                                </button>
+                                <BookingForm />
                             </div>
                         </div>
+
                     </div>
-                </div >
-            </div >
+                </div>
+
+
+            )}
+
+
+            <div className="fixed-bottom-menu shadow-custom2 w-full p-2 bg-white z-50 block md:hidden lg:hidden">
+                <div className="flex justify-between items-center gap-2">
+                    <div className="w-5/6 flex items-center gap-2">
+                        <button className="flex items-center justify-center w-full py-3 h-[40px] bg-green text-black rounded-md" onClick={toggleForm}>
+                            Book Now
+                        </button>
+                    </div>
+
+
+
+                    {/* Right Section */}
+                    <div className="w-1/6 flex justify-end">
+                        <button
+                            className="flex items-center justify-center w-full h-[40px] py-3 bg-white text-black rounded-md border border-line hover:bg-gray-200"
+                        >
+                            <span className="material-icons mr-2">call</span>
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+
+            <Footer />
         </>
     )
 }

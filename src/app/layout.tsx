@@ -30,7 +30,7 @@ export default function RootLayout({
 
           <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet"></link>
         </head>
-        <body className={dmSans.className}>
+        <body className={dmSans.className} style={{ overflow:'visible' }}>
           {children}
         </body>
       </html>
