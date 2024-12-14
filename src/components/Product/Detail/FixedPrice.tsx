@@ -23,6 +23,10 @@ import Packageday from '@/components/Travelexploria/Packageday';
 import BookingForm from '@/components/Travelexploria/BookingForm';
 import Collectionfooter from '@/components/Travelexploria/Collectionfooter'
 import Footer from '@/components/Travelexploria/Footer'
+import Summary from '@/components/Travelexploria/Summary'
+import Hotel from '@/components/Travelexploria/Hotel'
+import Activities from '@/components/Travelexploria/Activities'
+import Inclusion from '@/components/Travelexploria/Inclusion'
 
 
 SwiperCore.use([Navigation, Thumbs]);
@@ -158,9 +162,9 @@ const FixedPrice: React.FC<Props> = ({ data, productId }) => {
         setIsOpen(!isOpen);
     };
 
-  
 
-    
+
+
 
     return (
         <>
@@ -362,7 +366,7 @@ const FixedPrice: React.FC<Props> = ({ data, productId }) => {
                         </div>
                     </div >
 
-                    <div className="container flex justify-between gap-y-6 flex-wrap md:py-20 py-20">
+                    <div className="container flex justify-between gap-y-6 flex-wrap md:py-20 py-5">
                         <div className="desc-tab md:w-3/5 w-full lg:pr-[30px] md:pr-4">
                             <div className="get-it pb-6">
                                 <div className="heading5 font-bold text-red">Inclusion</div>
@@ -441,7 +445,7 @@ const FixedPrice: React.FC<Props> = ({ data, productId }) => {
                                     <div className='sticky-top1 top-0'>
 
                                         <div className="flex items-center justify-start w-full p-3 bg-green">
-                                            <div className="menu-tab flex items-center md:gap-[60px] gap-2">
+                                            <div className="menu-tab flex items-center md:gap-[60px] gap-5">
                                                 <div
                                                     className={`font-12px tab-item has-line-before text-black hover:text-black duration-300 ${activeTab === 'description' ? 'active' : ''}`}
                                                     onClick={() => handleActiveTab('description')}
@@ -483,17 +487,17 @@ const FixedPrice: React.FC<Props> = ({ data, productId }) => {
                                             <Packageday images={productMain.images} cityname={`Dubai`} />
 
                                         </div>
-                                        <div className={`desc-item specifications flex items-center justify-center ${activeTab === 'specifications' ? 'open' : ''}`}>
-                                            specifications
+                                        <div className={`desc-item specifications ${activeTab === 'specifications' ? 'open' : ''}`}>
+                                            <Summary images={productMain.images} cityname={`Dubai`} />
                                         </div>
                                         <div className={`desc-item review-block ${activeTab === 'hotel' ? 'open' : ''}`}>
-                                            hotel
+                                            <Hotel images={productMain.images} cityname={`Dubai`} />
                                         </div>
                                         <div className={`desc-item review-block ${activeTab === 'activity' ? 'open' : ''}`}>
-                                            activity
+                                            <Activities images={productMain.images} cityname={`Dubai`} />
                                         </div>
                                         <div className={`desc-item review-block ${activeTab === 'incexc' ? 'open' : ''}`}>
-                                            Inclusion / Exclusion
+                                            <Inclusion images={productMain.images} cityname={`Dubai`} />
                                         </div>
 
                                     </div>
@@ -511,25 +515,8 @@ const FixedPrice: React.FC<Props> = ({ data, productId }) => {
                                         <div>
                                             <div className="heading7 mt-1 font-bold">{productMain.name}</div>
                                         </div>
-                                        {/* <div
-                                        className={`add-wishlist-btn w-12 h-12 flex items-center justify-center border border-line cursor-pointer rounded-xl duration-300 hover:bg-black hover:text-white ${wishlistState.wishlistArray.some(item => item.id === productMain.id) ? 'active' : ''}`}
-                                        onClick={handleAddToWishlist}
-                                    >
-                                        {wishlistState.wishlistArray.some(item => item.id === productMain.id) ? (
-                                            <>
-                                                <Icon.Heart size={24} weight='fill' className='text-white' />
-                                            </>
-                                        ) : (
-                                            <>
-                                                <Icon.Heart size={24} />
-                                            </>
-                                        )}
-                                    </div> */}
                                     </div>
-                                    {/* <div className="flex items-center mt-3">
-                                    <Rate currentRate={productMain.rate} size={14} />
-                                    <span className='caption1 text-secondary'>(1.234 reviews)</span>
-                                </div> */}
+
 
                                     <div className="flex items-center flex-wrap gap-3 gap-y-4 mt-4">
                                         <div className="color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border border-line">
@@ -581,19 +568,51 @@ const FixedPrice: React.FC<Props> = ({ data, productId }) => {
             {isOpen && (
 
                 <div
-                    className={`shadow-custom2 fixed bottom-5 left-0 w-full h-[500px] bg-white shadow-lg z-50 transition-transform duration-500 ease-in-out transform ${isOpen ? 'translate-y-0' : 'translate-y-full'}`}>
+                    className={`shadow-custom2 fixed bottom-0 left-0 w-full h-[600px] bg-white z-50 transition-transform duration-500 ease-in-out transform ${isOpen ? 'translate-y-0' : 'translate-y-full'}`} style={{ zIndex: '9999' }}>
                     <div className="p-4 pr-10 h-full overflow-auto">
                         <div className="fixed inset-0 bg-white bg-opacity-50 flex items-center justify-center z-50">
-                            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md relative">
-                                <h2 className="text-lg font-bold mb-4">Tell Us how can we help you?</h2>
-
-                                {/* Close button */}
+                            <div className="bg-white p-3 rounded-lg w-full max-w-md relative">
                                 <button
                                     className="absolute top-2 right-2 text-gray-500 hover:text-red-500"
                                     onClick={toggleForm}
                                 >
                                     ✕
                                 </button>
+
+                                <div className="flex justify-between">
+                                    <div>
+                                        <div className="heading7 mt-1 font-bold">{productMain.name}</div>
+                                    </div>
+                                </div>
+
+
+                                <div className="flex items-center flex-wrap gap-3 gap-y-4 mt-4">
+                                    <div className="color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border border-line">
+                                        <div className="caption10 text-sm">3 Star</div>
+                                    </div>
+                                    <div className="color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border border-line ">
+                                        <div className="caption10 text-sm">4 Star</div>
+                                    </div>
+                                    <div className="color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border border-line ">
+                                        <div className="caption10 text-sm">5 Star</div>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center gap-3 flex-wrap mt-2 pb-6">
+                                    <div className="product-price heading5 font-bold text-red">₹{productMain.price}.00</div>
+
+
+
+
+
+                                    <div className="product-origin-price font-normal text-secondary2"><del>₹{productMain.originPrice}.00</del></div>
+                                    {productMain.originPrice && (
+                                        <div className="product-sale caption2 font-semibold bg-green px-3 py-0.5 inline-block rounded-full">
+                                            -{percentSale}%
+                                        </div>
+                                    )}
+                                    {/* <div className='desc text-secondary mt-3'>{productMain.description}</div> */}
+                                </div>
                                 <BookingForm />
                             </div>
                         </div>

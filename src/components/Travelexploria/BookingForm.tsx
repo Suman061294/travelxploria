@@ -148,7 +148,7 @@ const BookingForm: React.FC = () => {
       <div className="button-block mt-5">
         <button
           type="submit"
-          className="button-main w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-blue-600 transition"
+          className="button-main w-full bg-black text-white md:py-3 lg:py-3 py-5 text-lg md:text-sm lg:text-sm rounded-lg font-semibold hover:bg-blue-600 transition"
         >
           Book Now
         </button>

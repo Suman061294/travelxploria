@@ -869,6 +869,14 @@ hr{
   padding-left: 12px !important;
 }
 
+.bg-light-custom{
+  background: #f0f0f0;
+}
+
+.color-green{
+  color: green;
+}
+
 
 
 
