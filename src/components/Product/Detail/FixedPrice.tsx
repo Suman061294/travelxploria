@@ -445,7 +445,7 @@ const FixedPrice: React.FC<Props> = ({ data, productId }) => {
                                     <div className='sticky-top1 top-0'>
 
                                         <div className="flex items-center justify-start w-full p-3 bg-green">
-                                            <div className="menu-tab flex items-center md:gap-[60px] gap-5">
+                                            <div className="menu-tab flex items-center md:gap-[60px] gap-4">
                                                 <div
                                                     className={`font-12px tab-item has-line-before text-black hover:text-black duration-300 ${activeTab === 'description' ? 'active' : ''}`}
                                                     onClick={() => handleActiveTab('description')}
