@@ -9,6 +9,8 @@ import 'swiper/css/effect-fade';
 import Populardestination from './Populardestination';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css'
+import TrendingNow from './TrendingNow';
+import Bannerestination from './Banerdestination';
 
 
 const SliderFive = () => {
@@ -70,7 +72,7 @@ const SliderFive = () => {
     };
     return (
         <>
-            <div className="slider-block style-five bg-linear xl:h-[520px] lg:h-[800px] md:h-[580px] sm:h-[500px] h-[350px] max-[420px]:h-[320px] w-full">
+            <div className="slider-block style-five bg-linear xl:h-[550px] lg:h-[800px] md:h-[580px] sm:h-[500px] h-[350px] max-[420px]:h-[320px] w-full">
                 <div className="slider-main h-full w-full">
                     <Swiper
                         spaceBetween={0}
@@ -94,7 +96,7 @@ const SliderFive = () => {
                                     {/* Black Overlay */}
                                     <div className="overlay absolute left-0 top-0 w-full h-full bg-gradient-to-t overlay-custom  to-transparent z-[-1]"></div>
 
-                                    <div className="content relative z-[1] text-white text-center flex flex-col items-center md:w-3/4 lg:w-3/4 w-3/4">
+                                    <div className="content relative z-[1] text-white text-center flex flex-col items-center md:w-3/4 lg:w-3/4 w-full">
 
 
                                         <div className='flex flex-row items-center justify-between md:w-3/4 lg:w-3/4 w-full gap-2'>
@@ -112,55 +114,16 @@ const SliderFive = () => {
                                             <h1 className='shining-text text-center'>on Google</h1>
                                         </div>
 
-                                        <Populardestination />
+                                        <Bannerestination />
+
+                                        {/* <Populardestination /> */}
                                     </div>
                                 </div>
                             </div>
                         </SwiperSlide>
 
 
-                        <SwiperSlide>
-                        <div className="slider-item h-full w-full relative">
-                        <div className="container w-full h-full flex items-end justify-center pb-1">
-
-                                    <div className="sub-img absolute left-0 top-0 w-full h-full z-[-1]">
-                                        <Image
-                                            src={'/images/custom/b1.jpg'}
-                                            width={2560}
-                                            height={1080}
-                                            alt='bg5-1'
-                                            priority={true}
-                                            className='w-full h-full object-cover'
-                                        />
-                                    </div>
-
-                                    {/* Black Overlay */}
-                                    <div className="overlay absolute left-0 top-0 w-full h-full bg-gradient-to-t overlay-custom  to-transparent z-[-1]"></div>
-
-                                    <div className="content relative z-[1] text-white text-center flex flex-col items-center md:w-3/4 lg:w-3/4 w-3/4">
-
-
-                                        <div className='flex flex-row items-center justify-between md:w-3/4 lg:w-3/4 w-full gap-4'>
-                                            <h1 className='shining-text text-center'>We have</h1>
-                                            <div className='flex-1 flex justify-center'>
-                                                <Image
-                                                    src={'/test/googlenew.png'}
-                                                    width={350}
-                                                    height={350}
-                                                    alt='bg5-1'
-                                                    priority={true}
-                                                    className='object-contain w-full max-w-[100px] sm:max-w-[150px] md:max-w-[150px] lg:max-w-[200px]'
-                                                />
-                                            </div>
-                                            <h1 className='shining-text text-center'>on Google</h1>
-                                        </div>
-
-                                        <Populardestination />
-                                    </div>
-                                </div>
-                            </div>
-                        </SwiperSlide>
-
+                     
                     </Swiper>
                 </div>
             </div>

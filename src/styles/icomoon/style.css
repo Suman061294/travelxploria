@@ -864,10 +864,10 @@ hr{
 }
 
 
-.container {
+/* .container {
   padding-right: 12px !important;
   padding-left: 12px !important;
-}
+} */
 
 .bg-light-custom{
   background: #f0f0f0;

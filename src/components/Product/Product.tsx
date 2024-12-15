@@ -85,7 +85,7 @@ const Product: React.FC<ProductProps> = ({ data, type }) => {
 
     const handleDetailProduct = (productId: string) => {
         // redirect to shop with category selected
-        router.push(`/product/default?id=${productId}`);
+        router.push(`/package/dubai`);
     };
 
     let percentSale = Math.floor(100 - ((data.price / data.originPrice) * 100))

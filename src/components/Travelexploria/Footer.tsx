@@ -9,7 +9,7 @@ const Footer = React.forwardRef<HTMLDivElement>((props, ref) => {
       <div className="footer-main bg-surface">
         <div className="container">
           <div className="content-footer py-[60px] flex justify-between flex-wrap gap-y-8">
-            <div className="company-infor basis-1/4 max-lg:basis-full pr-7">
+            <div className="company-infor basis-1/5 max-lg:basis-full items-center flex justify-center flex-col">
               <Link href={'/'} className="logo">
                 <div className="heading6">
                   <Image
@@ -18,28 +18,28 @@ const Footer = React.forwardRef<HTMLDivElement>((props, ref) => {
                     height={400}
                     alt="bg5-1"
                     priority={true}
-                    className="w-full h-full w-[200px] object-cover"
+                    className="h-full w-[200px] object-cover"
                   />
                 </div>
               </Link>
               <div className="flex gap-3 mt-3">
                 <div className="flex flex-col">
-                  <span className="text-button">Mail:</span>
-                  <span className="text-button mt-3">Phone:</span>
-                  <span className="text-button mt-3">Address:</span>
+                  <span className="text-button text-sm">Mail:</span>
+                  <span className="text-button mt-3 text-sm">Phone:</span>
+                  <span className="text-button mt-3 text-sm">Address:</span>
                 </div>
                 <div className="flex flex-col">
-                  <span>tnxholiday@gmail.com</span>
-                  <span className="mt-3">+91 7439020962</span>
-                  <span className="mt-3 pt-px">Demo Address, Demo Location</span>
+                  <span className='text-sm'>tnxholiday@gmail.com</span>
+                  <span className="mt-3 text-sm">+91 7439020962</span>
+                  <span className="mt-3 pt-px text-sm">Demo Address, Demo Location</span>
                 </div>
               </div>
             </div>
 
-            <div className="right-content flex flex-wrap gap-y-8 basis-3/4 max-lg:basis-full">
+            <div className="right-content flex flex-wrap gap-y-8 basis-4/5 max-lg:basis-full md:pl-12 lg:pl-12">
               <div className="list-nav flex justify-between basis-2/3 max-md:basis-full gap-4">
                 <div className="item flex flex-col basis-1/3">
-                  <div className="text-button-uppercase pb-3">Quick Links</div>
+                  <div className="text-button-uppercase pb-3 text-red font-bold">Quick Links</div>
                   <Link className="caption1 has-line-before duration-300 w-fit" href={'/'}>
                     Contact us
                   </Link>
@@ -60,8 +60,10 @@ const Footer = React.forwardRef<HTMLDivElement>((props, ref) => {
                   </Link>
                 </div>
 
-                <div className="item flex flex-col basis-1/3">
-                  <div className="text-button-uppercase pb-3">International</div>
+                
+
+                <div className="item flex flex-col basis-1/5">
+                  <div className="text-button-uppercase pb-3 text-red font-bold">International</div>
                   <Link className="caption1 has-line-before duration-300 w-fit" href={'/'}>
                     Europe
                   </Link>
@@ -80,7 +82,7 @@ const Footer = React.forwardRef<HTMLDivElement>((props, ref) => {
                 </div>
 
                 <div className="item flex flex-col basis-1/3">
-                  <div className="text-button-uppercase pb-3">Domestic</div>
+                  <div className="text-button-uppercase pb-3 text-red font-bold">Domestic</div>
                   <Link className="caption1 has-line-before duration-300 w-fit" href={'/'}>
                     Kashmir
                   </Link>
@@ -97,7 +99,7 @@ const Footer = React.forwardRef<HTMLDivElement>((props, ref) => {
               </div>
 
               <div className="newsletter basis-1/3 pl-7 max-md:basis-full max-md:pl-0">
-                <div className="text-button-uppercase">Newsletter</div>
+                <div className="text-button-uppercase text-red font-bold">Newsletter</div>
                 <div className="caption1 mt-3">
                   Sign up for our newsletter and get 10% off your first booking
                 </div>
@@ -120,7 +122,7 @@ const Footer = React.forwardRef<HTMLDivElement>((props, ref) => {
 
           <div className="footer-bottom py-3 flex items-center justify-center gap-5 border-t border-line">
             <div className="copyright caption1 text-secondary">
-              ©2024 Travelxploria. All Rights Reserved.
+              ©2024 <span className='font-semibold text-red'>Travelxploria.</span> All Rights Reserved.
             </div>
           </div>
         </div>

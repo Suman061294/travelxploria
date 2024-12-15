@@ -28,6 +28,10 @@ const TrendingNow = () => {
                             loop={true}
                             modules={[Navigation, Autoplay]}
                             breakpoints={{
+                                0: {
+                                    slidesPerView: 3,
+                                    spaceBetween: 12,
+                                },
                                 576: {
                                     slidesPerView: 6,
                                     spaceBetween: 12,

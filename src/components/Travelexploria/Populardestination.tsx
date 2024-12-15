@@ -10,7 +10,9 @@ const Populardestination = () => {
 
     return (
         <>
-            <div className="instagram-block md:pt-20 lg:pt-10 md:pt-10 pt-0 px-20">
+
+        
+            <div className="instagram-block md:pt-20 lg:pt-10 md:pt-10 pt-0">
                 <div className="container">
                     <div className="heading">
                         {/* <div className="heading3 text-center">Popular Destination</div> */}
@@ -18,22 +20,22 @@ const Populardestination = () => {
                     </div>
                     <div className="list-instagram md:mt-4 mt-6">
                         <Swiper
-                            spaceBetween={24}
-                            slidesPerView={6}
+                            spaceBetween={0}
+                            slidesPerView={1}
                             loop={true}
                             modules={[Autoplay, Pagination]}
-                            autoplay={{
-                                delay: 4000,
-                            }}
+                            // autoplay={{
+                            //     delay: 4000,
+                            // }}
                             // pagination={isMobile ? { clickable: true } : false} // Conditionally set pagination for mobile only
                             breakpoints={{
-                                300: {
-                                    slidesPerView: 5, // Show 3 slides on smaller screens
+                                0: {
+                                    slidesPerView: 2, // Display 3 slides for all mobile screens up to 500px
                                     spaceBetween: 0,
                                 },
                                 500: {
-                                    slidesPerView: 5,
-                                    spaceBetween: 16,
+                                    slidesPerView: 3,
+                                    spaceBetween: 0,
                                 },
                                 680: {
                                     slidesPerView: 5,
@@ -50,9 +52,8 @@ const Populardestination = () => {
                             }}
                         >
                             <SwiperSlide>
-                                <div className="flex flex-col justify-center items-center md:p-5 lg:p-5 p-5 text-center">
+                                <div className="flex justify-center items-center md:p-5 lg:p-5 p-0 text-center">
                                     <div className="shiny-effect-container p-2">
-                                        {/* Inline SVG */}
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="50px"
@@ -80,7 +81,7 @@ const Populardestination = () => {
 
 
                             <SwiperSlide>
-                                <div className="flex flex-col justify-center items-center p-5 text-center">
+                                <div className="flex justify-center items-center p-0 text-center">
                                     <div className="shiny-effect-container p-2">
                                         {/* Inline SVG */}
                                         <svg
@@ -113,7 +114,7 @@ const Populardestination = () => {
 
 
                             <SwiperSlide>
-                                <div className="flex flex-col justify-center items-center p-5 text-center">
+                                <div className="flex justify-center items-center p-0 text-center">
                                     <div className="shiny-effect-container p-2">
                                         {/* Inline SVG with gradient effect */}
                                         <svg
@@ -164,7 +165,7 @@ const Populardestination = () => {
 
 
                             <SwiperSlide>
-                                <div className="flex flex-col justify-center items-center p-5 text-center">
+                                <div className="flex justify-center items-center p-0 text-center">
                                     <div className="shiny-effect-container p-2">
                                         {/* Thailand SVG with Gradient */}
                                         <svg
@@ -238,7 +239,7 @@ const Populardestination = () => {
 
 
                             <SwiperSlide>
-                                <div className="flex flex-col justify-center items-center p-5 text-center">
+                                <div className="flex justify-center items-center p-0 text-center">
                                     <div className="shiny-effect-container p-2">
                                         {/* Inline SVG with Gradient */}
                                         <svg
@@ -274,7 +275,7 @@ const Populardestination = () => {
 
 
                             <SwiperSlide>
-                                <div className="flex flex-col justify-center items-center p-5 text-center">
+                                <div className="flex justify-center items-center p-0 text-center">
                                     <div className="shiny-effect-container p-2">
                                         {/* Japan SVG with Gradient */}
                                         <svg
@@ -437,7 +438,7 @@ const Populardestination = () => {
 
 
                             <SwiperSlide>
-                                <div className="flex flex-col justify-center items-center p-5 text-center">
+                                <div className="flex justify-center items-center p-0 text-center">
                                     <div className="shiny-effect-container p-2">
                                         {/* New SVG */}
                                         <svg
@@ -479,7 +480,7 @@ const Populardestination = () => {
 
 
                             <SwiperSlide>
-                                <div className="flex flex-col justify-center items-center p-5 text-center">
+                                <div className="flex justify-center items-center p-0 text-center">
                                     <div className="shiny-effect-container p-2">
                                         {/* New SVG */}
                                         <svg
